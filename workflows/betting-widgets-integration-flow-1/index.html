@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Betting Widgets — Integration Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+    <link rel="stylesheet" href="../../shared/chrome.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=betting-widgets-integration-visual-12" />
+    <link rel="stylesheet" href="../../shared/responsive.css?v=14" />
+    <script src="../../shared/catalog.js?v=6" defer></script>
+    <script src="../../shared/chrome.js?v=23" defer></script>
+  </head>
+  <body class="betting-widgets-integration">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">INTEGRATION FLOW</p>
+        <h1>Betting Widgets</h1>
+        <p class="subtitle">Plug-and-Play Integration for Fast Deployment</p>
+        <div class="sr-tags"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8.62769 1.33432L8.58862 1.33823L8.54956 1.34409L8.51343 1.35092L8.44214 1.37241L8.39722 1.38998L8.30933 1.43686L8.24976 1.47983L8.19507 1.52866L2.16968 7.556C1.63105 8.15851 1.60552 9.05463 2.11499 9.70834L2.19507 9.80502L6.22241 13.8304C6.82495 14.3692 7.72195 14.3947 8.37573 13.8851L8.47144 13.805L14.4714 7.80502C14.5756 7.7009 14.6417 7.5656 14.6609 7.42123L14.6667 7.33334V4.66635C14.6666 2.82566 13.1744 1.33352 11.3337 1.33334L8.62769 1.33432ZM11.3337 2.66635C12.3987 2.66652 13.269 3.49944 13.3298 4.54916L13.3337 4.66635V7.05698L7.55542 12.8363C7.44472 12.9353 7.28451 12.9481 7.17944 12.891L7.13843 12.8617L3.16382 8.88901C3.06488 8.77839 3.05212 8.6181 3.10913 8.51303L3.13843 8.47104L8.94312 2.66635H11.3337ZM9.99976 4.00034C8.89534 4.00051 7.99976 4.89588 7.99976 6.00034C7.99989 7.10468 8.89542 8.00016 9.99976 8.00034C11.1042 8.00034 11.9996 7.10479 11.9998 6.00034C11.9998 4.89577 11.1043 4.00034 9.99976 4.00034ZM9.99976 5.33334C10.3679 5.33334 10.6667 5.63215 10.6667 6.00034C10.6666 6.36841 10.3679 6.66733 9.99976 6.66733C9.6318 6.66715 9.3329 6.3683 9.33276 6.00034C9.33276 5.63226 9.63172 5.33352 9.99976 5.33334Z" fill="#FF0000"></path></svg><span>Widget products, Betting Widgets, Integration flow</span></div>
+      </div>
+      <div class="team-switcher" aria-label="Select your team">
+        <span class="switcher-label">Responsibilities:</span>
+        <button class="team-button selected" data-team="all">All teams</button>
+        <button class="team-button sportradar" data-team="sportradar">Sportradar</button>
+        <button class="team-button client" data-team="client">Client</button>
+      </div>
+    </header>
+
+    <div class="sr-subnav">
+      <a class="sr-back" href="../../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to workflows</a>
+    <nav aria-label="Breadcrumb">
+        <ol class="sr-crumbs">
+          <li><a href="../../">BET Workflows</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><a href="../../">Widget products</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><span aria-current="page">Integration flow</span></li>
+        </ol>
+      </nav></div>
+
+    <main class="flow-shell" data-selected="all">
+      <div class="duration">1–3 days</div>
+
+      <section class="flow-lane sportradar-lane" aria-label="Sportradar steps">
+        <button class="stage-card sportradar-card" data-owner="sportradar" data-dialog="create-client-id">
+          <span class="owner">SPORTRADAR</span>
+          <img class="source-icon" src="assets/create-client-id.png" alt="" />
+          <span class="stage-number">1</span>
+          <strong>Create Client ID</strong>
+          <span class="summary">Create a licensing key for contracted products on whitelisted domains.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <span class="arrow right-arrow between-arrow" aria-hidden="true"></span>
+        <button class="stage-card sportradar-card" data-owner="sportradar" data-dialog="send-instructions">
+          <span class="owner">SPORTRADAR</span>
+          <img class="source-icon" src="assets/send-instructions.png" alt="" />
+          <span class="stage-number">2</span>
+          <strong>Send instructions</strong>
+          <span class="summary">Send the Integration Instructions PDF to the client.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <span class="arrow right-arrow exit-arrow" aria-hidden="true"></span>
+      </section>
+
+      <section class="flow-lane client-lane" aria-label="Client steps">
+        <span class="arrow right-arrow entry-arrow" aria-hidden="true"></span>
+        <button class="stage-card client-card" data-owner="client" data-dialog="configure-demo">
+          <span class="owner">CLIENT</span>
+          <img class="source-icon" src="assets/configure-demo.png" alt="" />
+          <span class="stage-number">3</span>
+          <strong>Configure Demo page</strong>
+          <span class="summary">Configure the parameters and theming on the Demo page.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <span class="arrow right-arrow between-arrow between-one" aria-hidden="true"></span>
+        <button class="stage-card client-card" data-owner="client" data-dialog="get-code">
+          <span class="owner">CLIENT</span>
+          <img class="source-icon" src="assets/get-code.png" alt="" />
+          <span class="stage-number">4</span>
+          <strong>Get integration code</strong>
+          <span class="summary">Download the integration code from the Get code tab.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <span class="arrow right-arrow between-arrow between-two" aria-hidden="true"></span>
+        <button class="stage-card client-card" data-owner="client" data-dialog="customize">
+          <span class="owner">CLIENT</span>
+          <img class="source-icon" src="assets/customize.png" alt="" />
+          <span class="stage-number">5</span>
+          <strong>Customize</strong>
+          <span class="summary">Use the technical documentation for additional customization.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+      </section>
+    </main>
+
+    <dialog id="create-client-id">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">1 · SPORTRADAR</p>
+      <h2>Create a Client ID</h2>
+      <p>Creates a Client ID (licensing key) with contracted products licensed on the whitelisted domains.</p>
+    </dialog>
+    <dialog id="send-instructions">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">2 · SPORTRADAR</p>
+      <h2>Send Integration Instructions</h2>
+      <p>Sends Integration Instructions PDF to the client.</p>
+    </dialog>
+    <dialog id="configure-demo">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">3 · CLIENT</p>
+      <h2>Configure the Demo page</h2>
+      <p>Configures the parameters and theming on the Demo page.</p>
+    </dialog>
+    <dialog id="get-code">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">4 · CLIENT</p>
+      <h2>Get integration code</h2>
+      <p>Downloads the integration code from <a href="https://www.youtube.com/watch?v=jPNdtdJ71Hs" target="_blank" rel="noopener noreferrer">Get code</a> tab on demo page.</p>
+    </dialog>
+    <dialog id="customize">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">5 · CLIENT</p>
+      <h2>Additional customization</h2>
+      <p>Options for additional customization are available in the technical documentation.</p>
+    </dialog>
+
+    <footer>
+      <div><strong>sportradar</strong><small>SPORTS TECHNOLOGY. REIMAGINED.</small></div>
+      <time datetime="2026-08-20">20 August 2026</time>
+    </footer>
+    <script src="app.js?v=shared-dialog-4" defer></script>
+  </body>
+</html>

@@ -1,0 +1,398 @@
+/* Landing page. Tokens and the top bar come from shared/chrome.css; this file
+   only styles the catalogue shell that sits under it.
+
+   Layout mirrors apidocs.sportradar.com: fixed dark bar, an 18rem sticky
+   sidebar, then a 58rem content column with a breadcrumb above the H1. */
+
+:root {
+  /* One label size for every tile. --w-word is the widest unbreakable word in
+     the whole catalogue, in ems, measured by app.js so the size follows the
+     actual type rather than a hardcoded list; the fallback keeps the page sane
+     if the script has not run yet.
+
+     This used to be two sizes: the handful of names with a word far wider than
+     the rest dropped a step so the other nineteen were not held down by them.
+     One tile reading a size smaller than its neighbours looks like a mistake
+     rather than like a decision, though, so every tile now takes the size that
+     fits the longest word -- "Recommendations" -- and names too long for one
+     line wrap instead of shrinking. */
+  --w-word: 9.2;
+
+  /* cqw resolves against the tile these are used in, so labels track the tile's
+     real width in the fluid grid instead of a viewport-fitting calculation.
+
+     --label-box, not 100cqw: .tile-name is inset 1rem on each side, so dividing
+     the tile's full width by the word width sized the word to the tile and let
+     it overflow the box it actually sits in -- which is what split
+     "Recommendations" across two lines. */
+  --label-box: calc(100cqw - 2rem);
+  --label: min(
+    clamp(.78rem, 13cqw, 1.35rem),
+    calc(var(--label-box) / var(--w-word))
+  );
+}
+
+* { box-sizing: border-box; }
+
+/* The filter hides products by setting the `hidden` property, and the UA rule
+   behind it -- `[hidden] { display: none }` -- loses to ANY author `display`
+   declaration, whatever its specificity, because author styles outrank the UA
+   sheet. `.sidebar-link { display: block }` was quietly winning, so filtering
+   emptied the grid while the sidebar still listed every product. */
+[hidden] { display: none !important; }
+
+body {
+  min-width: 320px;
+  margin: 0;
+  color: var(--sr-foreground);
+  background: var(--sr-background);
+  font-family: var(--sr-font-sans);
+}
+
+button, a, input { font: inherit; }
+h1, h2, h3, p { margin-top: 0; }
+
+.shell {
+  display: grid;
+  grid-template-columns: var(--sr-sidebar-w) minmax(0, 1fr);
+  align-items: start;
+  min-height: calc(100dvh - var(--sr-h-header));
+}
+
+/* ---------- sidebar ---------- */
+
+/* Colours below are the apidocs sidebar scale: a white surface, near-black
+   labels, #ececf2 hover fill and #eee rules. */
+.sidebar {
+  position: sticky;
+  top: var(--sr-h-header);
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--sr-h-header));
+  border-right: 1px solid var(--sr-sidebar-border);
+  background: var(--sr-sidebar);
+}
+
+.sidebar-search { padding: 1rem 1rem .75rem; }
+
+.sidebar-search input {
+  width: 100%;
+  padding: .4375rem .625rem;
+  border: 1px solid var(--sr-input);
+  border-radius: var(--sr-radius-sm);
+  color: var(--sr-sidebar-foreground);
+  background: var(--sr-sidebar);
+  font-size: .875rem;
+}
+
+.sidebar-search input::placeholder { color: var(--sr-muted-foreground); }
+
+.sidebar-search input:focus-visible {
+  border-color: var(--sr-ring);
+  outline: 3px solid #cbcde566;
+  outline-offset: 0;
+}
+
+.sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 .75rem 1.5rem;
+}
+
+.sidebar-group + .sidebar-group { margin-top: 1.25rem; }
+
+.sidebar-group h2 {
+  margin: 0 0 .25rem;
+  padding: 0 .5rem;
+  color: var(--sr-muted-foreground);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.sidebar-link {
+  display: block;
+  width: 100%;
+  padding: .375rem .5rem;
+  border: 0;
+  border-radius: var(--sr-radius-sm);
+  color: var(--sr-sidebar-foreground);
+  background: none;
+  cursor: pointer;
+  font-size: .875rem;
+  text-align: left;
+  transition: color .15s ease, background .15s ease;
+}
+
+/* apidocs' hover pair: #ececf2 fill, #00003c text. */
+.sidebar-link:hover,
+.sidebar-link:focus-visible {
+  color: var(--sr-sidebar-accent-foreground);
+  background: var(--sr-sidebar-accent);
+  outline: none;
+}
+
+.sidebar-empty {
+  padding: 0 1.25rem 1.25rem;
+  color: var(--sr-muted-foreground);
+  font-size: .875rem;
+}
+
+/* ---------- content column ---------- */
+
+.content {
+  width: 100%;
+  max-width: calc(var(--sr-content-max) + 4rem);
+  padding: 1.25rem 2rem 3rem;
+}
+
+/* The shared row is a page-wide bar on the flow pages, but here it lives inside
+   the already-padded content column, so it drops the horizontal padding and
+   lines its rule up with the catalogue above it rather than with the viewport. */
+.content > .sr-footer { margin-top: 3rem; padding: 1.25rem 0 0; }
+
+.page-intro { margin: 1.5rem 0 2rem; }
+
+h1 {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+.page-intro p {
+  margin: 0;
+  color: var(--sr-muted-foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.category-grid { display: grid; gap: 2rem; }
+
+/* --accent drives the category's rule and hover edge; --tint is the tile's
+   resting surface and --tint-2 its hover state, so each category carries its
+   colour through the whole card rather than only in the heading. */
+.cat--1 { --accent: #00003c; --tint: #f2f3f7; --tint-2: #e7e9f1; --edge: #dcdfea; }
+.cat--2 { --accent: #1c2271; --tint: #f2f3f9; --tint-2: #e6e8f4; --edge: #dadeee; }
+.cat--3 { --accent: #0e4f6b; --tint: #eff5f8; --tint-2: #e2eef3; --edge: #d5e4eb; }
+.cat--4 { --accent: #4c2a86; --tint: #f4f1f9; --tint-2: #eae4f4; --edge: #e0d8ee; }
+.cat--5 { --accent: #b3261e; --tint: #fdf2f1; --tint-2: #f9e5e3; --edge: #f2d6d3; }
+
+.cat-head { margin: 0 0 .875rem; padding-bottom: .5rem; border-bottom: 1px solid var(--sr-border); }
+
+.cat-head h2 {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: .875rem;
+}
+
+.tile {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1;
+  padding: 1rem 1rem 2.5rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--sr-radius);
+  color: var(--accent);
+  background: var(--tint);
+  cursor: pointer;
+  text-align: center;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+
+/* Every tile shares one size, measured to fit the catalogue's longest word.
+   break-word is only a guard against a name longer than --w-word. */
+.tile-name {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  left: 1rem;
+  max-width: calc(100% - 2rem);
+  font-size: var(--label);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.18;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  transform: translateY(-50%);
+}
+
+.tile-go {
+  position: absolute;
+  right: .75rem;
+  bottom: .75rem;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--sr-background);
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+}
+
+.tile:hover,
+.tile:focus-visible {
+  z-index: 1;
+  border-color: var(--accent);
+  background: var(--tint-2);
+  box-shadow: 0 8px 20px #10182814;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.tile:hover .tile-go,
+.tile:focus-visible .tile-go {
+  color: var(--sr-primary-foreground);
+  background: var(--accent);
+  transform: translateX(2px);
+}
+
+/* ---------- dialog ---------- */
+
+.flow-dialog {
+  width: min(520px, calc(100% - 2rem));
+  padding: 2rem;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius);
+  color: var(--sr-foreground);
+  background: var(--sr-background);
+  box-shadow: 0 24px 60px #10182833;
+  font-family: var(--sr-font-sans);
+}
+
+.flow-dialog::backdrop { background: #10182899; }
+
+.eyebrow {
+  margin: 0 0 .375rem;
+  color: var(--sr-muted-foreground);
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.flow-dialog h2 {
+  margin-bottom: .5rem;
+  font-size: 1.625rem;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
+.flow-dialog > p:not(.eyebrow) {
+  margin-bottom: 1.5rem;
+  color: var(--sr-muted-foreground);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.dialog-close {
+  position: absolute;
+  top: .875rem;
+  right: .875rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--sr-input);
+  border-radius: var(--sr-radius-sm);
+  color: var(--sr-muted-foreground);
+  background: var(--sr-background);
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.dialog-close:hover { color: var(--sr-foreground); background: var(--sr-muted); }
+
+.dialog-flow-options { display: grid; gap: .5rem; }
+
+.flow-option {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: .875rem 1rem;
+  border: 1px solid #2d427a;
+  border-radius: var(--sr-radius-sm);
+  color: var(--sr-primary-foreground);
+  background: #2d427a;
+  text-decoration: none;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+
+.flow-option:hover {
+  border-color: #243661;
+  background: #243661;
+  transform: translateX(2px);
+}
+
+.flow-option-label {
+  display: grid;
+  gap: .2rem;
+  text-align: left;
+}
+
+.flow-option-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.flow-option-subtitle {
+  font-size: .8125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #ffffffcc;
+}
+
+.flow-option .arrow { color: var(--sr-primary-foreground); font-size: 1.25rem; font-weight: 700; }
+
+/* The documentation link leaves the site, and it is not what the dialog exists
+   to offer -- outlined rather than filled, so it reads as the secondary route
+   next to the flows without being hidden. */
+.flow-option--external {
+  border-color: var(--sr-border);
+  color: var(--sr-foreground);
+  background: transparent;
+}
+
+.flow-option--external:hover {
+  border-color: #2d427a;
+  background: var(--sr-muted);
+}
+
+.flow-option--external .flow-option-title { color: var(--sr-foreground); }
+.flow-option--external .flow-option-subtitle { color: var(--sr-muted-foreground); }
+.flow-option--external .arrow { color: var(--sr-muted-foreground); }
+
+/* The footer is .sr-footer, defined once in shared/chrome.css for all 27 pages. */
+
+/* ---------- narrow viewports ---------- */
+
+@media (max-width: 1023px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { display: none; }
+  .content { max-width: none; padding: 1rem 1.25rem 2.5rem; }
+}
+
+@media (max-width: 560px) {
+  .tile-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .flow-dialog { padding: 1.5rem; }
+}

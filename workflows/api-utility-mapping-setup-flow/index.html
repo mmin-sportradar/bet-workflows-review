@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Utility / API Mapping — Setup Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+    <link rel="stylesheet" href="../../shared/chrome.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=api-utility-mapping-visual-12" />
+    <link rel="stylesheet" href="../../shared/responsive.css?v=14" />
+    <script src="../../shared/catalog.js?v=6" defer></script>
+    <script src="../../shared/chrome.js?v=23" defer></script>
+  </head>
+  <body class="api-utility-mapping-setup">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">SETUP FLOW</p>
+        <h1>BET API Utility / BET API Mapping</h1>
+        <p class="subtitle">Product setup flow</p>
+        <div class="sr-tags"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8.62769 1.33432L8.58862 1.33823L8.54956 1.34409L8.51343 1.35092L8.44214 1.37241L8.39722 1.38998L8.30933 1.43686L8.24976 1.47983L8.19507 1.52866L2.16968 7.556C1.63105 8.15851 1.60552 9.05463 2.11499 9.70834L2.19507 9.80502L6.22241 13.8304C6.82495 14.3692 7.72195 14.3947 8.37573 13.8851L8.47144 13.805L14.4714 7.80502C14.5756 7.7009 14.6417 7.5656 14.6609 7.42123L14.6667 7.33334V4.66635C14.6666 2.82566 13.1744 1.33352 11.3337 1.33334L8.62769 1.33432ZM11.3337 2.66635C12.3987 2.66652 13.269 3.49944 13.3298 4.54916L13.3337 4.66635V7.05698L7.55542 12.8363C7.44472 12.9353 7.28451 12.9481 7.17944 12.891L7.13843 12.8617L3.16382 8.88901C3.06488 8.77839 3.05212 8.6181 3.10913 8.51303L3.13843 8.47104L8.94312 2.66635H11.3337ZM9.99976 4.00034C8.89534 4.00051 7.99976 4.89588 7.99976 6.00034C7.99989 7.10468 8.89542 8.00016 9.99976 8.00034C11.1042 8.00034 11.9996 7.10479 11.9998 6.00034C11.9998 4.89577 11.1043 4.00034 9.99976 4.00034ZM9.99976 5.33334C10.3679 5.33334 10.6667 5.63215 10.6667 6.00034C10.6666 6.36841 10.3679 6.66733 9.99976 6.66733C9.6318 6.66715 9.3329 6.3683 9.33276 6.00034C9.33276 5.63226 9.63172 5.33352 9.99976 5.33334Z" fill="#FF0000"></path></svg><span>Data &amp; APIs, API Utility / API Mapping, Setup flow</span></div>
+      </div>
+      <div class="team-switcher" aria-label="Select your team">
+        <span class="switcher-label">Responsibilities:</span>
+        <button class="team-button selected" data-team="all">All teams</button>
+        <button class="team-button sales" data-team="sales">Sales Reps</button>
+        <button class="team-button beti" data-team="beti">BETI Team</button>
+        <button class="team-button additional" data-team="additional">Additional</button>
+        <button class="team-button sdsup" data-team="sdsup">SDSUP Team</button>
+      </div>
+    </header>
+
+    <div class="sr-subnav">
+      <a class="sr-back" href="../../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to workflows</a>
+    <nav aria-label="Breadcrumb">
+        <ol class="sr-crumbs">
+          <li><a href="../../">BET Workflows</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><a href="../../">Data &amp; APIs</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><span aria-current="page">Setup flow</span></li>
+        </ol>
+      </nav></div>
+
+    <main class="flow-shell" data-selected="all">
+      <section class="flow-grid" aria-label="BET API Utility and BET API Mapping setup flow">
+        <button class="stage-card sales-card step-one" data-owner="sales" data-dialog="registration">
+          <span class="stage-number">1</span>
+          <span class="owner">SALES REPS</span>
+          <strong>Developer Portal registration</strong>
+          <span class="summary">Direct the client to register and obtain a Console ID.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card sales-card step-two" data-owner="sales" data-dialog="salesforce">
+          <span class="stage-number">2</span>
+          <span class="owner">SALES REPS</span>
+          <strong>Salesforce account info</strong>
+          <span class="summary">Create or amend an opportunity and select the required API product.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card sales-card step-three" data-owner="sales" data-dialog="service">
+          <span class="stage-number">3</span>
+          <span class="owner">SALES REPS</span>
+          <strong>Service administration</strong>
+          <span class="summary">Request the service and provide mandatory Console and Bookmaker IDs.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card sdsup-card step-four" data-owner="sdsup" data-dialog="sdsup">
+          <span class="stage-number">4</span>
+          <span class="owner">SDSUP TEAM</span>
+          <strong>Client setup — SDSUP</strong>
+          <span class="summary">Enable packages in Developer Portal and hand the ticket to BETI.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card beti-card step-five" data-owner="beti" data-dialog="beti-setup">
+          <span class="stage-number">5</span>
+          <span class="owner">BETI TEAM</span>
+          <strong>Client setup — BETI</strong>
+          <span class="summary">Configure all sports, add technical documentation, and complete the ticket handoff.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card sales-card step-six" data-owner="sales" data-dialog="finalization">
+          <span class="stage-number">6</span>
+          <span class="owner">SALES REPS</span>
+          <strong>Finalization</strong>
+          <span class="summary">Inform the client that products and technical documentation are available.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <aside class="reference-card" data-owner="additional">
+          <p class="owner">ADDITIONAL · PRODUCTION PACKAGES INCREASEMENT</p>
+          <strong>Product context and call limit</strong>
+          <span class="summary">Review the service differences and the 100,000-call rolling limit.</span>
+          <button class="reference-action" data-dialog="reference">View reference</button>
+        </aside>
+      </section>
+    </main>
+
+    <dialog id="registration">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">1 · SALES REPS</p>
+      <h2>Developer Portal - Registration</h2>
+      <p>If client doesn’t have the <strong>Console ID</strong> yet, direct the client to <a href="https://developer.sportradar.com/" target="_blank" rel="noopener noreferrer">Developer Portal</a> where they need to <strong>REGISTER</strong> (obligatory process) in order to obtain it.</p>
+      <p>Client needs to provide his Console ID to the Sales Rep, as he created it when registered on Developer portal.</p>
+      <p>Direct clients to <a href="https://developer.sportradar.com/getting-started/docs/make-your-first-call" target="_blank" rel="noopener noreferrer">registration instructions</a>.</p>
+      <p>Help your client to find his Console ID: <a href="https://confluence.sportradar.ag/display/LSS/Sports+API?preview=/365367138/1044534911/Screenshot%202024-08-07%20at%2014.33.13.png" target="_blank" rel="noopener noreferrer">CLICK HERE</a></p>
+    </dialog>
+    <dialog id="salesforce">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">2 · SALES REPS</p>
+      <h2>Salesforce Account Info</h2>
+      <p><strong>CREATE A NEW OPPORTUNITY</strong> with a Quote where respective API product is chosen (API Utility and/or API Mapping) or <strong>AMEND OPPORTUNITY</strong> with a Quote where product is chosen.</p>
+      <p><strong>API Mapping</strong> product activation will continue <strong>ONLY</strong> when Contract is signed, or Exceptional Invoicing activated.</p>
+    </dialog>
+    <dialog id="service">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">3 · SALES REPS</p>
+      <h2>Service Administration</h2>
+      <p>When Quote is ready, <strong>REQUEST THE SERVICE</strong> via “Service Administration” button on the opportunity level.</p>
+      <p><strong>OBLIGATORY - Sales Reps need to:</strong></p>
+      <ol>
+        <li>Enter client’s Console ID on “Service administration” level, so setup teams can identify the client on Dev portal (mandatory for both BET API Utility and BET API Mapping);</li>
+        <li>Enter client’s Bookmaker ID (mandatory only for BET Mapping).</li>
+      </ol>
+      <p>If Console ID for the respective client was requested in the past, tick “Assign Console ID?” box and choose username in next stage. If Console ID is entered for the first time in SF, tick the box “Create New Console ID” and then enter the ID in the “New Console ID” box.</p>
+    </dialog>
+    <dialog id="sdsup">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">4 · SDSUP TEAM</p>
+      <h2>Client Setup - SDSUP</h2>
+      <p>Unlike the regular API process, clients do not self issue a trial key via Developer Portal. Client only registers via Console and waits for products to be configured and sent to their Dev Portal account.</p>
+      <p>SF request triggers automatic SDSUP Jira ticket.</p>
+      <p>When SDSUP receives BET API Mapping or BET API Utility request, they enable the packages on Developers portal. In case additional info is needed, SDSUP team will request it via comment on Jira ticket.</p>
+      <p>SDSUP informs BETI team about package activation: assigns the ticket to BET-Integrations Jira user and adds a link from Marketplace to the account where packages were enabled (so that BETI can obtain the API key).</p>
+    </dialog>
+    <dialog id="beti-setup">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">5 · BETI TEAM</p>
+      <h2>Client Setup - BETI</h2>
+      <h3>BET API Utility</h3>
+      <p>BETI team does the sport configuration (all sports) in the Fishnet Client Configuration API and attaches Technical documentation to the ticket.</p>
+      <h3>BET API Mapping</h3>
+      <p>BETI team does the sport configuration (all sports), adds the Bookmaker ID in the Fishnet Client Configuration API and attaches Technical documentation to the ticket. Sales follows up with the Client and Support/Crawler team for the mapping process.</p>
+      <h3>QA and ticket closure</h3>
+      <p>BETI informs the Sales via respective Jira Ticket, assigns the ticket to Sales Rep and changes ticket status to <strong>QA</strong>.</p>
+      <p>Sales Rep needs to check if everything is set according to the deal and do the <strong>SOX approval</strong>.</p>
+      <p>When BETI team gets update / QA from Sales Reps, they close the ticket.</p>
+    </dialog>
+    <dialog id="finalization">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">6 · SALES REPS</p>
+      <h2>Finalization</h2>
+      <p>Sales Rep may inform their client that Products have been sent to their Dev Portal account. They also provide a <a href="https://docs.sportradar.com/engagement-tools/readme/widgets/bet-utility-api#coverage-api" target="_blank" rel="noopener noreferrer">link to the Technical Documentation</a> for API Utility and/or API Mapping.</p>
+    </dialog>
+    <dialog id="reference">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">ADDITIONAL · PRODUCTION PACKAGES INCREASEMENT</p>
+      <h2>Product context and call limit</h2>
+      <p>These APIs are tailored for betting purposes and provide information on Tournament IDs for the entire season. BET API Utility: the client manages the mapping and it is offered free of charge. BET API Mapping: requires a monthly subscription and includes the mapping service.</p>
+      <p>The call limit is set to 100,000 calls on a rolling 30-day basis, and if the client exceeds this limit, they should be directed to use the Sports API instead.</p>
+    </dialog>
+
+    <footer>
+      <img src="assets/sportradar-footer.png" alt="Sportradar — Sports technology. Reimagined." />
+      <time datetime="2026-08-20">20 August 2026</time>
+    </footer>
+    <script src="app.js?v=api-utility-mapping-1"></script>
+  </body>
+</html>

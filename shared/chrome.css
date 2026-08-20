@@ -1,0 +1,900 @@
+/* The Source Sans 3 webfont is requested from each page's <head>, not with an
+   @import here. An @import is only discovered once this file has downloaded and
+   parsed, which serialises a second round trip and landed the font ~900ms in --
+   long after first paint -- so every page visibly reflowed as the fallback was
+   swapped out. It is also requested with display=optional rather than swap, so
+   the browser never performs that swap mid-view: if the font misses its short
+   block period the page simply stays on the fallback for that load and uses the
+   cached font from the next navigation on. */
+
+/* Shared page chrome for every page in the site: the Sportradar top bar, the
+   breadcrumb / back subnav on workflow pages, and the team-switcher coach mark.
+
+   Tokens below are the ones apidocs.sportradar.com actually ships, so this site
+   reads as part of the same product. They are prefixed --sr- because the 26
+   workflow stylesheets already define their own unprefixed --muted, --line,
+   --accent and friends, with different values per flow.
+
+   IMPORTANT: the sans font is applied only to the injected chrome, never to
+   body. Workflow diagrams are laid out in Arial with hand-tuned pixel offsets
+   for their connector arrows; restyling the body font would reflow all 26. */
+
+:root {
+  --sr-primary: #00003c;
+  --sr-primary-foreground: #fff;
+  --sr-background: #fff;
+  --sr-foreground: #101828;
+  --sr-muted: #f1f1f4;
+  --sr-muted-foreground: #475467;
+  --sr-border: #eee;
+  --sr-input: #e0e0e0;
+  --sr-accent: #ececf2;
+  --sr-accent-foreground: #1c2271;
+  --sr-ring: #cbcde5;
+  --sr-red: #f00;
+
+  /* apidocs ships a separate sidebar scale; these are its actual values. */
+  --sr-sidebar: #fff;
+  --sr-sidebar-foreground: #000;
+  --sr-sidebar-accent: #ececf2;
+  --sr-sidebar-accent-foreground: #00003c;
+  --sr-sidebar-border: #eee;
+
+  --sr-radius: .5rem;
+  --sr-radius-sm: .25rem;
+  --sr-h-header: 3.5rem;
+  --sr-sidebar-w: 18rem;
+  --sr-content-max: 58rem;
+
+  /* Fallback only — chrome.js copies each flow's own header padding onto the
+     subnav so the two line up exactly, whatever that flow uses. */
+  --sr-page-x: clamp(32px, 7vw, 150px);
+
+  /* One measure for the page chrome. Without it the header runs to the screen
+     edges on wide monitors, leaving the title and the team switcher marooned at
+     opposite ends of a ~900px gap. */
+  --sr-measure: 1600px;
+
+  --sr-font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --sr-font-mono: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+body { padding-top: var(--sr-h-header); }
+
+/* The workflow bodies are flex columns pinned to 100dvh/100vh; without this the
+   new header pushes their footer past the fold. */
+body:has(.page-header) { min-height: calc(100dvh - var(--sr-h-header)); }
+
+.sr-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- top bar ---------- */
+
+.sr-topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  height: var(--sr-h-header);
+  padding: 0 1.5rem;
+  color: var(--sr-primary-foreground);
+  background: var(--sr-primary);
+  box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
+  font-family: var(--sr-font-sans);
+}
+
+.sr-topbar nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.sr-topbar-left,
+.sr-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.sr-brand {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: .5rem;
+  margin-right: 1.5rem;
+  padding: .375rem;
+  border-radius: var(--sr-radius-sm);
+  color: inherit;
+  text-decoration: none;
+  transition: background .15s ease;
+}
+
+.sr-brand:hover { background: #ffffff1a; }
+.sr-brand img { display: block; width: 150px; height: 18px; }
+
+.sr-navlinks { display: flex; align-items: center; gap: .5rem; }
+
+.sr-navlink {
+  padding: .5rem;
+  border-radius: var(--sr-radius-sm);
+  color: inherit;
+  font-size: .875rem;
+  text-decoration: none;
+  transition: background .15s ease;
+}
+
+.sr-navlink:hover { background: #ffffff1a; }
+.sr-navlink.is-active { background: #ffffff26; font-weight: 600; }
+
+.sr-topbar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  height: 2rem;
+  padding: 0 .75rem;
+  border: 1px solid #ffffff33;
+  border-radius: var(--sr-radius-sm);
+  color: #ffffffe6;
+  background: #ffffff26;
+  cursor: pointer;
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background .15s ease, color .15s ease;
+}
+
+.sr-topbar-button:hover { color: #fff; background: #ffffff33; }
+
+/* apidocs spaces the label and the shortcut apart rather than bunching them. */
+.sr-topbar-button { gap: 2rem; }
+.sr-search-trigger-label { display: inline-flex; align-items: center; gap: .5rem; }
+
+.sr-topbar-button kbd {
+  display: inline-flex;
+  align-items: center;
+  height: 1.25rem;
+  padding: 0 .375rem;
+  border: 1px solid #ffffff4d;
+  border-radius: 3px;
+  background: var(--sr-primary);
+  font-family: var(--sr-font-mono);
+  font-size: .6875rem;
+  font-weight: 500;
+}
+
+@media (max-width: 1023px) {
+  .sr-navlinks { display: none; }
+  .sr-topbar-button { gap: .5rem; }
+  .sr-search-trigger-label span,
+  .sr-topbar-button kbd { display: none; }
+}
+
+/* ---------- search palette ---------- */
+
+.sr-search-dialog {
+  width: min(560px, calc(100% - 2rem));
+  max-height: min(28rem, calc(100dvh - 8rem));
+  margin-top: 5rem;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius);
+  color: var(--sr-foreground);
+  background: var(--sr-background);
+  box-shadow: 0 24px 60px #10182833;
+  font-family: var(--sr-font-sans);
+  text-align: left;
+}
+
+/* 14 of the workflow stylesheets decorate the bare `dialog` element with a red
+   ::before pill (and centre its text) for their step modals. This dialog is a
+   `dialog` too, so it inherits both unless they are switched off here. */
+.sr-search-dialog::before { content: none; }
+
+.sr-search-dialog::backdrop { background: #10182899; }
+
+.sr-search-head {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid var(--sr-border);
+  color: var(--sr-muted-foreground);
+}
+
+.sr-search-head input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: var(--sr-foreground);
+  background: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+.sr-search-head input::placeholder { color: var(--sr-muted-foreground); }
+.sr-search-head input::-webkit-search-cancel-button { display: none; }
+
+.sr-search-head kbd {
+  padding: .125rem .375rem;
+  border: 1px solid var(--sr-input);
+  border-radius: 3px;
+  color: var(--sr-muted-foreground);
+  font-family: var(--sr-font-mono);
+  font-size: .6875rem;
+}
+
+.sr-search-results {
+  max-height: 22rem;
+  margin: 0;
+  padding: .375rem;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.sr-search-hit {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .5rem .625rem;
+  border-radius: var(--sr-radius-sm);
+  color: var(--sr-foreground);
+  text-decoration: none;
+}
+
+.sr-search-hit.is-active {
+  color: var(--sr-sidebar-accent-foreground);
+  background: var(--sr-sidebar-accent);
+}
+
+.sr-search-hit-name { font-size: .9375rem; font-weight: 600; }
+
+.sr-search-hit-context {
+  flex-shrink: 0;
+  color: var(--sr-muted-foreground);
+  font-size: .75rem;
+}
+
+.sr-search-empty {
+  margin: 0;
+  padding: 1.25rem 1rem;
+  color: var(--sr-muted-foreground);
+  font-size: .875rem;
+  text-align: center;
+}
+
+/* ---------- breadcrumb + back (workflow pages) ---------- */
+
+/* Stacked, so the button and the breadcrumb stop competing for the same row. */
+.sr-subnav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: 1.25rem var(--sr-page-x) .25rem;
+  font-family: var(--sr-font-sans);
+}
+
+/* apidocs' outline button: 2rem tall, .75rem of side padding, hairline border
+   and a barely-there shadow. */
+.sr-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  height: 2rem;
+  padding: 0 .75rem;
+  border: 1px solid var(--sr-input);
+  border-radius: var(--sr-radius-sm);
+  color: var(--sr-foreground);
+  background: var(--sr-background);
+  box-shadow: 0 1px 2px #0000000d;
+  font-size: .875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color .15s ease, background .15s ease, border-color .15s ease;
+}
+
+/* Navigation hovers all land on the same apidocs pair as the sidebar. */
+.sr-back:hover {
+  border-color: var(--sr-ring);
+  color: var(--sr-sidebar-accent-foreground);
+  background: var(--sr-sidebar-accent);
+}
+
+.sr-back:focus-visible {
+  border-color: var(--sr-ring);
+  outline: 3px solid #cbcde566;
+  outline-offset: 0;
+}
+
+.sr-back svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform .15s ease;
+}
+
+/* The arrow leads the way out. */
+.sr-back:hover svg { transform: translateX(-2px); }
+
+.sr-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .375rem .625rem;
+  margin: 0;
+  padding: 0;
+  color: var(--sr-muted-foreground);
+  font-size: .875rem;
+  list-style: none;
+}
+
+.sr-crumbs li { display: inline-flex; align-items: center; gap: .375rem; }
+.sr-crumbs a { color: inherit; text-decoration: none; transition: color .15s ease; }
+.sr-crumbs a:hover { color: var(--sr-sidebar-accent-foreground); }
+.sr-crumbs [aria-current="page"] { color: var(--sr-foreground); font-weight: 600; }
+.sr-crumbs svg { width: .875rem; height: .875rem; opacity: .7; }
+
+/* ---------- footer ---------- */
+
+/* One definition for all 27 pages. The class beats the bare `footer` rules the
+   workflow stylesheets ship (they set their own dark fill and padding). */
+.sr-footer {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem 1.5rem;
+  width: 100%;
+  min-height: 0;
+  margin-top: auto;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--sr-border);
+  color: var(--sr-muted-foreground);
+  /* Both declared, not inherited: the workflow stylesheets each paint their own
+     dark fill on the bare `footer` element, and this class is what overrides
+     them. */
+  background: var(--sr-background);
+  font-family: var(--sr-font-sans);
+  font-size: .875rem;
+}
+
+.sr-footer-updated { margin: 0; }
+/* The workflow stylesheets size `footer time` themselves. */
+.sr-footer time { color: inherit; font-size: inherit; font-weight: inherit; }
+
+.sr-feedback {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* display: contents keeps the legend in the flex row instead of on its own
+   line above the group, which is where a fieldset legend renders by default. */
+.sr-feedback-legend { display: contents; }
+.sr-feedback-legend span { white-space: nowrap; }
+
+.sr-feedback-buttons {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--sr-border);
+  border-radius: 999px;
+}
+
+.sr-feedback-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  padding: 0 .75rem;
+  border: 0;
+  color: var(--sr-muted-foreground);
+  background: transparent;
+  cursor: pointer;
+  transition: color .15s ease, background .15s ease;
+}
+
+.sr-feedback-button:hover { color: var(--sr-foreground); background: var(--sr-muted); }
+.sr-feedback-button svg { display: block; width: 1rem; height: 1rem; transition: transform .2s ease; }
+.sr-feedback-button:hover svg { transform: scale(1.12); }
+
+/* Both states share one grid cell, so they cross over in place: the question
+   fades and settles back a little, the thanks rises into the same spot. The
+   question keeps its space in the layout the whole time (visibility, not
+   display), which is what stops the footer resizing mid-animation. */
+.sr-feedback-slot {
+  display: grid;
+  justify-items: end;
+  align-items: center;
+}
+
+.sr-feedback-slot > * { grid-area: 1 / 1; }
+
+.sr-feedback {
+  transition: opacity .2s ease .12s, transform .2s ease .12s;
+}
+
+/* Faded out but still laid out, so the slot keeps its width. pointer-events
+   rather than visibility: a visibility transition resolves at the end of its
+   own delay and was still reporting `visible` a second after the answer, which
+   would have left an invisible control in the way. The buttons are disabled in
+   JS at the same moment, which is what takes them out of the tab order. */
+.sr-feedback-slot[data-answered] .sr-feedback {
+  opacity: 0;
+  transform: scale(.97);
+  pointer-events: none;
+}
+
+.sr-feedback-slot[data-answered] .sr-feedback-button { color: var(--sr-border); }
+
+.sr-feedback-button.is-chosen {
+  color: var(--sr-primary);
+  background: var(--sr-muted);
+}
+
+.sr-feedback-button.is-chosen svg {
+  animation: sr-feedback-pop .34s cubic-bezier(.2, .9, .3, 1.5) both;
+}
+
+@keyframes sr-feedback-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.5); }
+  100% { transform: scale(1.2); }
+}
+
+/* Waiting in the same cell from the start, so there is nothing to insert and
+   nothing to reflow -- it just arrives. */
+.sr-feedback-thanks {
+  margin: 0;
+  opacity: 0;
+  transform: translateY(.5rem);
+  transition: opacity .28s ease .14s, transform .28s cubic-bezier(.2, .8, .3, 1) .14s;
+}
+
+.sr-feedback-slot[data-answered] .sr-feedback-thanks {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sr-feedback-button svg,
+  .sr-feedback-button.is-chosen svg { transition: none; transform: none; animation: none; }
+  .sr-feedback { transition: none; }
+  .sr-feedback-thanks { transition: none; }
+}
+
+@media (max-width: 560px) {
+  .sr-footer { justify-content: center; padding: 1.25rem; text-align: center; }
+}
+
+/* ---------- header + switchers ---------- */
+
+.page-header {
+  max-width: var(--sr-measure);
+  margin-inline: auto;
+}
+
+/* Both switchers were bare rows of pills floating against the page, which reads
+   as loose text rather than a control — most obviously on wide screens. Giving
+   them a surface anchors them. The per-team pill tints are left alone: they
+   encode which team owns which card. */
+.team-switcher,
+.scenario-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius);
+  background: var(--sr-muted);
+}
+
+.scenario-switcher { margin-inline: auto; }
+
+.switcher-label,
+.scenario-label {
+  align-self: center;
+  width: auto;
+  margin-right: .25rem;
+  color: var(--sr-muted-foreground);
+  font-family: var(--sr-font-sans);
+  font-size: .8125rem;
+  font-weight: 600;
+}
+
+/* The coach mark's ring hugs the switcher, so match its corner radius. */
+.sr-coach-target { border-radius: var(--sr-radius); }
+
+@media (max-width: 760px) {
+  .team-switcher,
+  .scenario-switcher { width: 100%; justify-content: flex-start; }
+}
+
+/* Each flow also restyled the switcher in its own "visual pass", so the same
+   control shipped in three sizes (40 / 42 / 45px pills, 13.3–15px type), two
+   corner radii (999px vs 5–7px), two surfaces, and two different selected
+   states. Worst case was the two integration flows, where every pill was a
+   saturated navy/red fill with white text, leaving "selected" legible only as a
+   2px white outline against a white page.
+   The rules below are the one canonical control, sized to match the rest of the
+   injected chrome (.sr-back). Their selectors are deliberately
+   `.page-header <container> <pill>` — the flow stylesheets all load after this
+   file, so anything at their own `.team-button.selected` weight (0,2,0) would
+   otherwise win on source order. Backgrounds are left to the flows on purpose:
+   the per-team tints encode which team owns which card. */
+.page-header .team-switcher,
+.page-header .scenario-switcher {
+  gap: .5rem;
+  max-width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid var(--sr-border);
+  border-radius: var(--sr-radius);
+  background: var(--sr-muted);
+}
+
+/* Placement: the team switcher sits at the right of the header, the scenario
+   switcher ("Request type", "Integration type") at the left.
+   Every flow already put the team switcher in the top-right corner on a wide
+   screen, but each one also stacks its header at its own breakpoint (1650px in
+   bet-concierge, 1450px in additional-domains, 1120px in lco-lcp, 950–1023px
+   elsewhere) and then aligns the controls to the left edge — so at one window
+   width the same control sat in the right corner on one flow and under the
+   title on the next. Auto margins hold the placement whether the header ends up
+   a flex row, a flex column, or a grid: in flexbox an auto margin takes
+   precedence over the container's own align-items, which is what those
+   breakpoints set. Below 760px the rule above gives each switcher the full
+   width, so this correctly stops applying there. */
+.page-header .team-switcher,
+.page-header .header-controls,
+.page-header .header-actions {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.page-header .scenario-switcher {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* The three flows that carry both switchers wrap them in one block, in either
+   DOM order. Lay that block out as a single row with the scenario switcher
+   first, so "scenario left, team right" holds inside the block as well as
+   across the header. It keeps wrapping on narrow screens.
+   Scoped with :has() to blocks that really do hold a scenario switcher — the
+   same wrapper class elsewhere carries the switcher plus a product note, and
+   that pairing must stay stacked. */
+.page-header .header-controls:has(> .scenario-switcher),
+.page-header .header-actions:has(> .scenario-switcher) {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+
+.page-header .header-controls > .scenario-switcher,
+.page-header .header-actions > .scenario-switcher { order: -1; }
+
+.page-header .switcher-label,
+.page-header .scenario-label {
+  margin-right: .25rem;
+  color: var(--sr-muted-foreground);
+  font-family: var(--sr-font-sans);
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.page-header .team-switcher .team-button,
+.page-header .scenario-switcher .scenario-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  /* Padding rather than a fixed height so a long label ("Steps for MTS
+     clients") can still wrap instead of overflowing its pill. */
+  padding: .375rem .875rem;
+  /* Every pill keeps a hairline edge, as in the majority of the flows already.
+     Without it the neutral team tints — several of which are the same grey as
+     the switcher's own surface — read as bare text next to tinted siblings. */
+  border: 1px solid var(--sr-input);
+  border-radius: 999px;
+  color: var(--sr-accent-foreground);
+  box-shadow: none;
+  font-family: var(--sr-font-sans);
+  font-size: .875rem;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 1.25;
+  text-transform: none;
+  transition: color .15s ease, background .15s ease, border-color .15s ease, transform .15s ease;
+}
+
+/* The "all teams" pill is the only one with no team of its own, so it is the
+   one pill whose surface this file owns; it read as white in some flows and as
+   the container's own grey in others. */
+.page-header .team-switcher .team-button[data-team="all"]:not(.selected) {
+  background: var(--sr-background);
+}
+
+/* The one pill whose text colour carries meaning rather than house style: the
+   urgent / off-hours request path. Restated here because the uniform pill
+   colour above outranks the flow's own rule. */
+.page-header .scenario-switcher .scenario-button.urgent:not(.selected) {
+  color: var(--red, var(--sr-red));
+}
+
+.page-header .team-switcher .team-button:hover:not(.selected),
+.page-header .scenario-switcher .scenario-button:hover:not(.selected) {
+  border-color: var(--sr-ring);
+  transform: translateY(-1px);
+}
+
+.page-header .team-switcher .team-button.selected,
+.page-header .scenario-switcher .scenario-button.selected {
+  border-color: var(--sr-primary);
+  color: var(--sr-primary-foreground);
+  background: var(--sr-primary);
+  outline: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+.page-header .team-switcher .team-button:focus-visible,
+.page-header .scenario-switcher .scenario-button:focus-visible {
+  outline: 2px solid var(--sr-ring);
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  .page-header .team-switcher .team-button,
+  .page-header .scenario-switcher .scenario-button {
+    min-height: 1.75rem;
+    padding: .3125rem .75rem;
+    font-size: .8125rem;
+  }
+}
+
+/* ---------- step cards ---------- */
+
+/* Half the flows already centre the step number half-outside the card's top
+   edge; the rest put it in a corner, where it collides with the horizontally
+   centred title. Centring it everywhere brings those flows onto the existing
+   house pattern and makes the collision structurally impossible.
+   Scoped to the card itself, so statshub's separate .stage-heading badge —
+   which sits above the button, not inside it — is left to the clearance pass
+   in chrome.js. No flow clips its cards, so the overhang is safe. */
+[data-dialog] > .stage-number,
+[data-dialog] > .task-number {
+  top: -14px;
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---------- tag row ---------- */
+
+/* The apidocs tag line: a red tag glyph followed by a comma-separated trail. */
+.sr-tags {
+  display: flex;
+  align-items: center;
+  margin: .75rem 0 0;
+  color: var(--sr-muted-foreground);
+  font-family: var(--sr-font-sans);
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.sr-tags svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-right: .375rem;
+}
+
+/* ---------- team-switcher coach mark ---------- */
+
+/* Outline rather than border/padding so the halo never shifts the switcher's
+   own layout, which differs across the 26 flows. */
+.sr-coach-target {
+  border-radius: var(--sr-radius);
+  outline: 2px solid #ff000047;
+  outline-offset: 6px;
+  animation: sr-coach-pulse 2.6s ease-out 2;
+}
+
+/* While the spotlight is up the control is already the only lit thing on the
+   page, so the ring is redundant -- and it sat exactly where the light stops,
+   which is what made it read as a line drawn across the lit field. */
+.sr-coach-target.sr-coach-lit {
+  outline: none;
+  animation: none;
+}
+
+@keyframes sr-coach-pulse {
+  0% { box-shadow: 0 0 0 0 #ff000040; }
+  70% { box-shadow: 0 0 0 18px #ff000000; }
+  100% { box-shadow: 0 0 0 0 #ff000000; }
+}
+
+/* Each team button lifts in turn, left to right, while the coach is up: a slow
+   pass along the row that shows what there is to choose between. --sr-hint-i is
+   the button's index, written by chrome.js -- nth-child cannot be used because
+   the switcher opens with a label element in some flows and not in others. */
+.sr-coach-target .team-button {
+  animation: sr-coach-hint 3.4s ease-in-out 2 both;
+  animation-delay: calc(var(--sr-hint-i, 0) * .13s);
+}
+
+@keyframes sr-coach-hint {
+  0%, 26%, 100% {
+    transform: none;
+    box-shadow: 0 0 0 0 #00003c00, 0 0 0 0 #f0000000;
+  }
+  10% {
+    /* Lifted, shadowed and ringed together: any one of the three on its own is
+       too quiet to notice at the edge of the eye, which is where this is. */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px #00003c3d, 0 0 0 3px #f0000033;
+  }
+}
+
+/* The spotlight, shown until a team has been chosen. The element itself is an
+   empty box laid over the switcher: its huge box-shadow spread darkens the rest
+   of the page, so the switcher shows through at full brightness without being
+   moved, re-parented or given a z-index it would have to fight its own header
+   for. pointer-events: none means the control underneath stays clickable --
+   the page is dimmed, not blocked. */
+.sr-coach-veil {
+  position: fixed;
+  z-index: 55;
+  /* No overflow clip: the glow below is drawn outside this box, over the dim. */
+  border-radius: var(--sr-radius);
+  pointer-events: none;
+  box-shadow: 0 0 0 100vmax #0b1020a6;
+  animation: sr-coach-veil-in .5s ease-out both;
+  transition: opacity .4s ease;
+}
+
+/* Red glare along the lit control's edges. It sits a hair outside the hole and
+   glows outward over the dim, so the control reads as the source of the light
+   rather than as a gap cut in a dark sheet -- and it carries the brand red the
+   ring used to, without a hard line landing on the boundary.
+
+   The base glow is on the element and the animation only breathes it: that way
+   the edges are still lit for anyone on prefers-reduced-motion, where the
+   breathing is switched off. */
+.sr-coach-veil::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  box-shadow: 0 0 0 1px #f0000059, 0 0 16px 3px #f000004d;
+  animation: sr-coach-edge 2.6s ease-in-out 3 both;
+}
+
+@keyframes sr-coach-edge {
+  0%, 100% { box-shadow: 0 0 0 1px #f0000047, 0 0 12px 2px #f0000038; }
+  50% { box-shadow: 0 0 0 1px #f000008c, 0 0 30px 7px #f0000080; }
+}
+
+.sr-coach-veil.is-fading { opacity: 0; }
+
+/* No band sweeping over the control. A translucent sheet passing across the
+   buttons reads as something smeared over them rather than as light, and it
+   dulls the labels while it crosses. What leads the eye instead is the row of
+   buttons itself, lifting one after another below -- it shows what there is to
+   click rather than drawing attention to a surface. */
+
+@keyframes sr-coach-veil-in {
+  from { opacity: 0; box-shadow: 0 0 0 100vmax #0b102000; }
+  to { opacity: 1; box-shadow: 0 0 0 100vmax #0b1020a6; }
+}
+
+/* Fixed, with coordinates measured from the switcher, so the bubble can never
+   be clipped by an ancestor's overflow in any of the 26 layouts. */
+.sr-coach {
+  position: fixed;
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  max-width: 19rem;
+  padding: .75rem .875rem;
+  border-radius: var(--sr-radius);
+  color: var(--sr-primary-foreground);
+  background: var(--sr-primary);
+  box-shadow: 0 12px 28px #00003c40;
+  font-family: var(--sr-font-sans);
+  font-size: .875rem;
+  line-height: 1.4;
+  animation: sr-coach-in .25s ease-out both;
+  transition: opacity .4s ease;
+}
+
+.sr-coach.is-fading { opacity: 0; }
+.sr-coach strong { display: block; font-weight: 600; }
+.sr-coach p { margin: .125rem 0 0; color: #ffffffc4; font-size: .8125rem; }
+
+.sr-coach-dismiss {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--sr-radius-sm);
+  color: #ffffffb3;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+}
+
+.sr-coach-dismiss:hover { color: #fff; background: #ffffff26; }
+
+/* The pointer. --sr-coach-arrow is the arrow's horizontal offset within the
+   bubble, written by chrome.js so it aims at the switcher even when the bubble
+   has been nudged inward to stay on screen. */
+.sr-coach::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: var(--sr-coach-arrow, 50%);
+  width: 10px;
+  height: 10px;
+  background: var(--sr-primary);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.sr-coach.is-below::after { top: -5px; bottom: auto; }
+
+/* Rises out of the control it points at rather than just appearing: the scale
+   and the offset are small on purpose, enough to read as movement from the
+   switcher without drawing attention to the animation itself. */
+@keyframes sr-coach-in {
+  from { opacity: 0; transform: translateY(-.5rem) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Whichever side of the switcher it lands on, it moves away from it: the class
+   is set before the first paint, so the right keyframes are in from frame one. */
+.sr-coach:not(.is-below) { animation-name: sr-coach-in-above; }
+
+@keyframes sr-coach-in-above {
+  from { opacity: 0; transform: translateY(.5rem) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sr-coach-target { animation: none; }
+  .sr-coach { animation: none; }
+  /* The dim still lands -- it is what makes the switcher findable. Only the
+     sweep and the fade-up go. */
+  .sr-coach-veil { animation: none; }
+  .sr-coach-veil::after { animation: none; }
+  .sr-coach-target .team-button { animation: none; }
+  .sr-back svg { transition: none; }
+  .sr-back:hover svg { transform: none; }
+}
