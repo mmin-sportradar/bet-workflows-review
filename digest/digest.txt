@@ -1,0 +1,727 @@
+BET PRODUCT SETUP AND INTEGRATION WORKFLOWS
+============================================
+
+Source: https://mmin-sportradar.github.io/bet-workflows-review/
+Generated: 2026-09-04
+
+A flattened index of every BET product, every step of every setup and integration flow, and the answers to the questions the team is asked most. Generated from the site itself, so it cannot disagree with it.
+
+PRODUCTS
+--------------------------------------------
+
+## Widget products
+
+### Betting Widgets
+The core Betting Widgets product.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/betting-widgets-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/betting-widgets-integration-flow-1/
+Widgets licensing: https://mmin-sportradar.github.io/bet-workflows-review/workflows/widgets-licensing-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139172963/Bet+Recommendations+Widgets
+
+### LMT Plus
+LMT widget setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/lmt-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-plus
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139165990/Live+Match+Tracker
+
+### LMT Premium
+Faster data for LMT and LMT Compact.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/lmt-premium-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-plus
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139181924/Live+Match+Tracker+Premium
+
+### LMT Virtualised
+LMT Virtualised product setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/lmt-virtualised-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-plus
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139178293/LMT+Virtualised
+
+### Custom Bet
+Custom Bet widget setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/custom-bet-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/custom-bet/overview
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139172399/CustomBet+Visualisation
+
+### H2H
+Head-to-head widget setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/h2h-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/head-to-head/button
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139169024/Head+to+Head+-+H2H
+
+### Bet Assist
+Bet Assist widget setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-assist-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/bet-assist/button
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139168685/Bet+Assist
+
+### Tournament Preview
+Tournament Preview widget setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/tournament-preview-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/tournament-preview/tournament-preview
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139171399/Tournament+Preview
+
+### Match Preview
+Match Preview widget setup.
+Family: Widget products
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/match-preview-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/match-preview/match-preview
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139169009/Match+Preview
+
+## Packages & combinations
+
+### BET Packages
+BET Product Packages setup.
+Family: Packages & combinations
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-product-packages-setup-flow/
+Technical Documentation: https://product-hub.sportradar.com/en/products/fan-engagement/content/bet-packages
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139181794/BET+Product+Packages
+
+### BET 3-in-1
+BET 3-in-1 setup.
+Family: Packages & combinations
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-3-in-1-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/bet3in1/overview
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139185774/BET+3-in-1
+
+### LCO / LCP via LMT
+LCO via LMT and LCP via LMT.
+Family: Packages & combinations
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/lco-lcp-via-lmt-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/lco-lcp-via-lmt-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-plus
+LCO via LMT Confluence Doc: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139174815/LCO+via+LMT
+LCP via LMT Confluence Doc: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139178195/LCP+via+LMT
+
+### SR Packages
+SR Packages setup, one flow per sport.
+Family: Packages & combinations
+No flow on this site.
+One flow per sport: Golf, Combat Sports, E-Sports/E-League
+
+### SR Packages — Golf
+SR Packages setup, one flow per sport.
+Family: Packages & combinations
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-golf-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-golf-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-golf
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/256456190/LMT+Golf+Hybrid
+One flow per sport: Golf, Combat Sports, E-Sports/E-League
+
+### SR Packages — Combat Sports
+SR Packages setup, one flow per sport.
+Family: Packages & combinations
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-combat-sports-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-combat-sports-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-mma
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/312882557/LMT+Combat+Hybrid
+One flow per sport: Golf, Combat Sports, E-Sports/E-League
+
+### SR Packages — E-Sports/E-League
+SR Packages setup, one flow per sport.
+Family: Packages & combinations
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-e-sports-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-e-sports-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-esports
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139183293/24+7+Sports+and+E-leagues+Product+Packages
+One flow per sport: Golf, Combat Sports, E-Sports/E-League
+
+## Experiences & engagement
+
+### Bet Concierge
+Bet Concierge delivery.
+Family: Experiences & engagement
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-concierge-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-concierge-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/bet-concierge/overview
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139180693/Bet+Concierge
+
+### Virtual Stadium
+Virtual Stadium delivery.
+Family: Experiences & engagement
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/virtual-stadium-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/virtual-stadium-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/virtual-stadium
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139175684/Virtual+Stadium
+
+### Bet Recommendations
+Bet Recommendations setup.
+Family: Experiences & engagement
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-recommendations-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/bet-recommendation
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139172963/Bet+Recommendations+Widgets
+
+### Bet Insights
+Bet Insights setup
+Family: Experiences & engagement
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-insights-player-prop-zone-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/bet-insights/bet-insights
+Bet Insights Confluence Doc: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139175441/Bet+Insights
+Shares its flow with: Player Prop Zone
+
+### Player Prop Zone
+Player Prop Zone setup
+Family: Experiences & engagement
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-insights-player-prop-zone-setup-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/widgets/match/player-prop-zone
+Confluence Documentation: https://sportradar.atlassian.net/wiki/x/PRPTDg
+Shares its flow with: Bet Insights
+
+## Data & APIs
+
+### StatsHub
+StatsHub product delivery.
+Family: Data & APIs
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/statshub-setup-flow/
+Integration flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/statshub-integration-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/statshub
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139185696/StatsHub
+
+### API Betting
+Sports API and Probabilities API.
+Family: Data & APIs
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-api-setup-flow/
+Technical Documentation: https://developer.sportradar.com/getting-started/docs/make-your-first-call
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/139170684/Sports+API
+
+### API Utility / API Mapping
+BET API Utility and BET API Mapping.
+Family: Data & APIs
+Setup flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/api-utility-mapping-setup-flow/
+Technical Documentation: https://docs.sportradar.com/engagement-tools/readme/widgets/bet-utility-api#coverage-api
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/LSS/pages/376385470/Utility+and+Mapping+API+-+Client+Setup+Flow
+
+## Operations
+
+### Additional domains
+Additional domains whitelisting.
+Family: Operations
+Process flow: https://mmin-sportradar.github.io/bet-workflows-review/workflows/additional-domains-whitelisting-flow/
+Technical Documentation: https://apidocs.sportradar.com/resources/widgets/docs/tutorials/troubleshooting/licensing-errors
+Confluence Documentation: https://sportradar.atlassian.net/wiki/spaces/SCS/pages/120040517/Whitelisting+process+for+BET+widgets
+
+### Product Hub
+The central Sportradar product hub.
+Family: Operations
+No flow on this site.
+Product Hub: https://product-hub.sportradar.com/en/home
+
+FLOWS, STEP BY STEP
+--------------------------------------------
+
+## Additional Domains Whitelisting Flow
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/additional-domains-whitelisting-flow/
+1. Approve the request — owned by SALES REPS
+   Accept requests received directly from the client or from Support.
+2. Re-open the relevant Jira — owned by SALES REPS
+   Add domains and assign the selected product setup Jira to Bet-Integrations.
+3. Use the dummy Jira — owned by ADDITIONAL · URGENT ONLY
+   For unregulated markets during weekends or late hours, use BETS-10234.
+4. Whitelist the domains — owned by CLIENT SETUP TEAM
+   Add the domains within 1–2 working days, notify Sales in Jira, and close it.
+5. Submit the urgent request — owned by ADDITIONAL · URGENT ONLY
+   Use the respective Jira and forward the domains email, Jira link, approval, and urgency.
+6. Whitelist domains ASAP — owned by SUPPORT TEAM · URGENT ONLY
+   Support completes urgent domain whitelisting.
+7. Inform the client — owned by SALES REPS
+   Sales rep may inform the client once whitelisting is complete.
+8. Inform the client — owned by SUPPORT TEAM · URGENT ONLY
+   Support informs the client in urgent cases.
+9. Update the client-specific Jira — owned by ADDITIONAL · URGENT ONLY
+   Complete the client Jira on the first working day after a dummy-Jira approval.
+
+## BET API Utility / BET API Mapping
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/api-utility-mapping-setup-flow/
+1. Developer Portal registration — owned by SALES REPS
+   Direct the client to register and obtain a Console ID.
+2. Salesforce account info — owned by SALES REPS
+   Create or amend an opportunity and select the required API product.
+3. Service administration — owned by SALES REPS
+   Request the service and provide mandatory Console and Bookmaker IDs.
+4. Client setup — SDSUP — owned by SDSUP TEAM
+   Enable packages in Developer Portal and hand the ticket to BETI.
+5. Client setup — BETI — owned by BETI TEAM
+   Configure all sports, add technical documentation, and complete the ticket handoff.
+6. Finalization — owned by SALES REPS
+   Inform the client that products and technical documentation are available.
+
+## BET 3-in-1
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-3-in-1-setup-flow/
+1. Salesforce info — owned by SALES REPS
+   Create or amend the quote and select only products requiring a new setup.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BET INTEGRATION TEAM
+   Activate selected products, publish integration instructions, and follow product-specific setup flows.
+4. Finalization — owned by SALES REPS
+   Send the integration instructions PDF to complete the client integration.
+
+## API Betting
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-api-setup-flow/
+1. Developer Portal — owned by SALES REPS
+   Direct clients to register and self issue a trial key.
+2. Salesforce account info — owned by SALES REPS
+   Use Salesforce for Qualified Trial or Production packages.
+3. Service administration — owned by SALES REPS
+   Request the service and provide the client’s Console ID.
+4. Client setup — owned by SDSUP TEAM
+   Find the client via Console ID and prepare trial or production packages.
+5. Production QA — owned by SALES REPS
+   Check the production packages are set according to the deal.
+6. Key activation — owned by SDSUP TEAM
+   Add production packages to the client’s Developer Portal Account and close the ticket.
+7. Finalization — owned by SALES REPS
+   Inform the client that Production packages have been sent.
+
+## Bet Assist
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-assist-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## Bet Concierge
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-concierge-integration-flow/
+1. Initial setup — owned by CLIENT
+   Provide the domains and prompt limits required for the widget setup.
+2. Authentication — owned by CLIENT
+   Create and provide the public RSA key for setup.
+3. Configuration — owned by SPORTRADAR
+   Apply the public key and configure the prompt limits.
+4. Integration — owned by CLIENT
+   Integrate, theme, and configure the widget pop-up.
+5. Adapter — owned by SPORTRADAR · FULL INTEGRATION
+   Prepare a data adapter that enables communication between Bet Concierge and the client’s API.
+6. ID mapping — owned by CLIENT · FULL INTEGRATION
+   Map client match and tournament IDs to Sportradar IDs.
+7. Custom Bet — owned by CLIENT · PREMIUM INTEGRATION
+   Integrate Custom Bet for combo markets.
+
+## Bet Concierge
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-concierge-setup-flow/
+1. Product offer — owned by SALES REPS · PRODUCT OFFER
+   Create or amend the opportunity, then select the required Bet Concierge integration type.
+2. Service request — owned by SALES REPS · SERVICE REQUEST
+   Submit the mandatory setup information and selected integration type.
+3. Setup — owned by BETI · SETUP
+   Activate the product, provide integration material, and create the Jira workstream.
+4. Communication — owned by SALES REPS · COMMUNICATION
+   Send technical documentation and coordinate the client’s public RSA key handoff.
+5. Configuration — owned by BETI · CONFIGURATION
+   Apply the public RSA key, Bookmaker ID, and prompt consumption limits.
+6. Monitoring and invoicing — owned by SALES REPS · MONITORING AND INVOICING
+   Follow the go-live, monitor quota consumption, and coordinate invoicing.
+
+## Bet Insights & Player Prop Zone
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-insights-player-prop-zone-setup-flow/
+1. Salesforce account level — owned by SALES REPS
+   Create the opportunity and select the corresponding product.
+2. Jira service request creation — owned by SALES REPS
+   Request the service and provide the technical information required by BETI.
+3. Internal initiative / Epic Jira ticket creation — owned by BETI TEAM
+   Follow the General Adapter Setup flow and use its product-specific Jira automation triggers.
+4. Communication channel creation — owned by ADDITIONAL
+   Create the shared client channel and agree the Bet Insights API package scope.
+5. Internal development — owned by BETI TEAM
+   Delegate the created tasks and monitor development progress on the Jira Board.
+
+## BET Packages
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-product-packages-setup-flow/
+1. Salesforce account info — owned by SALES REPS
+   Select the account path and add the respective BET New package to the Quote.
+2. Selection — owned by SALES REPS
+   Configure the package, number of sports, and package price.
+3. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+4. Setup of the Client — owned by BETI TEAM
+   Create or update the Store account, activate products, and prepare integration instructions.
+5. Finalization — owned by SALES REPS
+   Send the integration instructions PDF to complete the process.
+
+## Bet Recommendations
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/bet-recommendations-setup-flow/
+1. Salesforce account level — owned by SALES REPS
+   Create the opportunity and select the appropriate Bet Recommendations Widget.
+2. Jira service request creation — owned by SALES REPS
+   Request the service, add the required client information, and trigger BETI and VI tickets.
+3. Internal initiative / Epic Jira ticket creation — owned by BETI TEAM
+   Create the BETI Epic and the automatically generated setup tasks.
+4. Communication channel creation — Jira task — owned by ADDITIONAL
+   Create the shared Slack channel and invite the client’s technical team.
+5. Internal development — owned by BETI TEAM
+   Delegate the created tasks and monitor development progress on the Jira Board.
+
+## Betting Widgets
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/betting-widgets-integration-flow-1/
+1. Create Client ID — owned by SPORTRADAR
+   Create a licensing key for contracted products on whitelisted domains.
+2. Send instructions — owned by SPORTRADAR
+   Send the Integration Instructions PDF to the client.
+3. Configure Demo page — owned by CLIENT
+   Configure the parameters and theming on the Demo page.
+4. Get integration code — owned by CLIENT
+   Download the integration code from the Get code tab.
+5. Customize — owned by CLIENT
+   Use the technical documentation for additional customization.
+
+## Betting Widgets
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/betting-widgets-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## Custom Bet
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/custom-bet-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## H2H
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/h2h-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## LCO via LMT / LCP via LMT
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/lco-lcp-via-lmt-integration-flow/
+1. Initiation — owned by CS TEAM
+   Start the backend setup and coordinate CDN and AV content activation.
+2. Connecting the products — owned by BET INTEGRATION TEAM
+   Set the AV bookmaker ID and LMT Highlights parameter.
+3. Technical instructions — owned by BET INTEGRATION TEAM
+   Notify AV after Store setup and share JWT-token guidance.
+4. Informing the client — owned by AV TEAM
+   Coordinate client communication and the public RSA key handoff.
+5. Authentication tokens — owned by BET INTEGRATION TEAM
+   Apply the public RSA key to the correct account.
+6. Finalization — owned by SALES REPS
+   Open the shared channel for final integration assistance.
+
+## LCO via LMT / LCP via LMT
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/lco-lcp-via-lmt-setup-flow/
+1. Product offer — owned by SALES REPS · PRODUCT OFFER
+   Confirm the LMT status for the requested LCO via LMT or LCP via LMT sports.
+2. Salesforce account info — owned by SALES REPS · SALESFORCE ACCOUNT INFO
+   Update Salesforce for the agreed LMT sports and integration type.
+3. Product contract — owned by SALES REPS · PRODUCT CONTRACT
+   Complete the LMT contract process for the agreed sports.
+
+## LMT Premium
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/lmt-premium-setup-flow/
+1. Product offer — owned by ADDITIONAL
+   Review eligibility, product packaging, and the LMT Premium trial policy.
+2. Salesforce account info — owned by SALES REPS
+   Create or amend an opportunity for the chosen product or bundle.
+3. Service administration — owned by SALES REPS
+   Request the service and supply activation details.
+4. Client setup — owned by BETI INTEGRATIONS
+   Create the account or order, activate products, and complete the ticket.
+5. Finalization — owned by SALES REPS
+   Share integration instructions or confirm the faster data stream is enabled.
+
+## LMT PLUS
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/lmt-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## LMT Virtualised
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/lmt-virtualised-setup-flow/
+1. Salesforce account info — owned by SALES REPS
+   Select the LMT Virtualised opportunity path based on the client’s LCO and LMT status.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI INTEGRATIONS
+   Validate LCO rights, activate the product, and prepare integration instructions.
+4. Finalization — owned by SALES REPS
+   Send integration instructions and confirm trial conditions.
+
+## Match Preview
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/match-preview-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## LMT Combat BET Integration
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-combat-sports-integration-flow/
+1. Confirm the request and scope — owned by BET INTEGRATION TEAM
+   CS clones the Salesforce ticket; BETI activates standard LMT for MMA.
+2. Confirm new-client details — owned by SALES / BET INTEGRATION
+   Confirm the client POC, UFC-streaming need, and requested regions with Sales.
+3. Prepare the IMGA operator name — owned by BET INTEGRATION TEAM
+   Reuse or create the mandatory operator name and enter it in Store.
+4. Request UFC streaming — owned by IMGA TEAM · IF REQUESTED
+   Request IMGA activation in #bets-img-operator-setup for UFC only.
+5. Create the Keeper link — owned by BET INTEGRATION · STREAMING ONLY
+   Create a one-time credentials link, valid for one week, and share it separately.
+6. Send the client handover — owned by BET INTEGRATION TEAM
+   Send the Store ClientID and integration guidance to the POC, with Sales in CC.
+7. Route follow-up issues — owned by IMGA / BET INTEGRATION
+   Use #bets-img-operator-setup to coordinate integration and streaming follow-up.
+
+## SR Packages — Combat Sports
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-combat-sports-setup-flow/
+1. Salesforce account info — owned by SALES REPS
+   Select the account path and add the respective BET New package to the Quote.
+2. Selection — owned by SALES REPS
+   Configure the package, number of sports, and package price.
+3. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+4. Client setup — owned by CUSTOMER CARE TEAM
+   Create or update the Store account, activate products, and prepare integration instructions.
+5. Finalization — owned by SALES REPS
+   Send the integration instructions PDF to complete the process.
+
+## LMT eSports (GRID)
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-e-sports-integration-flow/
+1. Enable the eSports package in Store — owned by BET INTEGRATION TEAM
+   Confirm the LMT eSports Package and enable all four supported titles.
+2. Whitelist client domains — owned by GRID TEAM
+   Request required domain whitelisting in #shared-sportradar-widgets and notify Sales after confirmation.
+3. Check the required language — owned by BET INTEGRATION TEAM
+   Validate language support; use English when the requested language is unavailable.
+4. Request a custom translation — owned by GRID TEAM
+   For unsupported languages, request integration-level custom translation support from GRID.
+
+## SR Packages — E-Sports/E-League
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-e-sports-setup-flow/
+1. Salesforce account info — owned by SALES REPS
+   Select the account path and add the respective BET New package to the Quote.
+2. Selection — owned by SALES REPS
+   Configure the package, number of sports, and package price.
+3. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+4. Client setup — owned by CUSTOMER CARE TEAM
+   Create or update the Store account, activate products, and prepare integration instructions.
+5. Finalization — owned by SALES REPS
+   Send the integration instructions PDF to complete the process.
+
+## LMT Golf BET Integration
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-golf-integration-flow/
+1. Identify the Salesforce package — owned by BET INTEGRATION TEAM
+   Confirm Essential or Advanced and apply the matching LMT activation scope.
+2. Confirm client details — owned by SALES / BET INTEGRATION
+   Obtain the client POC and, for Advanced, the required streaming regions.
+3. Prepare the IMGA operator name — owned by BET INTEGRATION TEAM
+   Reuse or create the required operator name, then set imgaOperator
+4. Request streaming credentials — owned by IMGA TEAM · ADVANCED ONLY
+   Request activation in #bets-img-operator-setup with all streaming requirements.
+5. Create the Keeper credentials link — owned by BET INTEGRATION TEAM · ADVANCED ONLY
+   Create a one-time link, valid for one week, and share it separately with the client.
+6. Send the integration handover — owned by BET INTEGRATION TEAM
+   Email the client POC, copy Sales, and provide the Client ID and integration guidance.
+7. Route follow-up issues — owned by IMGA / BET INTEGRATION
+   Use #bets-img-operator-setup for integration or streaming follow-up with IMGA.
+
+## Premium Golf Service
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/sr-packages-golf-setup-flow/
+1. Set up the Salesforce opportunity — owned by SALES
+   Include the correct PGS offer and apply the applicable revenue allocation.
+2. Complete contracting — owned by SALES
+   Use the MSA and Streaming appendix; Advanced uses a child Streaming contract.
+3. Request the product trial — owned by SALES
+   Submit the regular Salesforce Tech Service or MTS Tech Service Request.
+4. Activate after CS Jira — owned by CLIENT SETUP TEAM
+   Activate in ISA and route the LMT or LMT Premium Golf Jira to bet-integrations.
+5. Coordinate Advanced AV setup — owned by STREAMING
+   Assess AV integration, arrange client setup where needed, and select AV CDN Usage.
+6. Activate invoicing — owned by INVOICE TEAM
+   Use the regular Invoice Activation process; the responsible setup team activates or extends ISA.
+
+## StatsHub
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/statshub-integration-flow/
+1. Fill out the Setup Document — owned by CLIENT
+   Provide the required setup information.
+2. Configure settings — owned by SPORTRADAR
+   Configure the setup and send the staging link for review.
+3. Review staging link — owned by CLIENT
+   Review the changes and confirm deployment to production.
+4. Production link — owned by SPORTRADAR
+   Provide the latest confirmed production link to the client.
+
+## StatsHub
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/statshub-setup-flow/
+1. New or existing client — owned by SALES REPS
+   Open a new account, create a new opportunity, or amend an opportunity.
+2. Request the service — owned by SALES REPS
+   Request StatsHub, provide activation details, and open the automatically created Jira ticket.
+3. Technical activation — owned by CLIENT SETUP TEAM
+   Add StatsHub technical activation in ISA and make adjustments in HSA if needed.
+4. Prepare staging link — owned by BETI TEAM
+   Prepare the StatsHub Staging link and add it to the Jira ticket.
+5. Client confirmation — owned by ADDITIONAL
+   Share the Staging link and communicate all possible changes via Jira ticket.
+6. Prepare production link — owned by BETI TEAM
+   Prepare the Production Link and add it to the Jira ticket.
+7. SOX approval — owned by ADDITIONAL
+   Update the SOX approval and reassign the ticket back to Client Setup Team.
+8. Close ticket — owned by BETI TEAM
+   Close the ticket after the required update/check.
+9. Share Production Link — owned by ADDITIONAL
+   Share the Production Link with a client for final integration.
+10. Trial and setup guidance — owned by ADDITIONAL
+   Use the StatsHub Setup Document and keep trial guidance in mind.
+11. New domains — owned by ADDITIONAL
+   Follow the supplied flow if new domains need to be whitelisted.
+
+## Tournament Preview
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/tournament-preview-setup-flow/
+1. Salesforce account — owned by SALES REPS
+   Open or amend an opportunity and choose the respective product.
+2. Service administration — owned by SALES REPS
+   Request the service and provide activation details.
+3. Client setup — owned by BETI TEAM
+   Create or activate the client setup and add instructions to Jira.
+4. Finalization — owned by SALES REPS
+   Send the Integration Instructions PDF to the client.
+
+## Virtual Stadium
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/virtual-stadium-integration-flow/
+1. Authentication — owned by CLIENT
+   Reuse the existing login or create and share a Public RSA key.
+2. Supervisor invite — owned by CLIENT
+   Grant client access to the Virtual Stadium dashboard.
+3. Brand and operator setup — owned by SPORTRADAR
+   Set up brands and operators.
+4. User setup — owned by SPORTRADAR
+   Send invitations to supervisors and moderators.
+5. Adapter — owned by SPORTRADAR
+   Prepare the data adapter for communication between Virtual Stadium and the client front end.
+6. Match ID mapping — owned by CLIENT
+   Map client match and tournament IDs to Sportradar IDs.
+7. API endpoint — owned by SPORTRADAR
+   Prepare the API endpoint for channel creation.
+8. Channel creation request — owned by CLIENT
+   Send the channel creation request to the API.
+9. Widget integration — owned by CLIENT
+   Integrate the Virtual Stadium widget on the web page.
+10. Styling — owned by CLIENT
+   Apply colors and typography.
+11. Component development — owned by SPORTRADAR
+   Develop the Virtual Stadium mobile UI components.
+12. SDK integration — owned by CLIENT
+   Use the Android or iOS SDK to integrate the components.
+13. Data SDK integration — owned by CLIENT
+   Implement the fully customizable Data SDK experience.
+
+## Virtual Stadium
+https://mmin-sportradar.github.io/bet-workflows-review/workflows/virtual-stadium-setup-flow/
+1. Salesforce account level — owned by SALES REPS
+   Create or amend the opportunity and select the Virtual Stadium quote product.
+2. Jira service request creation — owned by SALES REPS
+   Request the service and trigger the BETI Jira ticket.
+3. Internal initiative / Epic Jira ticket creation — owned by BETI TEAM
+   Create the BETI workstream and its automatically generated tasks.
+4. Communication channel creation — owned by BETI TEAM
+   Create the shared Slack channel and invite the client team.
+5. Internal development — owned by BETI TEAM
+   Delegate the work and monitor development progress on the Jira Board.
+
+FREQUENTLY ASKED
+--------------------------------------------
+
+## Which workflow do I need for my product?
+Open the catalogue on the landing page and pick the product tile. Each tile lists only the routes that product actually has:
+
+  - Setup flow — getting the product provisioned and configured for a client.
+  - Integration flow — the technical work on the client side once setup is done.
+  - Process flow — a standalone operational process, such as domain whitelisting.
+  - Widgets licensing — the per-sport licensing route for Betting Widgets.
+
+Every flow page then has a team switcher at the top. Pick your team and the diagram fades out every step somebody else owns, which is usually the fastest way to see whether a request is yours at all.
+
+## How do I see only the steps my team owns?
+Use the team switcher in the header of any flow page. Choosing a team fades every card owned by someone else, leaving your own path through the diagram at full contrast; All teams puts them back.
+
+Your choice is remembered in this browser and reapplied on every flow you open afterwards, so you only pick it once. If you want to see the first-run prompt again, add `?coach` to the page URL.
+
+One naming note: BETI appears as *BETI* on most flows and as *Integrations* on the widget ones — they are the same team, and the switcher follows your choice across both. Customer Care, Client Setup, Support, AV, CS and MTS are genuinely different teams and are never merged.
+
+## What is the difference between LMT Plus, LMT Premium and LMT Virtualised?
+They are three separate products in the catalogue, each with its own setup flow:
+
+  - LMT Plus — the standard Live Match Tracker widget.
+  - LMT Premium — the same tracker on a faster data path, for LMT and LMT Compact.
+  - LMT Virtualised — the virtualised variant.
+
+They share the LMT documentation but not the setup route, so start from the tile for the one the client bought rather than adapting another product's flow.
+
+## A client's widget shows a licensing error on a new domain. What do I do?
+That is the additional-domains process, not a product setup. Every domain a widget is embedded on has to be whitelisted against the client's licence — a domain that was never added produces exactly this error, including for staging and preview hosts, which are the ones most often forgotten.
+
+Open the Additional domains process flow for who raises the request and who approves it. The troubleshooting page covers reading the specific error the widget prints, which tells you whether the domain is genuinely missing or the licence itself has lapsed.
+
+## Why does SR Packages have a different flow for each sport?
+Because the setup genuinely differs per sport. SR Packages is listed once in the catalogue, and opening it shows the sports first — Golf, Combat Sports, and E-Sports/E-League — each with its own setup and integration flow behind it.
+
+Pick the sport and the dialog replaces the list with that sport's routes, so you only ever see the one you asked for. Everything else in the catalogue behaves the way it always has and goes straight to its flow.
+
+## What is the difference between a setup flow and an integration flow?
+Setup is everything that has to be true before the client can use the product: the commercial and provisioning path, service administration, product selection, licensing, and finalisation. It is mostly Sales, Client Setup and Customer Care.
+
+Integration is the technical work once that is done: adapters, ID mapping, configuration and the client's own implementation. It is mostly BETI and the client's engineers.
+
+A product with both listed has them as separate diagrams because they run at different times and involve different people. A product with only a setup flow either has no integration work worth diagramming, or it has not been drawn yet.
+
+## Where is the documentation for a product?
+Each product tile carries its own links, and there are usually two:
+
+  - Technical documentation on apidocs.sportradar.com — how the thing works and how to call it. This is what you send a client's engineer.
+  - Confluence on sportradar.atlassian.net — the internal page: ownership, commercial detail, and the history of the product. This one is for us.
+
+The Product Hub tile under Operations is the central catalogue of everything Sportradar sells, which is the right place to start when the question is commercial rather than technical.
+
+## What are the Utility and Mapping APIs for?
+They are the two supporting APIs around the BET products rather than products a client buys on their own:
+
+  - Utility API — coverage and availability questions: what a widget can show for a given match.
+  - Mapping API — reconciling the client's own match and competitor IDs against Sportradar's.
+
+Mapping is the one that turns up mid-integration, when a client's IDs do not line up with ours. The client setup flow covers who provisions access.
+
+## How do I know a workflow page is still current?
+Every flow page carries a Last updated stamp in its footer, shown as how long ago it changed — hover it for the exact date. The landing page has no stamp of its own because it is generated from the catalogue.
+
+If a diagram disagrees with what actually happens, that is worth saying rather than working around: the flows are edited through the content admin and a correction is a small change.
+
+## Are Bet Insights and Player Prop Zone the same thing?
+They are two tiles that currently share one setup flow. Player Prop Zone used to sit inside Bet Insights and is now listed as a product in its own right, but the provisioning path is the same diagram, so both tiles open it.
+
+The documentation is separate: Bet Insights and Player Prop Zone each have their own apidocs page and their own Confluence page, and those are the links to send on.

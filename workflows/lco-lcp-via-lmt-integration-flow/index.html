@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LCO via LMT / LCP via LMT — Integration Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+    <link rel="stylesheet" href="../../shared/chrome.css?v=24" />
+    <link rel="stylesheet" href="styles.css?v=lco-lcp-via-lmt-integration-visual-9" />
+    <link rel="stylesheet" href="../../shared/responsive.css?v=17" />
+    <script src="../../shared/catalog.js?v=17" defer></script>
+    <script src="../../shared/chrome.js?v=58" defer></script>
+  </head>
+  <body class="lco-lcp-via-lmt-integration">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">BET PRODUCTS · SETUP FLOW</p>
+        <h1>LCO via LMT / LCP via LMT</h1>
+        <p class="subtitle">Technical integration flow</p>
+        <div class="sr-tags"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8.62769 1.33432L8.58862 1.33823L8.54956 1.34409L8.51343 1.35092L8.44214 1.37241L8.39722 1.38998L8.30933 1.43686L8.24976 1.47983L8.19507 1.52866L2.16968 7.556C1.63105 8.15851 1.60552 9.05463 2.11499 9.70834L2.19507 9.80502L6.22241 13.8304C6.82495 14.3692 7.72195 14.3947 8.37573 13.8851L8.47144 13.805L14.4714 7.80502C14.5756 7.7009 14.6417 7.5656 14.6609 7.42123L14.6667 7.33334V4.66635C14.6666 2.82566 13.1744 1.33352 11.3337 1.33334L8.62769 1.33432ZM11.3337 2.66635C12.3987 2.66652 13.269 3.49944 13.3298 4.54916L13.3337 4.66635V7.05698L7.55542 12.8363C7.44472 12.9353 7.28451 12.9481 7.17944 12.891L7.13843 12.8617L3.16382 8.88901C3.06488 8.77839 3.05212 8.6181 3.10913 8.51303L3.13843 8.47104L8.94312 2.66635H11.3337ZM9.99976 4.00034C8.89534 4.00051 7.99976 4.89588 7.99976 6.00034C7.99989 7.10468 8.89542 8.00016 9.99976 8.00034C11.1042 8.00034 11.9996 7.10479 11.9998 6.00034C11.9998 4.89577 11.1043 4.00034 9.99976 4.00034ZM9.99976 5.33334C10.3679 5.33334 10.6667 5.63215 10.6667 6.00034C10.6666 6.36841 10.3679 6.66733 9.99976 6.66733C9.6318 6.66715 9.3329 6.3683 9.33276 6.00034C9.33276 5.63226 9.63172 5.33352 9.99976 5.33334Z" fill="#FF0000"></path></svg><span>Packages &amp; combinations, LCO / LCP via LMT, Integration flow</span></div>
+      </div>
+      <div class="team-switcher" aria-label="Select your team">
+        <span class="switcher-label">Responsibilities:</span>
+        <button class="team-button selected" data-team="all">All teams</button>
+        <button class="team-button cs" data-team="cs">CS Team</button>
+        <button class="team-button av" data-team="av">AV Team</button>
+        <button class="team-button beti" data-team="beti">BET Integration Team</button>
+      </div>
+    </header>
+
+    <div class="sr-subnav">
+      <a class="sr-back" href="../../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to workflows</a>
+    <nav aria-label="Breadcrumb">
+        <ol class="sr-crumbs">
+          <li><a href="../../">BET Workflows</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><a href="../../">Packages &amp; combinations</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><span aria-current="page">Integration flow</span></li>
+        </ol>
+      </nav></div>
+
+    <main class="flow-shell" data-selected="all">
+      <p class="source-note">This document is intended for units involved in the technical integration process. <strong>*Steps for LCP via LMT only</strong></p>
+      <section class="flow-grid" aria-label="LCO and LCP via LMT technical integration flow">
+        <button class="stage-card cs-card step-one" data-owner="cs" data-dialog="initiation">
+          <span class="stage-number">1</span>
+          <span class="owner">CS TEAM</span>
+          <strong>Initiation</strong>
+          <span class="summary">Start the backend setup and coordinate CDN and AV content activation.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card beti-card step-two" data-owner="beti" data-dialog="connecting">
+          <span class="stage-number">2</span>
+          <span class="owner">BET INTEGRATION TEAM</span>
+          <strong>Connecting the products</strong>
+          <span class="summary">Set the AV bookmaker ID and LMT Highlights parameter.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card beti-card step-three" data-owner="beti" data-dialog="technical-instructions">
+          <span class="stage-number">3</span>
+          <span class="owner">BET INTEGRATION TEAM</span>
+          <strong>Technical instructions</strong>
+          <span class="summary">Notify AV after Store setup and share JWT-token guidance.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card av-card step-four" data-owner="av" data-dialog="informing-client">
+          <span class="stage-number">4</span>
+          <span class="owner">AV TEAM</span>
+          <strong>Informing the client</strong>
+          <span class="summary">Coordinate client communication and the public RSA key handoff.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card beti-card step-five" data-owner="beti" data-dialog="authentication-tokens">
+          <span class="stage-number">5</span>
+          <span class="owner">BET INTEGRATION TEAM</span>
+          <strong>Authentication tokens</strong>
+          <span class="summary">Apply the public RSA key to the correct account.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+        <button class="stage-card sales-card step-six" data-owner="sales" data-dialog="finalization">
+          <span class="stage-number">6</span>
+          <span class="owner">SALES REPS</span>
+          <strong>Finalization</strong>
+          <span class="summary">Open the shared channel for final integration assistance.</span>
+          <span class="detail-hint">View instructions</span>
+        </button>
+      </section>
+    </main>
+
+    <dialog id="initiation">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">1 · CS TEAM</p>
+      <h2>Initiation</h2>
+      <p>SF triggers a Jira Ticket for CS Team. CS Team starts a setup process in Betradar backend system, ISA and AVCMP.</p>
+      <p>CS Team assigns the ticket for requesting CDN setup at VTD team and checking correct client setup in AVCMP to AV Team (Matthias Maass).</p>
+      <h3>AV content activation</h3>
+      <p>Matthias informs AV-Admin team and the responsible AV-PSS about completed CS process.</p>
+      <p>AV-Admin team activates contracted AV content packages in AVCMP.</p>
+    </dialog>
+    <dialog id="connecting">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">2 · BET INTEGRATION TEAM</p>
+      <h2>Connecting the Products</h2>
+      <p>Once the AV packages are set on AV side, AV team informs CS team about completed content activation.</p>
+      <p>CS Team clones the Jira ticket and assigns it to BET Integration team (BETI Project).</p>
+      <p>Check the availability of AV bookmakerID in Store. If AV bookmakerID is not set in Store, please connect AV bookmakerID with correct account.</p>
+      <p>Set additional parameter <strong>“LMT Highlights”</strong> to <strong>“TRUE”.</strong></p>
+    </dialog>
+    <dialog id="technical-instructions">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">3 · BET INTEGRATION TEAM</p>
+      <h2>Technical Instructions</h2>
+      <p>Once everything is set on Sportradar Store, BET Integration Team passes the notice to AV team (Matthias) by Jira ticket and by e-mail (to <a href="mailto:av-integration@sportradar.com">av-integration@sportradar.com</a>), along with the link to <a href="https://apidocs.sportradar.com/resources/widgets/docs/tutorials/jwt" target="_blank" rel="noopener noreferrer">documentation for creating JWT token</a> (needed for authentication of streams).</p>
+      <p>If RSA tokens are already set for LCO purposes, nothing additional is needed.</p>
+    </dialog>
+    <dialog id="informing-client">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">4 · AV TEAM</p>
+      <h2>Informing the Client</h2>
+      <p>AV-integration team contacts the client via e-mail and includes BET Integration team in the e-mail chain (<strong>bet-integrations@sportradar.com</strong>). E-mail sent to the client includes a link to technical documentation and a request for client to provide the Public RSA key (created in the process of obtaining JWT token) to BET Integration team (<strong>bet-integrations@sportradar.com</strong>).</p>
+      <p>AV integration team follows-up with client and BET Integration team until the client has gone live.</p>
+      <p>If RSA tokens are already set for LCO purposes, nothing additional is needed.</p>
+    </dialog>
+    <dialog id="authentication-tokens">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">5 · BET INTEGRATION TEAM</p>
+      <h2>Authentication Tokens</h2>
+      <p>BET Integration team applies the provided Public RSA key to correct account.</p>
+      <p>If RSA tokens are already set for LCO purposes, nothing additional is needed.</p>
+    </dialog>
+    <dialog id="finalization">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">6 · SALES REPS</p>
+      <h2>Finalization</h2>
+      <p>AV team (Matthias) opens a communication channel (preferably) on Slack, adding AV team, BET Integration team, responsible sales and client, for potential detailed integration and/or help with setting up correct parameters to existing LMT integration.</p>
+    </dialog>
+
+    <footer>
+      <img src="assets/sportradar-footer.png" alt="Sportradar — Sports technology. Reimagined." />
+      <time datetime="2026-09-03">3 September 2026</time>
+    </footer>
+    <script src="app.js?v=lco-lcp-via-lmt-integration-2"></script>
+  </body>
+</html>

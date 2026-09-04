@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Navigate BET product setup and integration workflows." />
+    <title>BET Workflows | Sportradar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+    <link rel="stylesheet" href="shared/chrome.css?v=24" />
+    <link rel="stylesheet" href="styles.css?v=apidocs-11" />
+    <link rel="stylesheet" href="shared/responsive.css?v=17" />
+    <script src="shared/catalog.js?v=17" defer></script>
+    <script src="shared/chrome.js?v=58" defer></script>
+    <script src="app.js?v=apidocs-12" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Product navigation">
+        <div class="sidebar-search">
+          <label class="sr-visually-hidden" for="product-filter">Filter products</label>
+          <input id="product-filter" type="search" placeholder="Filter products…" autocomplete="off" />
+        </div>
+        <nav id="sidebar-nav" class="sidebar-nav" aria-label="Products"></nav>
+        <p id="sidebar-empty" class="sidebar-empty" hidden>No products match that filter.</p>
+      </aside>
+
+      <main class="content">
+        <nav aria-label="Breadcrumb">
+          <ol class="sr-crumbs">
+            <li>
+              <a href="./">BET Workflows</a>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+            </li>
+            <li><span aria-current="page">Catalog</span></li>
+          </ol>
+        </nav>
+
+        <div class="page-intro">
+          <h1>BET Product Setup &amp; Integration Flows</h1>
+          <p>Select a product to open its available workflow, an interactive diagram you can filter down to the steps your&nbsp;team owns.</p>
+        </div>
+
+        <section class="catalog" aria-label="BET product catalog">
+          <div id="category-grid" class="category-grid" aria-live="polite"></div>
+        </section>
+
+        <!-- Inside the content column, not after the shell: the sidebar is a
+             full-height sticky column, so a page-wide footer drew its rule
+             straight across it. Filled by buildFooter() in shared/chrome.js,
+             the single definition for all 27 pages. The landing page carries no
+             last-updated stamp, so its row shows the feedback control alone. -->
+        <footer class="sr-footer"><time datetime="2026-09-03">3 September 2026</time></footer>
+      </main>
+    </div>
+
+    <!-- Two panes, one at a time. A product whose flows are per-sport (SR Packages)
+         lists the sports first; choosing one replaces that list with the sport's
+         own routes, so the dialog only ever shows the screen you asked for. The
+         back row and Escape return to the list. Everything else uses the first
+         pane alone and looks exactly as it did. -->
+    <dialog id="flow-dialog" class="flow-dialog" aria-labelledby="dialog-product-title">
+      <button class="dialog-close" type="button" aria-label="Close workflow options">&times;</button>
+      <div class="dialog-panes">
+        <div class="dialog-pane">
+          <p id="dialog-family" class="eyebrow"></p>
+          <h2 id="dialog-product-title"></h2>
+          <p id="dialog-description"></p>
+          <div id="dialog-flow-options" class="dialog-flow-options"></div>
+        </div>
+        <div id="dialog-variant-pane" class="dialog-pane dialog-pane--variant" role="group" aria-labelledby="dialog-variant-title" hidden>
+          <button id="dialog-variant-back" class="dialog-back" type="button">
+            <span class="arrow" aria-hidden="true">&larr;</span>
+            <span id="dialog-variant-back-label">Back</span>
+          </button>
+          <p id="dialog-variant-family" class="eyebrow"></p>
+          <h3 id="dialog-variant-title"></h3>
+          <div id="dialog-variant-options" class="dialog-flow-options"></div>
+        </div>
+      </div>
+    </dialog>
+
+  </body>
+</html>

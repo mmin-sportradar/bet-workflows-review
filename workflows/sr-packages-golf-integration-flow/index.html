@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LMT Golf BET Integration process for new clients">
+  <title>LMT Golf BET Integration — New Clients</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+  <link rel="stylesheet" href="../../shared/chrome.css?v=24" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../../shared/responsive.css?v=17" />
+  <script src="../../shared/catalog.js?v=17" defer></script>
+  <script src="../../shared/chrome.js?v=58" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">BET PRODUCTS · SETUP FLOW</p>
+      <h1>LMT Golf BET Integration</h1>
+      <p class="subtitle">New-client setup for Premium Golf Service Essential and Advanced</p>
+    </div>
+    <nav class="team-switcher" aria-label="Filter steps by responsible team">
+      <span class="switcher-label">Responsibilities:</span>
+      <button class="team-button selected" type="button" data-team="all">All teams</button>
+      <button class="team-button beti" type="button" data-team="bet-integration">BET Integration</button>
+      <button class="team-button sales" type="button" data-team="sales">Sales</button>
+      <button class="team-button imga" type="button" data-team="imga">IMGA</button>
+    </nav>
+  </header>
+
+  <main class="flow-shell">
+    <aside class="source-note" aria-label="Process note">
+      <strong>Package scope:</strong> Essential activates <strong>LMT</strong>. Advanced activates <strong>LMT + LMT Premium + streaming</strong> with the IMGA team.
+    </aside>
+
+    <section class="flow-grid" aria-label="LMT Golf BET Integration setup steps">
+      <button class="stage-card beti-card step-one" type="button" data-owner="bet-integration" data-dialog="step-1-dialog">
+        <span class="stage-number">1</span><span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Identify the Salesforce package</strong>
+        <span class="summary">Confirm Essential or Advanced and apply the matching LMT activation scope.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card sales-card step-two" type="button" data-owner="sales" data-dialog="step-2-dialog">
+        <span class="stage-number">2</span><span class="owner">SALES / BET INTEGRATION</span>
+        <strong>Confirm client details</strong>
+        <span class="summary">Obtain the client POC and, for Advanced, the required streaming regions.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-three" type="button" data-owner="bet-integration" data-dialog="step-3-dialog">
+        <span class="stage-number">3</span><span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Prepare the IMGA operator name</strong>
+        <span class="summary">Reuse or create the required operator name, then set <code>imgaOperator</code> in Store.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card imga-card step-four" type="button" data-owner="imga" data-dialog="step-4-dialog">
+        <span class="stage-number">4</span><span class="owner">IMGA TEAM · ADVANCED ONLY</span>
+        <strong>Request streaming credentials</strong>
+        <span class="summary">Request activation in #bets-img-operator-setup with all streaming requirements.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-five" type="button" data-owner="bet-integration" data-dialog="step-5-dialog">
+        <span class="stage-number">5</span><span class="owner">BET INTEGRATION TEAM · ADVANCED ONLY</span>
+        <strong>Create the Keeper credentials link</strong>
+        <span class="summary">Create a one-time link, valid for one week, and share it separately with the client.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-six" type="button" data-owner="bet-integration" data-dialog="step-6-dialog">
+        <span class="stage-number">6</span><span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Send the integration handover</strong>
+        <span class="summary">Email the client POC, copy Sales, and provide the Client ID and integration guidance.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card imga-card step-seven" type="button" data-owner="imga" data-dialog="step-7-dialog">
+        <span class="stage-number">7</span><span class="owner">IMGA / BET INTEGRATION</span>
+        <strong>Route follow-up issues</strong>
+        <span class="summary">Use #bets-img-operator-setup for integration or streaming follow-up with IMGA.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand" aria-label="Sportradar">SPORTRADAR</div><time datetime="2026-09-03">3 September 2026</time></footer>
+
+  <dialog id="step-1-dialog" aria-labelledby="step-1-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-1-title">Identify the Salesforce package</h2>
+    <ol>
+      <li>Check whether Salesforce requested <strong>Premium Golf Service Essential</strong> or <strong>Premium Golf Service Advanced</strong>.</li>
+      <li>Both requests are <strong>cross-unit bundles</strong>. Salesforce requests go to the CS team first; CS later clones tickets and assigns LMT-integration work to BETI.</li>
+      <li>Apply the corresponding activation scope.</li>
+    </ol>
+    <h3>Essential</h3><p>Activate <strong>LMT</strong>.</p>
+    <h3>Advanced</h3><p>Activate <strong>LMT + LMT Premium + streaming</strong> with the IMGA team.</p>
+  </dialog>
+
+  <dialog id="step-2-dialog" aria-labelledby="step-2-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">SALES / BET INTEGRATION</p>
+    <h2 id="step-2-title">Confirm client details</h2>
+    <ol>
+      <li>Add a comment to the relevant Jira ticket and contact the Sales representative.</li>
+      <li>Ask Sales to confirm the client’s integration point of contact (<strong>POC</strong>).</li>
+      <li>For <strong>Advanced</strong>, also ask Sales to confirm the required streaming regions.</li>
+      <li>Do not proceed with client-facing setup until these details are available.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-3-dialog" aria-labelledby="step-3-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-3-title">Prepare the IMGA operator name</h2>
+    <p>The IMGA operator name is mandatory for both Essential and Advanced.</p>
+    <ol>
+      <li>Check the IMGA repository for an existing client <strong>IMGA operator name</strong>.</li>
+      <li>If it exists, reuse it for LMT activation.</li>
+      <li>If it does not exist, create a new operator ID using the standard operator-creation process.</li>
+      <li>Enter the confirmed operator name in Store’s <code>imgaOperator</code> field during LMT activation.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-4-dialog" aria-labelledby="step-4-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">IMGA TEAM · ADVANCED ONLY</p>
+    <h2 id="step-4-title">Request streaming credentials</h2>
+    <ol>
+      <li>Confirm the client is on <strong>Premium Golf Service Advanced</strong> and that the IMGA operator name is ready.</li>
+      <li>Contact the IMGA team (Faisal Hussain) in <strong>#bets-img-operator-setup</strong>.</li>
+      <li>Request streaming activation with the IMGA operator name, leagues, required region, and licensing period.</li>
+      <li>Ask whether the region is already available; if not, ask whether it can be enabled.</li>
+      <li>Request the operator ID and streaming token via <strong>Keeper</strong> once ready.</li>
+      <li>For new clients, provide the client POC’s name and email address.</li>
+    </ol>
+    <h3>Request example</h3><p>“Please activate streaming for [operator name]. Please confirm if the region is available; if not, can it be enabled? The stream should cover [league] from [start] to [end]. Once ready, please share the operator ID and token via Keeper.”</p>
+  </dialog>
+
+  <dialog id="step-5-dialog" aria-labelledby="step-5-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM · ADVANCED ONLY</p>
+    <h2 id="step-5-title">Create the Keeper credentials link</h2>
+    <ol>
+      <li>Wait until IMGA provides the <strong>operator ID</strong> and <strong>streaming token</strong>.</li>
+      <li>Create a <strong>one-time Keeper link</strong> containing those credentials.</li>
+      <li>Set the link to remain active for <strong>one week</strong>.</li>
+      <li>Share it with the client separately, preferably by email.</li>
+    </ol>
+    <h3>Single-use warning</h3><p>The link must not be opened by anyone else: credentials are available only to the first person who opens it.</p>
+  </dialog>
+
+  <dialog id="step-6-dialog" aria-labelledby="step-6-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-6-title">Send the client integration handover</h2>
+    <ol>
+      <li>Email the client POC confirmed by Sales and put relevant Sales representatives in <strong>CC</strong>.</li>
+      <li>Confirm the client can proceed with integration and provide the <strong>Store Client ID</strong>.</li>
+      <li>For Advanced, include the separately shared Keeper link with streaming credentials.</li>
+      <li>Share the referenced email-communication template.</li>
+      <li>Share AsP API documentation for available streaming content, including events and coverage.</li>
+      <li>Include geo-restriction rules so the client can identify streamable events and configure geofencing.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-7-dialog" aria-labelledby="step-7-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">IMGA / BET INTEGRATION</p>
+    <h2 id="step-7-title">Route follow-up issues</h2>
+    <p>Direct all client integration or streaming issues to <strong>#bets-img-operator-setup</strong>.</p>
+    <p>Use the channel for follow-up with the IMGA team whenever streaming is involved.</p>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>

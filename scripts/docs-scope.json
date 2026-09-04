@@ -1,0 +1,219 @@
+{
+  "_comment": [
+    "The documentation the assistant is allowed to read, and nothing else.",
+    "",
+    "This file is an allowlist on purpose. Left to crawl freely, discovery",
+    "reached a 13,186-word generated market list and a 12,506-word type",
+    "reference -- pages nobody asks about, whose vocabulary competes with the",
+    "pages they do. docs.sportradar.com is the sharper warning: its llms.txt",
+    "indexes 2,999 pages, of which 6 are Engagement Tools.",
+    "",
+    "`products` is also the entity tagging. A passage is about whatever this",
+    "file says its section is about, because a page's own URL is a better",
+    "signal than anything mined out of prose -- both regressions in the thread",
+    "ingest were tagging failures. Use exact catalogue labels: the entity veto",
+    "compares lowercased label strings, so a near-miss silently turns a 1.6x",
+    "reward into a 0.4x penalty.",
+    "",
+    "`slugPrefix` narrows a section when the folder holds unrelated pages.",
+    "/widgets/docs/widgets/match/ is the Player Prop Zone section AND the home",
+    "of sixteen unrelated statistics widgets, so the prefix keeps the tag off",
+    "ball-possession and commentary."
+  ],
+  "hosts": {
+    "apidocs.sportradar.com": {
+      "mode": "browser",
+      "why": "No llms.txt (404) and appending .md returns the app shell as HTML -- a soft 200 with zero headings. The sidebar is client-rendered, so discovery needs a real browser; the rendered <main> was verified to contain every content heading."
+    },
+    "docs.sportradar.com": {
+      "mode": "markdown",
+      "why": "GitBook. Every page serves text/markdown at .md. Its root llms.txt is curated rather than complete (it omits bet-utility-api, which the catalogue links), and no per-section llms.txt exists, so pages are listed explicitly below."
+    },
+    "developer.sportradar.com": {
+      "mode": "markdown",
+      "why": "ReadMe. Serves text/markdown at .md with updatedAt frontmatter, and /getting-started/docs/llms.txt is a complete section index."
+    }
+  },
+  "sections": [
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/bet-concierge/",
+      "products": [
+        "Bet Concierge"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/bet-assist/",
+      "products": [
+        "Bet Assist"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/custom-bet/",
+      "products": [
+        "Custom Bet"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/head-to-head/",
+      "products": [
+        "H2H"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/match-preview/",
+      "products": [
+        "Match Preview"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/tournament-preview/",
+      "products": [
+        "Tournament Preview"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/bet3in1/",
+      "products": [
+        "BET 3-in-1"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/bet-insights/",
+      "products": [
+        "Bet Insights",
+        "Player Prop Zone"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/bet-recommendation/",
+      "products": [
+        "Bet Recommendations"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/widgets/match/",
+      "slugPrefix": "player-prop-zone",
+      "products": [
+        "Player Prop Zone"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/lmt/",
+      "slugPrefix": "lmt-golf",
+      "products": [
+        "SR Packages — Golf"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/lmt/",
+      "slugPrefix": "lmt-mma",
+      "products": [
+        "SR Packages — Combat Sports"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/lmt/",
+      "slugPrefix": "lmt-esports",
+      "products": [
+        "SR Packages — E-Sports/E-League"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/lmt/",
+      "products": [
+        "LMT Plus",
+        "LMT Premium",
+        "LMT Virtualised",
+        "LCO / LCP via LMT"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/statshub/",
+      "products": [
+        "StatsHub"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/virtual-stadium/",
+      "products": [
+        "Virtual Stadium"
+      ],
+      "maxDepth": 2
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/virtual-stadium/docs/gettingStarted/",
+      "products": [
+        "Virtual Stadium"
+      ],
+      "maxDepth": 2
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/tutorials/",
+      "products": [],
+      "shared": true
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/adapter/",
+      "products": [],
+      "shared": true
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/shared_snippets/",
+      "products": [],
+      "shared": true
+    },
+    {
+      "prefix": "https://docs.sportradar.com/engagement-tools/readme/widgets/",
+      "products": [
+        "API Utility / API Mapping"
+      ]
+    },
+    {
+      "prefix": "https://docs.sportradar.com/engagement-tools/",
+      "products": [],
+      "shared": true
+    },
+    {
+      "prefix": "https://developer.sportradar.com/getting-started/docs/",
+      "products": [
+        "API Betting"
+      ]
+    },
+    {
+      "prefix": "https://apidocs.sportradar.com/resources/widgets/docs/tutorials/troubleshooting/",
+      "slugPrefix": "licensing-errors",
+      "products": [
+        "Additional domains",
+        "Betting Widgets"
+      ]
+    }
+  ],
+  "pages": [
+    "https://docs.sportradar.com/engagement-tools/readme/widgets/bet-utility-api",
+    "https://docs.sportradar.com/engagement-tools/readme",
+    "https://docs.sportradar.com/engagement-tools/readme/frequently-asked-questions",
+    "https://docs.sportradar.com/engagement-tools/adapter/overview",
+    "https://docs.sportradar.com/engagement-tools/adapter/hosted-implementation",
+    "https://docs.sportradar.com/engagement-tools/adapter/self-service-implementation"
+  ],
+  "indexes": [
+    "https://developer.sportradar.com/getting-started/docs/llms.txt"
+  ],
+  "skip": [
+    "/tutorials/references/",
+    "/adapter/Types",
+    "/engagement-tools/adapter/types",
+    "/changelog",
+    "/release-notes",
+    "@sportradar.com"
+  ],
+  "_skipWhy": {
+    "/tutorials/references/": "generated attribute and market dumps, 13,186 words on one page",
+    "/adapter/Types": "12,506-word TypeScript type reference",
+    "@sportradar.com": "the crawler found /tutorials/sales@sportradar.com, a page invented by a mailto link"
+  },
+  "_caps": {
+    "maxDepth": "path segments allowed below a section prefix; default 3. Virtual Stadium is 2 because its section is an entire separate documentation site.",
+    "declaredVsDiscovered": "A declared URL that fails is a build failure. A link merely discovered on their pages that 404s is their broken link -- reported, never fatal. 45 broken virtual-stadium links would otherwise block every run."
+  }
+}

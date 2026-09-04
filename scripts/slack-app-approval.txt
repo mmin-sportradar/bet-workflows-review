@@ -1,0 +1,9 @@
+BET Workflows Feedback posts ratings and optional comments from our internal BET Workflows site into #<channel>.
+
+Permissions: incoming-webhook only - it can post to that one channel and nothing else. It cannot read messages, list channels or see users. No bot or user token. Slack requires a bot user alongside a bot scope, so one is declared, but it never posts or joins a channel.
+
+The webhook URL is an encrypted environment variable on our Cloudflare Pages deployment and is never sent to the browser. The page posts to our own /api/feedback route behind Cloudflare Access, so only authenticated Sportradar staff can trigger a message. It is not committed to the repo; the build fails if anyone tries.
+
+No personal data is sent - only the rating, optional comment, page path, page title and the selected team filter. Names and emails are available to the service and deliberately excluded.
+
+Owner: <your name, your email>

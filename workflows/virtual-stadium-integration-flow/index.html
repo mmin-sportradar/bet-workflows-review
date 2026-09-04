@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Stadium — Integration Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+    <link rel="stylesheet" href="../../shared/chrome.css?v=24" />
+    <link rel="stylesheet" href="styles.css?v=virtual-stadium-integration-visual-14" />
+    <link rel="stylesheet" href="../../shared/responsive.css?v=17" />
+    <script src="../../shared/catalog.js?v=17" defer></script>
+    <script src="../../shared/chrome.js?v=58" defer></script>
+  </head>
+  <body class="virtual-stadium-integration">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">INTEGRATION FLOW</p>
+        <h1>Virtual Stadium</h1>
+        <p class="subtitle">Initial setup, adapter and ID mapping, channel creation, and integration</p>
+        <div class="sr-tags"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8.62769 1.33432L8.58862 1.33823L8.54956 1.34409L8.51343 1.35092L8.44214 1.37241L8.39722 1.38998L8.30933 1.43686L8.24976 1.47983L8.19507 1.52866L2.16968 7.556C1.63105 8.15851 1.60552 9.05463 2.11499 9.70834L2.19507 9.80502L6.22241 13.8304C6.82495 14.3692 7.72195 14.3947 8.37573 13.8851L8.47144 13.805L14.4714 7.80502C14.5756 7.7009 14.6417 7.5656 14.6609 7.42123L14.6667 7.33334V4.66635C14.6666 2.82566 13.1744 1.33352 11.3337 1.33334L8.62769 1.33432ZM11.3337 2.66635C12.3987 2.66652 13.269 3.49944 13.3298 4.54916L13.3337 4.66635V7.05698L7.55542 12.8363C7.44472 12.9353 7.28451 12.9481 7.17944 12.891L7.13843 12.8617L3.16382 8.88901C3.06488 8.77839 3.05212 8.6181 3.10913 8.51303L3.13843 8.47104L8.94312 2.66635H11.3337ZM9.99976 4.00034C8.89534 4.00051 7.99976 4.89588 7.99976 6.00034C7.99989 7.10468 8.89542 8.00016 9.99976 8.00034C11.1042 8.00034 11.9996 7.10479 11.9998 6.00034C11.9998 4.89577 11.1043 4.00034 9.99976 4.00034ZM9.99976 5.33334C10.3679 5.33334 10.6667 5.63215 10.6667 6.00034C10.6666 6.36841 10.3679 6.66733 9.99976 6.66733C9.6318 6.66715 9.3329 6.3683 9.33276 6.00034C9.33276 5.63226 9.63172 5.33352 9.99976 5.33334Z" fill="#FF0000"></path></svg><span>Experiences &amp; engagement, Virtual Stadium, Integration flow</span></div>
+      </div>
+      <div class="team-switcher" aria-label="Select your responsibility">
+        <span class="switcher-label">Responsibilities:</span>
+        <button class="team-button selected" data-team="all">All</button>
+        <button class="team-button sportradar" data-team="sportradar">Sportradar</button>
+        <button class="team-button client" data-team="client">Client</button>
+      </div>
+    </header>
+
+    <div class="sr-subnav">
+      <a class="sr-back" href="../../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to workflows</a>
+    <nav aria-label="Breadcrumb">
+        <ol class="sr-crumbs">
+          <li><a href="../../">BET Workflows</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><a href="../../">Experiences &amp; engagement</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><span aria-current="page">Integration flow</span></li>
+        </ol>
+      </nav></div>
+
+    <main class="flow-shell" data-selected="all">
+      <section class="top-phases" aria-label="Virtual Stadium integration preparation">
+        <section class="phase phase-initial">
+          <h2><span>1.</span> Initial setup</h2>
+          <div class="task-list">
+            <button class="task-card client-card" data-owner="client" data-dialog="authentication">
+              <span class="task-number">1</span>
+              <img class="task-icon" src="assets/icons/authentication.png" alt="" />
+              <span class="owner">CLIENT</span>
+              <strong>Authentication</strong>
+              <span>Reuse the existing login or create and share a Public RSA key.</span>
+              <span class="duration">1 hour</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+            <button class="task-card client-card" data-owner="client" data-dialog="supervisor-invite">
+              <span class="task-number">2</span>
+              <img class="task-icon" src="assets/icons/supervisor-invite.png" alt="" />
+              <span class="owner">CLIENT</span>
+              <strong>Supervisor invite</strong>
+              <span>Grant client access to the Virtual Stadium dashboard.</span>
+              <span class="duration">1 hour</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+            <button class="task-card sportradar-card" data-owner="sportradar" data-dialog="brand-operator">
+              <span class="task-number">3</span>
+              <img class="task-icon" src="assets/icons/brand-operator.png" alt="" />
+              <span class="owner">SPORTRADAR</span>
+              <strong>Brand and operator setup</strong>
+              <span>Set up brands and operators.</span>
+              <span class="duration">1 day</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+            <button class="task-card sportradar-card" data-owner="sportradar" data-dialog="user-setup">
+              <span class="task-number">4</span>
+              <img class="task-icon" src="assets/icons/user-setup.png" alt="" />
+              <span class="owner">SPORTRADAR</span>
+              <strong>User setup</strong>
+              <span>Send invitations to supervisors and moderators.</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="phase phase-adapter">
+          <h2><span>2.</span> Adapter, ID mapping &amp; channel creation</h2>
+          <div class="task-list">
+            <button class="task-card sportradar-card" data-owner="sportradar" data-dialog="adapter">
+              <span class="task-number">5</span>
+              <img class="task-icon" src="assets/icons/adapter.png" alt="" />
+              <span class="owner">SPORTRADAR</span>
+              <strong>Adapter</strong>
+              <span>Prepare the data adapter for communication between Virtual Stadium and the client front end.</span>
+              <span class="duration">5–15 days</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+            <button class="task-card client-card" data-owner="client" data-dialog="id-mapping">
+              <span class="task-number">6</span>
+              <img class="task-icon" src="assets/icons/id-mapping.png" alt="" />
+              <span class="owner">CLIENT</span>
+              <strong>Match ID mapping</strong>
+              <span>Map client match and tournament IDs to Sportradar IDs.</span>
+              <span class="duration">1–5 days</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+            <button class="task-card sportradar-card" data-owner="sportradar" data-dialog="api-endpoint">
+              <span class="task-number">7</span>
+              <img class="task-icon" src="assets/icons/api-endpoint.png" alt="" />
+              <span class="owner">SPORTRADAR</span>
+              <strong>API endpoint</strong>
+              <span>Prepare the API endpoint for channel creation.</span>
+              <span class="duration">3–10 days</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+            <button class="task-card client-card" data-owner="client" data-dialog="channel-request">
+              <span class="task-number">8</span>
+              <img class="task-icon" src="assets/icons/channel-request.png" alt="" />
+              <span class="owner">CLIENT</span>
+              <strong>Channel creation request</strong>
+              <span>Send the channel creation request to the API.</span>
+              <span class="detail-hint">View instructions</span>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section class="phase phase-integration" aria-label="Virtual Stadium integration options">
+        <h2><span>3.</span> Integration</h2>
+        <div class="integration-groups">
+          <section class="integration-group web-group">
+            <h3>Web</h3>
+            <div class="task-list two-up">
+              <button class="task-card client-card" data-owner="client" data-dialog="widget-integration">
+                <span class="task-number">9</span>
+                <img class="task-icon" src="assets/icons/widget-integration.png" alt="" />
+                <span class="owner">CLIENT</span>
+                <strong>Widget integration</strong>
+                <span>Integrate the Virtual Stadium widget on the web page.</span>
+                <span class="duration">2 hours</span>
+                <span class="detail-hint">View instructions</span>
+              </button>
+              <button class="task-card client-card" data-owner="client" data-dialog="styling">
+                <span class="task-number">10</span>
+                <img class="task-icon" src="assets/icons/styling.png" alt="" />
+                <span class="owner">CLIENT</span>
+                <strong>Styling</strong>
+                <span>Apply colors and typography.</span>
+                <span class="duration">1 day</span>
+                <span class="detail-hint">View instructions</span>
+              </button>
+            </div>
+          </section>
+          <section class="integration-group mobile-group">
+            <h3>Mobile UI components <small>Android &amp; iOS SDK</small></h3>
+            <div class="task-list">
+              <button class="task-card sportradar-card" data-owner="sportradar" data-dialog="mobile-components">
+                <span class="task-number">11</span>
+                <img class="task-icon" src="assets/icons/mobile-components.png" alt="" />
+                <span class="owner">SPORTRADAR</span>
+                <strong>Component development</strong>
+                <span>Develop the Virtual Stadium mobile UI components.</span>
+                <span class="duration">1–3 weeks</span>
+                <span class="detail-hint">View instructions</span>
+              </button>
+              <button class="task-card client-card" data-owner="client" data-dialog="mobile-sdk">
+                <span class="task-number">12</span>
+                <img class="task-icon" src="assets/icons/mobile-sdk.png" alt="" />
+                <span class="owner">CLIENT</span>
+                <strong>SDK integration</strong>
+                <span>Use the Android or iOS SDK to integrate the components.</span>
+                <span class="detail-hint">View instructions</span>
+              </button>
+            </div>
+          </section>
+          <section class="integration-group sdk-group">
+            <h3>Mobile <small>Data SDK</small></h3>
+            <div class="task-list">
+              <button class="task-card client-card" data-owner="client" data-dialog="data-sdk">
+                <span class="task-number">13</span>
+                <img class="task-icon" src="assets/icons/data-sdk.png" alt="" />
+                <span class="owner">CLIENT</span>
+                <strong>Data SDK integration</strong>
+                <span>Implement the fully customizable Data SDK experience.</span>
+                <span class="duration">3+ months</span>
+                <span class="detail-hint">View instructions</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="authentication">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">1 · CLIENT · INITIAL SETUP · 1 HOUR</p>
+      <h2>Authentication</h2>
+      <ul>
+        <li>Existing client login for end users is reused.</li>
+        <li>Client creates a Public/Private key pair and shares the public key with Sportradar.</li>
+      </ul>
+    </dialog>
+    <dialog id="supervisor-invite">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">2 · CLIENT · INITIAL SETUP · 1 HOUR</p>
+      <h2>Supervisor Invite</h2>
+      <p>Client is granted access to the Virtual Stadium dashboard.</p>
+    </dialog>
+    <dialog id="brand-operator">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">3 · SPORTRADAR · INITIAL SETUP · 1 DAY</p>
+      <h2>Brand and Operator Setup</h2>
+      <p>Setup of brands and operators.</p>
+    </dialog>
+    <dialog id="user-setup">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">4 · SPORTRADAR · INITIAL SETUP</p>
+      <h2>User Setup</h2>
+      <p>Invitations are sent to supervisors and moderators.</p>
+    </dialog>
+    <dialog id="adapter">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">5 · SPORTRADAR · ADAPTER &amp; ID MAPPING · 5–15 DAYS</p>
+      <h2>Adapter</h2>
+      <p>Sportradar prepares a data adapter that enables communication between Virtual Stadium and the client’s API or front end.</p>
+      <h3>Required data</h3>
+      <ul>
+        <li>Betslips (Users open tickets, users winning tickets)</li>
+        <li>Selections (Odds)</li>
+        <li>User IDs</li>
+        <li>Event info</li>
+      </ul>
+      <p>This step is required to enable Bets Sharing and Flash Bet.</p>
+    </dialog>
+    <dialog id="id-mapping">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">6 · CLIENT · ADAPTER &amp; ID MAPPING · 1–5 DAYS</p>
+      <h2>Match ID Mapping</h2>
+      <ul>
+        <li>Mapping of client match and tournament IDs to Sportradar IDs.</li>
+        <li>Required for the Flash Bet feature.</li>
+      </ul>
+    </dialog>
+    <dialog id="api-endpoint">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">7 · SPORTRADAR · CHANNEL CREATION · 3–10 DAYS</p>
+      <h2>API Endpoint</h2>
+      <p>API endpoint for channel creation is prepared by Sportradar.</p>
+    </dialog>
+    <dialog id="channel-request">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">8 · CLIENT · CHANNEL CREATION</p>
+      <h2>Channel Creation Request</h2>
+      <p>Channel creation request is sent to the API by the client.</p>
+    </dialog>
+    <dialog id="widget-integration">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">9 · CLIENT · WEB · 2 HOURS</p>
+      <h2>Widget Integration</h2>
+      <p>Virtual Stadium widget can be integrated on the webpage as an inline or a pop-up element.</p>
+    </dialog>
+    <dialog id="styling">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">10 · CLIENT · WEB · 1 DAY</p>
+      <h2>Styling</h2>
+      <p>Styling options include colors and typography.</p>
+    </dialog>
+    <dialog id="mobile-components">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">11 · SPORTRADAR · MOBILE UI COMPONENTS · 1–3 WEEKS</p>
+      <h2>Component Development</h2>
+      <ul>
+        <li>Virtual Stadium components are developed by Sportradar.</li>
+        <li>Styling options are limited to colors and typography.</li>
+        <li>This option provides a faster time to market with limited customization options.</li>
+      </ul>
+    </dialog>
+    <dialog id="mobile-sdk">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">12 · CLIENT · MOBILE UI COMPONENTS</p>
+      <h2>SDK Integration</h2>
+      <p>Client can use the Android or iOS Virtual Stadium SDK to integrate Virtual Stadium components into their native app.</p>
+    </dialog>
+    <dialog id="data-sdk">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">13 · CLIENT · MOBILE DATA SDK · 3+ MONTHS</p>
+      <h2>Data SDK Integration</h2>
+      <ul>
+        <li>Data integration is done by the client based on the provided data SDK.</li>
+        <li>UI components are developed by the client.</li>
+        <li>Client has complete control over styling.</li>
+        <li>This option presents a slower time to market but is fully customizable.</li>
+      </ul>
+    </dialog>
+
+    <footer>
+      <img src="assets/sportradar-footer.png" alt="Sportradar — Sports technology. Reimagined." />
+      <time datetime="2026-09-03">3 September 2026</time>
+    </footer>
+    <script src="app.js?v=virtual-stadium-integration-2"></script>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Additional Domains Whitelisting Flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+    <link rel="stylesheet" href="../../shared/chrome.css?v=24" />
+    <link rel="stylesheet" href="styles.css?v=additional-domains-whitelisting-visual-8" />
+    <link rel="stylesheet" href="../../shared/responsive.css?v=17" />
+    <script src="../../shared/catalog.js?v=17" defer></script>
+    <script src="../../shared/chrome.js?v=58" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">PROCESS FLOW</p>
+        <h1>Additional Domains<br />Whitelisting Flow</h1>
+        <p class="subtitle">Approve, assign, whitelist, and finalize additional domain requests.</p>
+        <div class="sr-tags"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8.62769 1.33432L8.58862 1.33823L8.54956 1.34409L8.51343 1.35092L8.44214 1.37241L8.39722 1.38998L8.30933 1.43686L8.24976 1.47983L8.19507 1.52866L2.16968 7.556C1.63105 8.15851 1.60552 9.05463 2.11499 9.70834L2.19507 9.80502L6.22241 13.8304C6.82495 14.3692 7.72195 14.3947 8.37573 13.8851L8.47144 13.805L14.4714 7.80502C14.5756 7.7009 14.6417 7.5656 14.6609 7.42123L14.6667 7.33334V4.66635C14.6666 2.82566 13.1744 1.33352 11.3337 1.33334L8.62769 1.33432ZM11.3337 2.66635C12.3987 2.66652 13.269 3.49944 13.3298 4.54916L13.3337 4.66635V7.05698L7.55542 12.8363C7.44472 12.9353 7.28451 12.9481 7.17944 12.891L7.13843 12.8617L3.16382 8.88901C3.06488 8.77839 3.05212 8.6181 3.10913 8.51303L3.13843 8.47104L8.94312 2.66635H11.3337ZM9.99976 4.00034C8.89534 4.00051 7.99976 4.89588 7.99976 6.00034C7.99989 7.10468 8.89542 8.00016 9.99976 8.00034C11.1042 8.00034 11.9996 7.10479 11.9998 6.00034C11.9998 4.89577 11.1043 4.00034 9.99976 4.00034ZM9.99976 5.33334C10.3679 5.33334 10.6667 5.63215 10.6667 6.00034C10.6666 6.36841 10.3679 6.66733 9.99976 6.66733C9.6318 6.66715 9.3329 6.3683 9.33276 6.00034C9.33276 5.63226 9.63172 5.33352 9.99976 5.33334Z" fill="#FF0000"></path></svg><span>Operations, Additional domains, Process flow</span></div>
+      </div>
+      <div class="header-actions">
+        <div class="scenario-switcher" aria-label="Select request type">
+          <span class="switcher-label">Request type:</span>
+          <button class="scenario-button selected" data-scenario="all">All paths</button>
+          <button class="scenario-button" data-scenario="normal">Standard</button>
+          <button class="scenario-button urgent" data-scenario="urgent">Urgent / off hours</button>
+        </div>
+        <div class="team-switcher" aria-label="Select your team">
+          <span class="switcher-label">Responsibilities:</span>
+          <button class="team-button selected" data-team="all">All teams</button>
+          <button class="team-button sales" data-team="sales">Sales Reps</button>
+          <button class="team-button client-setup" data-team="client-setup">Client Setup Team</button>
+          <button class="team-button support" data-team="support">Support Team</button>
+          <button class="team-button additional" data-team="additional">Additional</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="sr-subnav">
+      <a class="sr-back" href="../../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Back to workflows</a>
+    <nav aria-label="Breadcrumb">
+        <ol class="sr-crumbs">
+          <li><a href="../../">BET Workflows</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><a href="../../">Operations</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></li>
+          <li><span aria-current="page">Process flow</span></li>
+        </ol>
+      </nav></div>
+
+    <main class="flow-shell" data-selected="all" data-scenario="all">
+      <section class="flow-grid" aria-label="Additional domains whitelisting flow">
+        <section class="phase phase-inform">
+          <h2><span>1.</span> Informing Sales Reps</h2>
+          <button class="task-card sales-card" data-owner="sales" data-scenarios="normal urgent" data-dialog="inform-sales">
+            <span class="task-number">1</span>
+            <span class="owner">SALES REPS</span>
+            <strong>Approve the request</strong>
+            <span>Accept requests received directly from the client or from Support.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+        </section>
+
+        <section class="phase phase-reopen">
+          <h2><span>2.</span> Re-opening Jira</h2>
+          <button class="task-card sales-card" data-owner="sales" data-scenarios="normal urgent" data-dialog="reopen-jira">
+            <span class="task-number">2</span>
+            <span class="owner">SALES REPS</span>
+            <strong>Re-open the relevant Jira</strong>
+            <span>Add domains and assign the selected product setup Jira to Bet-Integrations.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+          <button class="task-card additional-card urgent-card" data-owner="additional" data-scenarios="urgent" data-dialog="dummy-jira">
+            <span class="task-number">3</span>
+            <span class="owner">ADDITIONAL · URGENT ONLY</span>
+            <strong>Use the dummy Jira</strong>
+            <span>For unregulated markets during weekends or late hours, use BETS-10234.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+        </section>
+
+        <section class="phase phase-whitelist">
+          <h2><span>3.</span> Domain Whitelisting</h2>
+          <button class="task-card client-card" data-owner="client-setup" data-scenarios="normal" data-dialog="client-whitelist">
+            <span class="task-number">4</span>
+            <span class="owner">CLIENT SETUP TEAM</span>
+            <strong>Whitelist the domains</strong>
+            <span>Add the domains within 1–2 working days, notify Sales in Jira, and close it.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+          <button class="task-card additional-card urgent-card" data-owner="additional" data-scenarios="urgent" data-dialog="urgent-request">
+            <span class="task-number">5</span>
+            <span class="owner">ADDITIONAL · URGENT ONLY</span>
+            <strong>Submit the urgent request</strong>
+            <span>Use the respective Jira and forward the domains email, Jira link, approval, and urgency.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+          <button class="task-card support-card urgent-card" data-owner="support" data-scenarios="urgent" data-dialog="support-whitelist">
+            <span class="task-number">6</span>
+            <span class="owner">SUPPORT TEAM · URGENT ONLY</span>
+            <strong>Whitelist domains ASAP</strong>
+            <span>Support completes urgent domain whitelisting.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+        </section>
+
+        <section class="phase phase-final">
+          <h2><span>4.</span> Finalization</h2>
+          <button class="task-card sales-card" data-owner="sales" data-scenarios="normal urgent" data-dialog="sales-finalization">
+            <span class="task-number">7</span>
+            <span class="owner">SALES REPS</span>
+            <strong>Inform the client</strong>
+            <span>Sales rep may inform the client once whitelisting is complete.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+          <button class="task-card support-card urgent-card" data-owner="support" data-scenarios="urgent" data-dialog="support-finalization">
+            <span class="task-number">8</span>
+            <span class="owner">SUPPORT TEAM · URGENT ONLY</span>
+            <strong>Inform the client</strong>
+            <span>Support informs the client in urgent cases.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+          <button class="task-card additional-card urgent-card" data-owner="additional" data-scenarios="urgent" data-dialog="update-client-jira">
+            <span class="task-number">9</span>
+            <span class="owner">ADDITIONAL · URGENT ONLY</span>
+            <strong>Update the client-specific Jira</strong>
+            <span>Complete the client Jira on the first working day after a dummy-Jira approval.</span>
+            <span class="detail-hint">View instructions</span>
+          </button>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="inform-sales">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">1 · SALES REPS · INFORMING SALES REPS</p>
+      <h2>Approve the Request</h2>
+      <p>Sales is informed regarding the request for additional domains whitelisting either:</p>
+      <ol>
+        <li>Directly by the client</li>
+        <li>By Support via email</li>
+      </ol>
+      <p><strong>Sales needs to approve the request, even if request comes on the weekend or late night.</strong></p>
+    </dialog>
+
+    <dialog id="reopen-jira">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">2 · SALES REPS · RE-OPENING JIRA</p>
+      <h2>Re-open the Relevant Jira</h2>
+      <p>In case client has more widget type solutions involved (e.g. LMT, H2H, Bet Assist), please re-open <strong>only one</strong> product relevant setup BETI Jira.</p>
+      <ol>
+        <li>Add domains in the comment section of the one selected Jira.</li>
+        <li>Include the specific, predefined wording in your comment: <strong>“whitelist the following domain”</strong>.</li>
+        <li>Assign it to the <a href="mailto:bet-integrations@sportradar.com">Bet-Integrations team</a>.</li>
+        <li>Set Jira status on “TO DO”.</li>
+      </ol>
+      <p>For easier tracking, we suggest to always pick the Jira ticket with the lowest number (e.g. among Jira 535 for LMT, Jira 877 for Bet Assist and Jira 1122 for H2H, please update Jira 535).</p>
+    </dialog>
+
+    <dialog id="dummy-jira">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">3 · ADDITIONAL · URGENT / OFF HOURS</p>
+      <h2>Unregulated Markets — Dummy Jira for Urgent Cases</h2>
+      <p>For urgent requests on unregulated markets, if this happens during weekends or late hours, use <a href="https://jira.sportradar.ag/browse/BETS-10234" target="_blank" rel="noopener noreferrer">dummy Jira BETS-10234</a>. Save it on your phone and use it <strong>only</strong> if you are approving during these time periods, as Support will not accept approval without having a Jira ticket stated.</p>
+    </dialog>
+
+    <dialog id="client-whitelist">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">4 · CLIENT SETUP TEAM · DOMAIN WHITELISTING</p>
+      <h2>Whitelist the Domains</h2>
+      <p>Client setup team adds domains in 1–2 working days. Once complete, they inform the Sales Reps via comment in Jira ticket and close it.</p>
+      <p><a href="https://sportradar.atlassian.net/wiki/x/RawnBw" target="_blank" rel="noopener noreferrer">Whitelisting process explained here</a>.</p>
+    </dialog>
+
+    <dialog id="urgent-request">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">5 · ADDITIONAL · URGENT / OFF HOURS</p>
+      <h2>Submit the Urgent Request</h2>
+      <p>If your request is urgent, you still need to request it via the respective Jira (Step 2).</p>
+      <p>Additionally, please forward the client’s email with domains list to Sportradar Support team along with Jira link and your approval. Explain the urgency.</p>
+    </dialog>
+
+    <dialog id="support-whitelist">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">6 · SUPPORT TEAM · URGENT / OFF HOURS</p>
+      <h2>Whitelist Domains ASAP</h2>
+      <p>Support whitelists domains as soon as possible in urgent cases.</p>
+    </dialog>
+
+    <dialog id="sales-finalization">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">7 · SALES REPS · FINALIZATION</p>
+      <h2>Inform the Client</h2>
+      <p>Sales rep may inform the client.</p>
+    </dialog>
+
+    <dialog id="support-finalization">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">8 · SUPPORT TEAM · URGENT / OFF HOURS</p>
+      <h2>Inform the Client</h2>
+      <p>Support informs the client.</p>
+    </dialog>
+
+    <dialog id="update-client-jira">
+      <button class="dialog-close" aria-label="Close">×</button>
+      <p class="dialog-owner">9 · ADDITIONAL · URGENT / OFF HOURS</p>
+      <h2>Update the Client-Specific Jira</h2>
+      <p>Even though you used dummy Jira for approval described in Step 2, you (or your SSS) still need to update client-specific Jira on the first working day (not the dummy one).</p>
+      <p>If you want your SSS to update the Jira, <strong>do not</strong> forget to put her/him in cc when you are approving during weekend.</p>
+    </dialog>
+
+    <footer>
+      <img src="assets/sportradar-footer.png" alt="Sportradar — Sports technology. Reimagined." />
+      <time datetime="2026-09-03">3 September 2026</time>
+    </footer>
+    <script src="app.js?v=additional-domains-whitelisting-1"></script>
+  </body>
+</html>

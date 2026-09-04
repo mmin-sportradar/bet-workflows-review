@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Premium Golf Service contracting and activation process">
+  <title>Premium Golf Service — Contracting &amp; Activation Process</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+  <link rel="stylesheet" href="../../shared/chrome.css?v=24" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../../shared/responsive.css?v=17" />
+  <script src="../../shared/catalog.js?v=17" defer></script>
+  <script src="../../shared/chrome.js?v=58" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">BET PRODUCTS · SETUP FLOW</p>
+      <h1>Premium Golf Service</h1>
+      <p class="subtitle">Contracting and activation process</p>
+    </div>
+    <nav class="team-switcher" aria-label="Filter steps by responsible team">
+      <span class="switcher-label">Responsibilities:</span>
+      <button class="team-button selected" type="button" data-team="all">All teams</button>
+      <button class="team-button sales" type="button" data-team="sales">Sales</button>
+      <button class="team-button cs" type="button" data-team="client-setup">Client Setup</button>
+      <button class="team-button streaming" type="button" data-team="streaming">Streaming</button>
+      <button class="team-button invoice" type="button" data-team="invoice">Invoice</button>
+    </nav>
+  </header>
+
+  <main class="flow-shell">
+    <aside class="source-note" aria-label="Important availability note">
+      <strong>Important:</strong> AV streaming is available after mid-May 2026. Until then, Advanced AV-related setup is not required.
+    </aside>
+
+    <section class="flow-grid" aria-label="Premium Golf Service process steps">
+      <button class="stage-card sales-card step-one" type="button" data-owner="sales" data-dialog="step-1-dialog">
+        <span class="stage-number">1</span>
+        <span class="owner">SALES</span>
+        <strong>Set up the Salesforce opportunity</strong>
+        <span class="summary">Include the correct PGS offer and apply the applicable revenue allocation.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+
+      <button class="stage-card sales-card step-two" type="button" data-owner="sales" data-dialog="step-2-dialog">
+        <span class="stage-number">2</span>
+        <span class="owner">SALES</span>
+        <strong>Complete contracting</strong>
+        <span class="summary">Use the MSA and Streaming appendix; Advanced uses a child Streaming contract.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+
+      <button class="stage-card sales-card step-three" type="button" data-owner="sales" data-dialog="step-3-dialog">
+        <span class="stage-number">3</span>
+        <span class="owner">SALES</span>
+        <strong>Request the product trial</strong>
+        <span class="summary">Submit the regular Salesforce Tech Service or MTS Tech Service Request.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+
+      <button class="stage-card cs-card step-four" type="button" data-owner="client-setup" data-dialog="step-4-dialog">
+        <span class="stage-number">4</span>
+        <span class="owner">CLIENT SETUP TEAM</span>
+        <strong>Activate after CS Jira</strong>
+        <span class="summary">Activate in ISA and route the LMT or LMT Premium Golf Jira to bet-integrations.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+
+      <button class="stage-card streaming-card step-five" type="button" data-owner="streaming" data-dialog="step-5-dialog">
+        <span class="stage-number">5</span>
+        <span class="owner">STREAMING</span>
+        <strong>Coordinate Advanced AV setup</strong>
+        <span class="summary">Assess AV integration, arrange client setup where needed, and select AV CDN Usage.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+
+      <button class="stage-card invoice-card step-six" type="button" data-owner="invoice" data-dialog="step-6-dialog">
+        <span class="stage-number">6</span>
+        <span class="owner">INVOICE TEAM</span>
+        <strong>Activate invoicing</strong>
+        <span class="summary">Use the regular Invoice Activation process; the responsible setup team activates or extends ISA.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand" aria-label="Sportradar">SPORTRADAR</div>
+    <time datetime="2026-09-03">3 September 2026</time>
+  </footer>
+
+  <dialog id="step-1-dialog" aria-labelledby="step-1-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">SALES</p>
+    <h2 id="step-1-title">Set up the Salesforce opportunity</h2>
+    <h3>Premium Golf Service Essential</h3>
+    <ol>
+      <li>Include <strong>PGS</strong> in the <strong>VBP opportunity</strong>, following the standard sales process and selecting the relevant product in the quote.</li>
+      <li>Respect the revenue allocations from <strong>VBP</strong>.</li>
+    </ol>
+    <h3>Premium Golf Service Advanced</h3>
+    <ol>
+      <li>Include <strong>PGS content</strong> in the <strong>VBP opportunity</strong>, following the standard sales process.</li>
+      <li>Enter revenue only for the included products.</li>
+      <li>Contact <a href="mailto:streamingsales@sportradar.com">Streaming Sales</a> using the details referred to in slide 2 of the source material.</li>
+      <li>Do not share the contract with the client until the streaming part is aligned.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-2-dialog" aria-labelledby="step-2-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">SALES</p>
+    <h2 id="step-2-title">Complete contracting</h2>
+    <h3>All packages</h3>
+    <ol>
+      <li>Ensure the client is contracted for <strong>all products</strong> included in the selected package offer.</li>
+      <li>Use the <strong>MSA</strong> for contracting.</li>
+      <li>For Premium contracts, add the <strong>Streaming appendix</strong>.</li>
+      <li>Follow the normal process for quote approval and contract creation.</li>
+    </ol>
+    <h3>Advanced package</h3>
+    <ol>
+      <li>Create <strong>one opportunity</strong> covering all products.</li>
+      <li>Respect the revenue allocation from the <strong>Pricing Tool</strong>.</li>
+      <li>At contract creation, place Streaming products in a child contract of the main Betting contract.</li>
+      <li>Request and add the Streaming appendix to the paper contract for client signature.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-3-dialog" aria-labelledby="step-3-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">SALES</p>
+    <h2 id="step-3-title">Request the product trial</h2>
+    <p>Request the product for trial in Salesforce through either a <strong>Tech Service Request</strong> or <strong>MTS Tech Service Request</strong>.</p>
+    <ul>
+      <li>Use the normal / regular request process.</li>
+      <li>For the <strong>Essential</strong> package, activation is available and follows the normal approval process.</li>
+    </ul>
+    <h3>Emergency reactivation</h3>
+    <ul>
+      <li>Use emergency activation only to <strong>re-activate existing clients</strong>.</li>
+      <li>Do not use it to activate trial services or first-time services.</li>
+    </ul>
+  </dialog>
+
+  <dialog id="step-4-dialog" aria-labelledby="step-4-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">CLIENT SETUP TEAM</p>
+    <h2 id="step-4-title">Activate after CS Jira</h2>
+    <ol>
+      <li>Once a <strong>CS Jira</strong> is created, the Client Setup Team activates the product in <strong>ISA</strong>.</li>
+      <li>The requester follows the regular process for <strong>Sox checks</strong>.</li>
+      <li>Create a separate Jira ticket for <strong>LMT</strong> or <strong>LMT Premium Golf</strong>, then assign it to <strong>bet-integrations</strong> — or have the existing ticket reassigned to that team.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-5-dialog" aria-labelledby="step-5-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">STREAMING</p>
+    <h2 id="step-5-title">Coordinate Advanced AV setup</h2>
+    <ol>
+      <li>Determine whether an <strong>AV integration period</strong> is required.</li>
+      <li>If required, liaise with the relevant <strong>Streaming counterpart</strong>.</li>
+      <li>The Streaming counterpart arranges a set-up call with the client.</li>
+      <li>For an Advanced package, select <strong>AV CDN Usage</strong>.</li>
+      <li>Use the default stated AV CDN Usage price of <strong>€0.10 per gigabyte</strong>.</li>
+    </ol>
+    <h3>Availability</h3>
+    <p>AV streaming is available after <strong>mid-May 2026</strong>. Before then, these Advanced AV-related setup steps are not needed.</p>
+    <h3>Manual communication</h3>
+    <p>Communication between <strong>ECPs / SSS</strong> and <strong>Streaming Sales</strong> is manual; it is not automated in Salesforce.</p>
+  </dialog>
+
+  <dialog id="step-6-dialog" aria-labelledby="step-6-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">INVOICE TEAM</p>
+    <h2 id="step-6-title">Activate invoicing</h2>
+    <h3>Essential package</h3>
+    <ol>
+      <li>Sales requests <strong>Invoice Activation</strong> through the regular process.</li>
+      <li>After an <strong>SFINVOICE Jira</strong> is created, the Client Setup Team activates the product in <strong>ISA</strong>, or prolongs its end date.</li>
+      <li>The Invoice Team triggers invoicing through the regular process.</li>
+    </ol>
+    <h3>Advanced package</h3>
+    <ol>
+      <li>Sales requests <strong>Invoice Activation</strong> through the regular process.</li>
+      <li>After an <strong>SFINVOICE Jira</strong> is created, the Streaming Setup Team activates the product in <strong>ISA</strong>, or prolongs its end date.</li>
+      <li>The Invoice Team triggers invoicing through the regular process.</li>
+    </ol>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

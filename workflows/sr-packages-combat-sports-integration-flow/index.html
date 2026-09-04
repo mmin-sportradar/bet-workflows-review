@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LMT Combat BET Integration new client setup flow">
+  <title>LMT Combat BET Integration — New Clients</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+  <link rel="stylesheet" href="../../shared/chrome.css?v=24" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../../shared/responsive.css?v=17" />
+  <script src="../../shared/catalog.js?v=17" defer></script>
+  <script src="../../shared/chrome.js?v=58" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">BET PRODUCTS · SETUP FLOW</p>
+      <h1>LMT Combat BET Integration</h1>
+      <p class="subtitle">New-client setup for the Combat Package</p>
+    </div>
+    <nav class="team-switcher" aria-label="Filter steps by responsible team">
+      <span class="switcher-label">Responsibilities:</span>
+      <button class="team-button selected" type="button" data-team="all">All teams</button>
+      <button class="team-button beti" type="button" data-team="bet-integration">BET Integration</button>
+      <button class="team-button sales" type="button" data-team="sales">Sales</button>
+      <button class="team-button imga" type="button" data-team="imga">IMGA</button>
+    </nav>
+  </header>
+
+  <main class="flow-shell">
+    <aside class="source-note" aria-label="Activation scope note">
+      <strong>Combat Package:</strong> activate regular <strong>LMT for MMA</strong> only. <strong>Premium</strong> and <strong>Compact</strong> versions are not available for Combat.
+    </aside>
+
+    <section class="flow-grid" aria-label="LMT Combat new-client setup steps">
+      <button class="stage-card beti-card step-one" type="button" data-owner="bet-integration" data-dialog="step-1-dialog">
+        <span class="stage-number">1</span><span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Confirm the request and scope</strong>
+        <span class="summary">CS clones the Salesforce ticket; BETI activates standard LMT for MMA.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card sales-card step-two" type="button" data-owner="sales" data-dialog="step-2-dialog">
+        <span class="stage-number">2</span><span class="owner">SALES / BET INTEGRATION</span>
+        <strong>Confirm new-client details</strong>
+        <span class="summary">Confirm the client POC, UFC-streaming need, and requested regions with Sales.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-three" type="button" data-owner="bet-integration" data-dialog="step-3-dialog">
+        <span class="stage-number">3</span><span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Prepare the IMGA operator name</strong>
+        <span class="summary">Reuse or create the mandatory operator name and enter it in Store.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card imga-card step-four" type="button" data-owner="imga" data-dialog="step-4-dialog">
+        <span class="stage-number">4</span><span class="owner">IMGA TEAM · IF REQUESTED</span>
+        <strong>Request UFC streaming</strong>
+        <span class="summary">Request IMGA activation in #bets-img-operator-setup for UFC only.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-five" type="button" data-owner="bet-integration" data-dialog="step-5-dialog">
+        <span class="stage-number">5</span><span class="owner">BET INTEGRATION · STREAMING ONLY</span>
+        <strong>Create the Keeper link</strong>
+        <span class="summary">Create a one-time credentials link, valid for one week, and share it separately.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-six" type="button" data-owner="bet-integration" data-dialog="step-6-dialog">
+        <span class="stage-number">6</span><span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Send the client handover</strong>
+        <span class="summary">Send the Store ClientID and integration guidance to the POC, with Sales in CC.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card imga-card step-seven" type="button" data-owner="imga" data-dialog="step-7-dialog">
+        <span class="stage-number">7</span><span class="owner">IMGA / BET INTEGRATION</span>
+        <strong>Route follow-up issues</strong>
+        <span class="summary">Use #bets-img-operator-setup to coordinate integration and streaming follow-up.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand" aria-label="Sportradar">SPORTRADAR</div><time datetime="2026-09-03">3 September 2026</time></footer>
+
+  <dialog id="step-1-dialog" aria-labelledby="step-1-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-1-title">Confirm the request and activation scope</h2>
+    <ol>
+      <li>The Salesforce request goes to the <strong>CS team</strong> and contains the Combat Package products.</li>
+      <li>CS clones the ticket for LMT activation and assigns the cloned ticket to the <strong>BETI team</strong>.</li>
+      <li>Confirm the request is for the <strong>Combat Package</strong>.</li>
+      <li>Activate regular <strong>LMT for MMA</strong> through the standard licence-activation process for IMG-related products.</li>
+    </ol>
+    <h3>Activation scope</h3><p>Activate <strong>LMT</strong> only. Do not activate Premium or Compact: neither is available for Combat.</p>
+  </dialog>
+
+  <dialog id="step-2-dialog" aria-labelledby="step-2-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">SALES / BET INTEGRATION</p>
+    <h2 id="step-2-title">Confirm new-client details</h2>
+    <p>Add a comment to the Jira ticket and ask Sales to confirm the following before client-facing setup:</p>
+    <ol>
+      <li>Whether the client wants <strong>UFC streaming</strong> enabled. Streaming is available only for the UFC league.</li>
+      <li>The region or regions for streaming, if it is requested.</li>
+      <li>The client integration <strong>point of contact (POC)</strong>.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-3-dialog" aria-labelledby="step-3-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-3-title">Find or create the IMGA operator name</h2>
+    <p>The IMGA operator name is mandatory for Combat products for both new and existing IMG clients.</p>
+    <ol>
+      <li>Before Store licence activation, check the IMGA repository for an existing operator name.</li>
+      <li>Reuse an existing operator name for LMT activation.</li>
+      <li>If none exists, create a new operator ID through the standard process.</li>
+      <li>Enter the confirmed or created operator name in Store’s <code>imgaOperator</code> field during LMT activation.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-4-dialog" aria-labelledby="step-4-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">IMGA TEAM · IF UFC STREAMING IS REQUESTED</p>
+    <h2 id="step-4-title">Request UFC streaming</h2>
+    <ol>
+      <li>Confirm that the IMGA operator name is available.</li>
+      <li>Contact the IMGA team (Faisal Hussain) in <strong>#bets-img-operator-setup</strong>.</li>
+      <li>Request streaming activation with the operator name, <strong>UFC</strong> league, requested regions, and licensing period.</li>
+      <li>Ask whether each requested region is available and, if required, whether it can be enabled.</li>
+      <li>For a new client, provide the client POC’s name and email address.</li>
+      <li>Ask IMGA to share the operator ID and streaming token via <strong>Keeper</strong> when setup is complete.</li>
+    </ol>
+    <h3>Request example</h3><p>“Please activate streaming for [operator name]. Please confirm if the region is available; if not, can it be enabled? The stream should cover UFC from [start] to [end]. Once ready, please share the operator ID and token via Keeper.”</p>
+  </dialog>
+
+  <dialog id="step-5-dialog" aria-labelledby="step-5-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION · STREAMING ONLY</p>
+    <h2 id="step-5-title">Create and share the Keeper link</h2>
+    <ol>
+      <li>Wait for IMGA to provide the operator ID and streaming token.</li>
+      <li>Generate a <strong>one-time Keeper link</strong> containing the credentials.</li>
+      <li>Configure the link to remain active for <strong>one week</strong>.</li>
+      <li>Send it separately to the client, preferably by email.</li>
+    </ol>
+    <h3>Single-use warning</h3><p>Do not open the link yourself or allow anyone other than the intended recipient to open it first. Credentials are available only to the first person who opens the link.</p>
+  </dialog>
+
+  <dialog id="step-6-dialog" aria-labelledby="step-6-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-6-title">Send the client integration handover</h2>
+    <ol>
+      <li>When all applicable setup is complete, email the client POC confirmed by Sales.</li>
+      <li>Put relevant Sales representatives in <strong>CC</strong>.</li>
+      <li>Confirm the client can proceed with integration and provide the <strong>Store ClientID</strong>.</li>
+      <li>If UFC streaming is enabled, share the Keeper credentials link separately.</li>
+      <li>Share the referenced client email-communication template.</li>
+      <li>Share Events API information for available streaming content, including events and coverage.</li>
+      <li>Share geo-restriction documentation so the client can identify streamable events and configure geofencing.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-7-dialog" aria-labelledby="step-7-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button><p class="dialog-owner">IMGA / BET INTEGRATION</p>
+    <h2 id="step-7-title">Route integration and streaming issues</h2>
+    <p>Forward every client integration or streaming issue to <strong>#bets-img-operator-setup</strong>.</p>
+    <p>Use the channel to coordinate follow-up with the IMGA team.</p>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>

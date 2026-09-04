@@ -1,0 +1,70 @@
+# Slack app manifest for the page-feedback webhook.
+#
+# HOW TO USE
+#   1. https://api.slack.com/apps  ->  Create New App  ->  From an app manifest
+#   2. Choose the workspace
+#   3. Paste everything below the "-- paste from here --" line
+#   4. Create  ->  Install to Workspace  ->  choose the channel  ->  Allow
+#   5. Incoming Webhooks  ->  copy the URL
+#   6. ./scripts/test-webhook.sh          (confirms it works and shows the channel)
+#   7. Cloudflare > Pages > Settings > Environment variables:
+#        SLACK_WEBHOOK_URL = <the URL>, type Encrypted
+#      Then redeploy.
+#
+# WHY ONLY ONE SCOPE
+#   incoming-webhook permits posting to the single channel chosen at install and
+#   nothing else. This app cannot read a message, list a channel, or see a user.
+#   If the URL ever leaks, that is the whole blast radius: somebody can post
+#   noise into one feedback channel. Do not add scopes to "future-proof" it --
+#   every extra one widens that radius for a capability nothing here uses.
+#
+# WHY THERE IS A bot_user WHEN THE APP HAS NO BOT
+#   Slack refuses a manifest that declares oauth_config.scopes.bot without a
+#   features.bot_user block -- bot scopes are held by a bot identity, so the
+#   identity has to exist even when, as here, it never posts, never listens and
+#   never appears in a channel member list. It grants nothing on its own: the
+#   scope list above is still the entire set of permissions. The display_name is
+#   what shows as the message author when feedback arrives.
+#
+# WHERE THE URL MUST NOT GO
+#   Not in this repository. shared/** is published to
+#   mmin-sportradar/bet-workflows-review, which is public, so a committed webhook
+#   is a live credential on the open internet and stays in a public history after
+#   the line is deleted. scripts/check-secrets.py fails the build rather than let
+#   one through. The Cloudflare environment variable is the only place it lives.
+#
+# If Slack rejects this manifest, "From scratch" and then toggling Incoming
+# Webhooks on reaches the identical result in two clicks.
+#
+# ---------------------------------------------------------------------------
+# IF THE WORKSPACE ASKS YOU TO REQUEST APPROVAL
+#   Slack shows "Request to install" when an admin has to approve new apps, and
+#   caps the reason box at 1000 characters. The text is in a file of its own so
+#   it can be copied without stripping comment markers:
+#
+#       scripts/slack-app-approval.txt
+#
+#   Open it, replace the two <> placeholders, select all, paste. It is 926
+#   characters as written, which leaves 74 for the channel name and your own --
+#   enough, but do not pad it.
+# ---------------------------------------------------------------------------
+
+# -- paste from here --
+display_information:
+  name: BET Workflows Feedback
+  description: Page ratings and comments from the BET Workflows site
+  background_color: "#00003c"
+features:
+  bot_user:
+    display_name: BET Workflows Feedback
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      - incoming-webhook
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
+  interactivity:
+    is_enabled: false
