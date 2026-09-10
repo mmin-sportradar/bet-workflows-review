@@ -1,0 +1,654 @@
+:root {
+  --ink: #19215b;
+  --red: #f1322f;
+  --sales: #eef0f5;
+  --integrations: #dce9f7;
+  --additional: #cfd1f5;
+  --panel: #f7f8fb;
+  --line: #d8dbe5;
+  --muted: #5d6780;
+  --footer: #13243d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background: #fff;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button { font: inherit; }
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: 48px clamp(28px, 5vw, 96px) 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--red);
+  font-size: .78rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3.7rem);
+  font-weight: 900;
+  letter-spacing: -.055em;
+  line-height: .96;
+}
+
+.subtitle {
+  margin: 12px 0 0;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.team-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 8px;
+  max-width: 700px;
+}
+
+.switcher-label {
+  align-self: center;
+  margin-right: 5px;
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 750;
+}
+
+.team-button {
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 9px 13px;
+  color: var(--ink);
+  background: #fff;
+  font-size: .79rem;
+  font-weight: 780;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.team-button:hover { transform: translateY(-1px); }
+.team-button.selected { border-color: var(--ink); box-shadow: 0 3px 11px #19215b1f; }
+.team-button.sales { background: var(--sales); }
+.team-button.integrations { background: var(--integrations); }
+.team-button.additional { background: var(--additional); }
+
+.flow-shell {
+  display: grid;
+  gap: 26px;
+  max-width: 1900px;
+  min-height: calc(100vh - 245px);
+  margin: 0 auto;
+  padding: 30px clamp(28px, 5vw, 96px) 54px;
+}
+
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(38px, 4vw, 82px);
+  --connector-gap: clamp(38px, 4vw, 82px);
+  --connector-width: clamp(20px, 2vw, 41px);
+}
+
+.stage-card, .reference-card {
+  position: relative;
+  min-height: 312px;
+  border: 0;
+  border-radius: 12px;
+  padding: 32px 25px 23px;
+  color: var(--ink);
+  text-align: center;
+  box-shadow: 0 1px 0 #ffffffb5 inset, 0 10px 26px #1f2b5520;
+}
+
+.stage-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.stage-card:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 #ffffffb5 inset, 0 15px 30px #1f2b5530;
+}
+
+.sales-card { background: var(--sales); }
+.integrations-card { background: var(--integrations); }
+.reference-card { background: var(--additional); }
+
+.stage-number {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 2px 6px #ef3b393d;
+  font-size: .8rem;
+  font-weight: 900;
+  transform: translateX(-50%);
+}
+
+.owner {
+  margin: 0 0 17px;
+  color: var(--red);
+  font-size: .65rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.stage-card strong, .reference-card strong {
+  display: block;
+  max-width: 16ch;
+  font-size: clamp(1.05rem, 1.38vw, 1.42rem);
+  font-weight: 880;
+  letter-spacing: -.033em;
+  line-height: 1.08;
+}
+
+.summary, .reference-card > span {
+  display: block;
+  margin: 16px 0 auto;
+  color: #3d4965;
+  font-size: clamp(.82rem, .92vw, .98rem);
+  line-height: 1.48;
+}
+
+.detail-hint, .reference-action {
+  margin-top: 23px;
+  border: 0;
+  border-radius: 7px;
+  padding: 9px 13px;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 4px 10px #ef3b3940;
+  font-size: .72rem;
+  font-weight: 880;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+
+.reference-card {
+  min-height: 0;
+  padding: 24px 29px;
+}
+
+.reference-card .owner { margin-bottom: 10px; }
+.reference-card > strong { max-width: none; }
+.reference-card > span { margin: 12px 0 0; }
+.reference-action { display: inline-block; cursor: pointer; margin-top: 17px; }
+
+.step-one::after, .step-two::after, .step-three::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  /* Centered in the actual gap: (gap - width) / 2 past the card's own edge,
+     rather than a hardcoded offset that drifts out of sync whenever gap or
+     width change at a breakpoint. */
+  left: calc(100% + (var(--connector-gap) - var(--connector-width)) / 2);
+  width: var(--connector-width);
+  height: 14px;
+  background: var(--muted);
+  clip-path: polygon(0 38%, 70% 38%, 70% 0, 100% 50%, 70% 100%, 70% 62%, 0 62%);
+  transform: translateY(-50%);
+}
+
+.stage-card.is-dependency { cursor: default; box-shadow: none; }
+.stage-card.is-dependency .owner { margin-bottom: 9px; color: var(--muted); }
+.stage-card.is-dependency .detail-hint { padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: .68rem; }
+.stage-card.is-dependency .detail-hint::after { content: "dependency"; }
+.stage-card.is-dependency .detail-hint { font-size: 0; }
+.stage-card.is-dependency .detail-hint::after { font-size: .68rem; }
+
+/* Nothing is hidden by the filter: the note lives in the grid with the steps,
+   so hiding the grid for its own team emptied the page. A note you do not own
+   mutes and says so, exactly like a step card you do not own. */
+.reference-card.is-dependency { cursor: default; box-shadow: none; }
+.reference-card.is-dependency .owner { color: var(--muted); }
+.reference-card.is-dependency .reference-action { padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: 0; cursor: default; }
+.reference-card.is-dependency .reference-action::after { content: "dependency"; font-size: .72rem; }
+
+dialog {
+  width: min(760px, calc(100vw - 34px));
+  max-height: min(840px, calc(100vh - 40px));
+  overflow: auto;
+  border: 0;
+  border-radius: 19px;
+  padding: 39px clamp(25px, 5vw, 55px) 42px;
+  color: var(--ink);
+  text-align: center;
+  box-shadow: 0 25px 80px #1119325c;
+}
+
+dialog::backdrop { background: #101a35a1; backdrop-filter: blur(3px); }
+
+.dialog-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: #eef0f5;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.dialog-owner {
+  margin: 0 0 8px;
+  color: var(--red);
+  font-size: .69rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+dialog h2 {
+  max-width: 20ch;
+  margin: 0 auto 29px;
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  letter-spacing: -.045em;
+  line-height: 1.04;
+}
+
+.dialog-content {
+  display: grid;
+  gap: 14px;
+  max-width: 54ch;
+  margin: 0 auto;
+}
+
+.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }
+.dialog-content > ul, .dialog-content > ol {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 24px;
+  text-align: left;
+}
+.dialog-content li { padding-left: 4px; line-height: 1.5; }
+.dialog-content a { color: #215da8; font-weight: 760; overflow-wrap: anywhere; }
+
+.instruction-section {
+  display: grid;
+  gap: 12px;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+  text-align: center;
+}
+
+.instruction-section h3 {
+  margin: 0;
+  justify-self: center;
+  border-radius: 999px;
+  padding: 7px 11px;
+  color: var(--red);
+  background: #fff1f0;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.instruction-section p { margin: 0; line-height: 1.5; text-wrap: pretty; }
+.instruction-section ul, .instruction-section ol {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 24px;
+  text-align: left;
+}
+
+.dialog-content.has-branches {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: none;
+  gap: 14px;
+}
+.dialog-content.has-many-branches { grid-template-columns: 1fr; max-width: 56ch; }
+
+.path-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 600px;
+  margin: 0 auto 18px;
+}
+
+.path-button {
+  cursor: pointer;
+  border: 1px solid #cbd1df;
+  border-radius: 999px;
+  padding: 8px 11px;
+  color: var(--ink);
+  background: #fff;
+  font-size: .73rem;
+  font-weight: 820;
+}
+.path-button.selected { border-color: var(--ink); color: #fff; background: var(--ink); }
+
+.path-panel {
+  display: none;
+  max-width: 56ch;
+  margin: 0 auto;
+  padding: 24px 23px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+}
+
+.path-panel.selected { display: grid; gap: 14px; }
+.path-panel h3 {
+  margin: 0;
+  color: var(--red);
+  font-size: .78rem;
+  letter-spacing: .08em;
+}
+.path-panel p { margin: 0; line-height: 1.52; text-wrap: pretty; }
+.path-panel ol { display: grid; gap: 8px; margin: 0; padding-left: 25px; text-align: left; }
+.path-panel li { padding-left: 4px; line-height: 1.5; }
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100px;
+  padding: 22px clamp(28px, 5vw, 96px);
+  color: #fff;
+  background: var(--footer);
+}
+
+footer img { width: 200px; height: auto; max-height: 45px; object-fit: contain; object-position: left center; }
+footer time { font-size: .8rem; }
+
+@media (max-width: 1180px) {
+  .page-header { align-items: start; flex-direction: column; }
+  .team-switcher { justify-content: start; max-width: none; }
+  .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; --connector-gap: 36px; --connector-width: 24px; }
+  .step-two::after { display: none; }
+}
+
+@media (max-width: 650px) {
+  .page-header { padding-top: 32px; }
+  .flow-shell { padding-top: 44px; }
+  .flow-grid { grid-template-columns: 1fr; }
+  .stage-card, .reference-card { min-height: 255px; }
+  .step-one::after, .step-two::after, .step-three::after { display: none; }
+  .team-switcher { gap: 6px; }
+  .switcher-label { width: 100%; }
+  .team-button { padding: 8px 10px; font-size: .71rem; }
+  .dialog-content.has-branches { grid-template-columns: 1fr; }
+  footer { min-height: 84px; }
+  footer img { width: 158px; }
+}
+/* Keep introductory dialog content readable before branch panels. */
+.dialog-content.has-branches > :is(p, ul, ol, .instruction-intro) {
+  grid-column: 1 / -1;
+  width: min(100%, 54ch);
+  justify-self: center;
+}
+
+/* Visual pass: make each responsibility and route decision readable at desktop scale. */
+.page-header { padding: 54px clamp(36px, 5vw, 108px) 34px; }
+.subtitle { line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { gap: 11px; max-width: 820px; }
+.switcher-label { font-size: .9rem; }
+.team-button { padding: 13px 19px; font-size: .92rem; }
+.flow-shell { gap: 34px; padding: 48px clamp(36px, 5vw, 108px) 64px; }
+/* Scoped above the 1180px breakpoint below — unconditional, it would win the
+   cascade over that block's own gap/width (same specificity, later in
+   source) and silently widen the 2-column layout and its connectors past
+   their intended spacing. */
+@media (min-width: 1181px) {
+  .flow-grid { gap: clamp(54px, 4vw, 92px); --connector-gap: clamp(54px, 4vw, 92px); --connector-width: clamp(30px, 2.4vw, 52px); }
+  .step-one::after, .step-two::after, .step-three::after { height: 18px; }
+}
+.stage-card, .reference-card { min-height: 345px; padding: 38px 30px 28px; border-radius: 16px; }
+.stage-number { top: -17px; width: 42px; height: 42px; font-size: 1.08rem; }
+.owner { margin-bottom: 23px; font-size: .78rem; }
+.stage-card strong, .reference-card strong { font-size: clamp(1.3rem, 1.55vw, 1.65rem); line-height: 1.13; }
+.summary, .reference-card > span { margin-top: 22px; font-size: clamp(.98rem, 1.05vw, 1.12rem); line-height: 1.48; }
+.detail-hint, .reference-action { margin-top: 30px; min-height: 44px; padding: 12px 18px; font-size: .86rem; }
+.reference-card { min-height: 0; padding: 30px 34px; }
+.stage-card.is-dependency .detail-hint::after { font-size: .78rem; }
+
+@media (max-width: 1180px) {
+  .subtitle { text-wrap: wrap; }
+  .team-button { padding: 10px 14px; font-size: .82rem; }
+}
+
+/* Instruction dialogs: tighter labels, centered copy, balanced line breaks. */
+dialog .dialog-content {
+  gap: 16px;
+}
+
+dialog .dialog-content:is(.has-flow, .has-section) {
+  width: 100%;
+  max-width: none;
+  gap: 14px;
+}
+
+.instruction-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+}
+
+/* The salesforce dialog's path-selector/path-panel tabs already carry their
+   own bordered panel styling; wrapping them in another one nests two nearly
+   identical boxes. Strip the outer box in that specific case. */
+.instruction-panel:has(.path-selector) {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.has-flow .instruction-panel,
+.has-section .instruction-panel,
+.has-section .instruction-section {
+  text-align: left;
+}
+
+.instruction-panel-body,
+.instruction-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.has-flow .instruction-panel-body,
+.has-section .instruction-panel-body,
+.has-section .instruction-section-body {
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.has-branches .instruction-section-body {
+  justify-content: center;
+}
+
+.has-flow .instruction-panel-body > p,
+.has-section .instruction-panel-body > p,
+.has-section .instruction-section-body > p {
+  margin: 0;
+  text-align: left;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+.instruction-panel-body > :is(ul, ol),
+.instruction-section-body > :is(ul, ol) {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 1.25rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.instruction-panel--compact,
+.has-flow .instruction-panel {
+  min-height: 0;
+}
+
+.instruction-panel--compact .instruction-panel-body {
+  justify-content: flex-start;
+}
+
+.instruction-intro.instruction-panel {
+  width: 100%;
+  max-width: none;
+  gap: 0;
+}
+
+.has-section > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+.has-section > .instruction-section > h3 {
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.instruction-intro:not(.instruction-panel) {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 52ch);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dialog-content.has-branches > .instruction-intro {
+  grid-column: 1 / -1;
+}
+
+.instruction-intro p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+dialog .dialog-content.has-branches {
+  align-items: stretch;
+}
+
+.dialog-content.has-branches > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+.dialog-content.has-branches > .instruction-section > h3 {
+  align-self: center;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
+  margin-bottom: 10px;
+}
+
+.dialog-content.has-branches .instruction-section-body {
+  flex: 1;
+  min-height: 0;
+}
+
+.instruction-section p.or {
+  max-width: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+  font-size: .82rem;
+}
+
+.instruction-panel-body p.or {
+  max-width: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+  font-size: .82rem;
+}
+
+/* The ≤650px card height near the top of this file sits *before* the visual
+   pass's unconditional `.stage-card, .reference-card { min-height }`, so it
+   loses the cascade and never applies. Restate it here, after that rule, at the
+   height a single-column card's own content needs. */
+@media (max-width: 650px) {
+  .stage-card, .reference-card { min-height: 280px; }
+}
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-grid { --cols: 5; --col-gap: 92px; }
+
+/* The note sits in the step grid so it shares the diagram's left and right
+   edges instead of floating beside it, but it spans the row rather than taking
+   a step's slot: squeezed into one of four columns its text would run far
+   longer than the steps', and widening the row to fit it would make every card
+   that tall.
+
+   Spanning the row also takes it out of the row's height: chrome.js equalises
+   every card in the grid to the tallest one, which is right for steps standing
+   side by side and wrong for a note with nothing beside it -- it just became a
+   mostly empty band. !important is how this file already wins back over that
+   inline min-height (see .is-dependency above); the value is the one declared
+   for .reference-card above. */
+/* The note takes a step's slot rather than spanning the row: it belongs with
+   the cards, not as a band under them, and as an ordinary cell it reflows with
+   them at every width and takes the row's height like the rest. */

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LMT Combat BET Integration process for Standalone LMT and LCO via LMT">
+  <title>LMT Combat BET Integration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+  <link rel="stylesheet" href="../../shared/chrome.css?v=bbc8f30892" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../../shared/responsive.css?v=bbc8f30892" />
+  <script src="../../shared/catalog.js?v=bbc8f30892" defer></script>
+  <script src="../../shared/chrome.js?v=bbc8f30892" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">BET PRODUCTS · SETUP FLOW</p>
+      <h1>LMT Combat BET Integration</h1>
+      <p class="subtitle">Combat Package — LMT and LCO via LMT</p>
+    </div>
+    <nav class="team-switcher" aria-label="Filter steps by responsible team">
+      <span class="switcher-label">Responsibilities:</span>
+      <button class="team-button selected" type="button" data-team="all">All teams</button>
+      <button class="team-button beti" type="button" data-team="bet-integration">BET Integration</button>
+      <button class="team-button av" type="button" data-team="av">AV</button>
+    </nav>
+  </header>
+
+  <main class="flow-shell">
+    <aside class="source-note" aria-label="Process note">
+      <strong>Package scope:</strong> Standalone LMT activates <strong>LMT Combat</strong>, with no cross-team work. LCO via LMT activates <strong>LMT Combat + LCO via LMT</strong> — coordinate with the AV team (<strong>av-integration</strong>).
+    </aside>
+
+    <section class="flow-grid" aria-label="LMT Combat BET Integration steps">
+      <button class="stage-card beti-card step-one" type="button" data-owner="bet-integration" data-dialog="step-1-dialog">
+        <span class="stage-number">1</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Identify package and client type</strong>
+        <span class="summary">Confirm Standalone LMT or LCO via LMT, and whether the client is new or an existing IMG migration.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-two" type="button" data-owner="bet-integration" data-dialog="step-2-dialog">
+        <span class="stage-number">2</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>In-Store activation</strong>
+        <span class="summary">Activate LMT Combat, populate the IMG operator name, and share docs for a new client or an IMG migration.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card av-card step-three" type="button" data-owner="av" data-dialog="step-3-dialog">
+        <span class="stage-number">3</span>
+        <span class="owner">AV TEAM</span>
+        <strong>Confirm AV delivery</strong>
+        <span class="summary">Confirm LCO via LMT or Standalone LCO. Standalone LCO: video in AV’s own player.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-four" type="button" data-owner="bet-integration" data-dialog="step-4-dialog">
+        <span class="stage-number">4</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Close or continue</strong>
+        <span class="summary">Standalone LCO: share LMT Combat docs and close. LCO via LMT: continue with the AV and BETI cards that follow.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card av-card step-five" type="button" data-owner="av" data-dialog="step-5-dialog">
+        <span class="stage-number">5</span>
+        <span class="owner">AV TEAM · LCO VIA LMT</span>
+        <strong>Provide the AV Bookmaker ID</strong>
+        <span class="summary">LMT is configured in Store. Reply on Jira with the AV Bookmaker ID so BETI can connect the order.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-six" type="button" data-owner="bet-integration" data-dialog="step-6-dialog">
+        <span class="stage-number">6</span>
+        <span class="owner">BET INTEGRATION TEAM · LCO VIA LMT</span>
+        <strong>Connect the order</strong>
+        <span class="summary">Link the Bookmaker ID to the order, then ask AV to send JWT docs and request the client’s Public RSA key.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card av-card step-seven" type="button" data-owner="av" data-dialog="step-7-dialog">
+        <span class="stage-number">7</span>
+        <span class="owner">AV TEAM · LCO VIA LMT</span>
+        <strong>Share JWT docs and request the RSA key</strong>
+        <span class="summary">Send JWT authentication docs to the client, request their Public RSA key, and post it on Jira.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-eight" type="button" data-owner="bet-integration" data-dialog="step-8-dialog">
+        <span class="stage-number">8</span>
+        <span class="owner">BET INTEGRATION TEAM · LCO VIA LMT</span>
+        <strong>Apply the RSA key</strong>
+        <span class="summary">Apply the Public RSA key in Store and confirm LMT is ready for embedded LCO.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand" aria-label="Sportradar">SPORTRADAR</div><time datetime="2026-09-08">8 September 2026</time></footer>
+
+  <dialog id="step-1-dialog" aria-labelledby="step-1-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-1-title">Identify package and client type</h2>
+    <p>When a cloned ticket is assigned to BETI from Customer Support, check the contracted package and whether the client is <strong>new</strong> or an <strong>existing IMG migration</strong>.</p>
+    <ol>
+      <li>Confirm the request is for the <strong>Combat Package</strong>.</li>
+      <li>Check whether the contracted package is <strong>Standalone LMT</strong> or <strong>LCO via LMT</strong>.</li>
+      <li>Confirm whether the client is new or an existing IMG / IMT Event Centre migration. Check the list of existing IMT clients.</li>
+      <li>An operator name in the IMG repository does <strong>not</strong> mean they are still an IMG client — some names remain from a previous IMG relationship.</li>
+    </ol>
+    <h3>Standalone LMT</h3>
+    <p>BETI activates <strong>LMT Combat</strong>. No cross-team coordination.</p>
+    <h3>LCO via LMT</h3>
+    <p>BETI activates <strong>LMT Combat + LCO via LMT</strong>. The AV team confirms delivery and, if LCO via LMT, the Bookmaker ID and JWT / RSA handoff.</p>
+  </dialog>
+
+  <dialog id="step-2-dialog" aria-labelledby="step-2-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-2-title">In-Store activation</h2>
+    <ol>
+      <li>Activate the <strong>LMT Combat</strong> widget in Store.</li>
+      <li>Populate the IMG operator name in the configuration.</li>
+    </ol>
+    <h3>New clients</h3>
+    <p>Share the standard <a href="https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-mma" target="_blank" rel="noopener noreferrer">API Hub MMA LMT documentation</a> in the Jira ticket.</p>
+    <h3>Existing IMG Event Centre migrations</h3>
+    <p>If they want to keep their existing layout and styling, send the <strong>Migration Integration Guide</strong>. That guide is internal — do not share it with brand-new clients.</p>
+    <p>Remind the client of the legacy sunset date: <strong>30 November 2026</strong>.</p>
+  </dialog>
+
+  <dialog id="step-3-dialog" aria-labelledby="step-3-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">AV TEAM</p>
+    <h2 id="step-3-title">Confirm AV delivery</h2>
+    <p>BETI will have asked on Jira:</p>
+    <p><strong>@av-integration, please confirm if LCO via LMT is required for this client or if it is Standalone LCO?</strong></p>
+    <h3>Standalone LCO</h3>
+    <p>Handle video independently in AV’s own player. BETI then shares LMT Combat docs and closes the BETI ticket.</p>
+    <h3>LCO via LMT</h3>
+    <p>Continue on this flow: provide the Bookmaker ID, then the JWT / RSA handoff with the client.</p>
+  </dialog>
+
+  <dialog id="step-4-dialog" aria-labelledby="step-4-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-4-title">Close or continue</h2>
+    <h3>Standalone LCO</h3>
+    <p>AV handles video in their own player. Share LMT Combat docs and close the BETI ticket.</p>
+    <h3>LCO via LMT</h3>
+    <p>Stay on this flow. AV provides the Bookmaker ID and later the JWT / RSA handoff; BETI connects the order and applies the key.</p>
+  </dialog>
+
+  <dialog id="step-5-dialog" aria-labelledby="step-5-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">AV TEAM · LCO VIA LMT</p>
+    <h2 id="step-5-title">Provide the AV Bookmaker ID</h2>
+    <p>BETI will have configured the LMT widget in Store and asked on Jira:</p>
+    <p><strong>@av-integration, LMT widget has been configured in Store. Could you please provide the AV Bookmaker ID for this client so we can connect it to the order?</strong></p>
+    <p>Reply on the Jira ticket with the <strong>AV Bookmaker ID</strong>.</p>
+  </dialog>
+
+  <dialog id="step-6-dialog" aria-labelledby="step-6-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM · LCO VIA LMT</p>
+    <h2 id="step-6-title">Connect the order</h2>
+    <p>Link the AV Bookmaker ID to the order in Store. Then tag AV:</p>
+    <p><strong>@av-integration, Store configuration complete. AV Bookmaker ID [XXXXX] is now linked to Order [YYYYY]. Please share the JWT authentication documentation with the client and request their Public RSA Key.</strong></p>
+  </dialog>
+
+  <dialog id="step-7-dialog" aria-labelledby="step-7-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">AV TEAM · LCO VIA LMT</p>
+    <h2 id="step-7-title">Share JWT docs and request the RSA key</h2>
+    <p>Share the JWT authentication documentation with the client and request their Public RSA Key.</p>
+    <p>Post the client’s Public RSA Key on the Jira ticket for BETI to apply in Store.</p>
+  </dialog>
+
+  <dialog id="step-8-dialog" aria-labelledby="step-8-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM · LCO VIA LMT</p>
+    <h2 id="step-8-title">Apply the RSA key</h2>
+    <p>Once AV provides the client’s Public RSA Key in Jira, apply it to the client’s account in Store.</p>
+    <p>If the client already has an active Public RSA Key configured for other existing LCO services, re-upload is not needed.</p>
+    <p>Post final confirmation:</p>
+    <p><strong>Public RSA Key has been applied. LMT is ready for embedded LCO.</strong></p>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

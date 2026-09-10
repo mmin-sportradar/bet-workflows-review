@@ -1,0 +1,358 @@
+:root {
+  --navy: #202560;
+  --ink: #172036;
+  --muted: #63708a;
+  --line: #d9dfeb;
+  --red: #d40000;
+  --sales: #f5f5f8;
+  --integrations: #dcecf8;
+  --additional: #d9dbff;
+  --footer: #102e45;
+}
+
+* { box-sizing: border-box; }
+body.lmt-premium-setup { display: flex; flex-direction: column; min-height: 100dvh; margin: 0; color: var(--ink); background: #fff; font-family: Arial, Helvetica, sans-serif; }
+button { font: inherit; }
+.page-header { display: flex; align-items: center; justify-content: space-between; gap: 28px; align-self: stretch; width: 100%; max-width: none; margin-inline: 0; padding: 38px clamp(28px, 5vw, 88px) 24px; border-bottom: 1px solid var(--line); }
+.eyebrow, .owner, .dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 7px; color: #000; font-size: clamp(2.35rem, 4vw, 3.75rem); letter-spacing: -.06em; line-height: .95; }
+.subtitle { margin: 0; color: var(--muted); font-size: 1rem; }
+.team-switcher { display: flex; align-items: center; justify-content: end; gap: 8px; flex-wrap: wrap; padding: 9px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; box-shadow: 0 6px 18px #1920380d; }
+.switcher-label { color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.team-button { border: 1px solid var(--line); border-radius: 999px; padding: 10px 15px; background: #fff; color: var(--ink); cursor: pointer; font-size: .84rem; font-weight: 700; }
+.team-button.sales { background: var(--sales); }.team-button.integrations { background: var(--integrations); }.team-button.additional { background: var(--additional); }.team-button.selected { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+/* chrome.js centers the subnav with auto margins when the header resolves a
+   real max-width (it does, globally, via --sr-measure) — auto margins on a
+   flex item's cross axis suppress stretch, so without an explicit width the
+   subnav shrinks to its content and drifts off the header's left edge. */
+body.lmt-premium-setup > .sr-subnav { width: 100%; }
+.flow-stage { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-width: 0; width: 100%; }
+.flow-shell { display: flex; align-items: center; justify-content: center; width: 100%; margin: 0; padding: 34px clamp(28px, 5vw, 88px); box-sizing: border-box; }
+.flow-scale { display: flex; align-items: center; justify-content: center; flex: 0 1 auto; max-width: 100%; max-height: 100%; overflow: visible; }
+.flow-scale-inner { transform-origin: top left; }
+.flow-scale > .flow-scale-inner > .flow-grid { flex: 0 0 auto; margin: 0; }
+.flow-grid { display: grid; grid-template-columns: repeat(3, 280px); gap: 66px 70px; justify-content: center; width: max-content; max-width: 100%; margin: auto; }
+.stage-card { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; justify-items: center; min-height: 240px; padding: 19px 18px 17px; overflow: visible; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); cursor: pointer; text-align: center; transition: transform .16s, box-shadow .16s, border-color .16s; }
+.stage-card:hover { transform: translateY(-3px); border-color: #aeb9cc; box-shadow: 0 10px 24px #18223d14; }.sales-card { background: var(--sales); }.integrations-card { background: var(--integrations); }.additional-card { background: var(--additional); }
+.owner { align-self: start; margin: 0; font-size: .67rem; }.stage-number { position: absolute; top: 14px; left: 14px; display: grid; place-items: center; width: 33px; height: 33px; border-radius: 50%; background: var(--red); color: #fff; font-size: .93rem; font-weight: 700; }.stage-card strong { align-self: center; color: var(--navy); font-size: 1.12rem; line-height: 1.1; }.summary { align-self: center; color: var(--muted); font-size: .84rem; line-height: 1.3; }
+.detail-hint { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; margin-top: 12px; padding: 7px 11px; border: 0; border-radius: 999px; background: var(--red); color: #fff; cursor: pointer; font-size: .7rem; font-weight: 700; }
+.step-one::after, .step-two::after, .step-three::after, .step-four::after, .step-four::before { content: ""; position: absolute; top: 50%; width: 58px; height: 10px; background: var(--muted); clip-path: polygon(0 40%, 78% 40%, 78% 0, 100% 50%, 78% 100%, 78% 60%, 0 60%); transform: translateY(-50%); }.step-one::after, .step-two::after, .step-three::after, .step-four::after { right: -64px; }.step-four::before { left: -64px; }.flow-shell:not([data-selected="all"]) .stage-card::before, .flow-shell:not([data-selected="all"]) .stage-card::after { display: none; }
+
+/* chrome.js's shared row-height-equalizer measures every card sharing a grid
+   row and sets an inline min-height/padding-top to match the tallest one —
+   it has no notion of an intentionally-small collapsed card, so a dependency
+   chip sitting beside a full-size owned card gets stretched to match via
+   inline style, which only !important can outrank. align-self:center then
+   keeps its connector arrows level with its full-size row-mates. */
+.flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]), .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]), .flow-shell[data-selected="additional"] .stage-card:not([data-owner="additional"]) { background: #f5f6f9; cursor: default; } .flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]) .detail-hint, .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]) .detail-hint, .flow-shell[data-selected="additional"] .stage-card:not([data-owner="additional"]) .detail-hint { display: none; }
+.flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]) .owner, .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]) .owner, .flow-shell[data-selected="additional"] .stage-card:not([data-owner="additional"]) .owner { color: var(--muted); }.flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]):hover, .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]):hover, .flow-shell[data-selected="additional"] .stage-card:not([data-owner="additional"]):hover { transform: none; border-color: var(--line); box-shadow: none; }
+
+dialog { width: min(760px, calc(100% - 32px)); max-height: min(760px, calc(100dvh - 48px)); overflow: auto; border: 1px solid var(--line); border-radius: 18px; padding: 36px 48px 40px; color: var(--ink); text-align: center; box-shadow: 0 28px 72px #10182d40; } dialog::before { content: ""; display: block; width: 46px; height: 4px; margin: 0 auto 14px; border-radius: 99px; background: var(--red); } dialog::backdrop { background: #17203685; } dialog .dialog-owner { text-align: center; } dialog h2 { max-width: 24ch; margin: 0 auto 18px; color: var(--navy); font-size: 2rem; letter-spacing: -.04em; line-height: 1.08; text-wrap: balance; }
+.dialog-content { display: grid; gap: 14px; max-width: 56ch; margin: 0 auto; }.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content li { padding-left: 4px; line-height: 1.5; }.instruction-section { display: grid; gap: 12px; padding: 20px 18px 17px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }.instruction-section h3 { margin: 0; padding: 7px 11px; justify-self: center; border-radius: 999px; background: #fff1f0; color: var(--red); font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; }.instruction-section p { margin: 0; line-height: 1.48; text-wrap: pretty; }.instruction-section ul, .instruction-section ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content.has-branches { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; max-width: none; }.dialog-content.has-many-branches { grid-template-columns: 1fr; max-width: 56ch; } dialog a { color: var(--navy); font-weight: 700; }.dialog-close { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--muted); cursor: pointer; font-size: 1.45rem; line-height: 1; }
+
+footer { display: flex; align-items: center; justify-content: space-between; min-height: 68px; padding: 9px clamp(28px, 5vw, 88px); background: var(--footer); color: #fff; } footer img { display: block; width: 195px; height: 45px; object-fit: contain; object-position: left center; } footer time { font-size: .78rem; }
+
+@media (max-width: 1150px) { .page-header { align-items: start; flex-direction: column; }.team-switcher { justify-content: start; }.flow-grid { grid-template-columns: repeat(2, minmax(0, 290px)); width: min(100%, 600px); gap: 22px; }.stage-card { width: 100%; }.step-one::after, .step-two::after, .step-three::after, .step-four::after, .step-four::before { display: none; } }
+@media (max-width: 620px) { .page-header, .flow-shell { padding-right: 20px; padding-left: 20px; }.flow-grid { grid-template-columns: 1fr; width: min(100%, 320px); }.stage-card { min-height: 220px; } dialog { padding: 34px 24px 30px; }.dialog-content.has-branches { grid-template-columns: 1fr; } footer { padding-right: 20px; padding-left: 20px; } footer img { width: 170px; } }
+/* Keep introductory dialog content readable before branch panels. */
+.dialog-content.has-branches > :is(p, ul, ol, .instruction-intro) {
+  grid-column: 1 / -1;
+  width: min(100%, 54ch);
+  justify-self: center;
+}
+
+/* Visual pass: larger cards and visible continuation arrows for every team view. */
+.page-header { padding: 48px clamp(36px, 5vw, 100px) 32px; }
+.subtitle { line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { gap: 10px; padding: 12px; }
+.switcher-label { font-size: .8rem; }
+.team-button { padding: 13px 20px; font-size: .94rem; }
+.flow-shell { padding: 52px clamp(36px, 5vw, 100px); }
+/* Scoped above the 1150px breakpoint below — unconditional, it would win the
+   cascade over that block's own grid-template-columns/gap (same specificity,
+   later in source) and silently cancel the 2-column mobile fallback. */
+@media (min-width: 1151px) {
+  .flow-grid { grid-template-columns: repeat(3, 340px); gap: 78px 88px; }
+}
+/* 260px is the tallest card's own content height plus breathing room; the
+   previous 340px left a dead band between the summary and the button. */
+.stage-card { min-height: 260px; padding: 26px 24px 22px; border-radius: 15px; }
+.stage-number { top: 18px; left: 18px; width: 42px; height: 42px; font-size: 1.12rem; }
+.owner { font-size: .82rem; }
+.stage-card strong { font-size: 1.42rem; }
+.summary { font-size: 1.04rem; line-height: 1.38; }
+.detail-hint { min-height: 42px; margin-top: 16px; padding: 10px 16px; font-size: .88rem; }
+.step-one::after, .step-two::after, .step-three::after, .step-four::after, .step-four::before { width: 68px; height: 18px; clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%); }
+.step-one::after, .step-two::after, .step-three::after, .step-four::after { right: -76px; }
+.step-four::before { left: -76px; }
+.flow-shell:not([data-selected="all"]) .stage-card::before, .flow-shell:not([data-selected="all"]) .stage-card::after { display: block; }
+
+@media (max-width: 1150px) {
+  .subtitle { text-wrap: wrap; }
+  .team-button { padding: 10px 14px; font-size: .82rem; }
+}
+
+/* Instruction dialogs: tighter labels, centered copy, balanced line breaks. */
+body.lmt-premium-setup dialog .dialog-content {
+  gap: 16px;
+}
+
+body.lmt-premium-setup dialog .dialog-content:is(.has-flow, .has-section) {
+  width: 100%;
+  max-width: none;
+  gap: 14px;
+}
+
+body.lmt-premium-setup .instruction-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+}
+
+body.lmt-premium-setup .has-flow .instruction-panel,
+body.lmt-premium-setup .has-section .instruction-panel,
+body.lmt-premium-setup .has-section .instruction-section {
+  text-align: left;
+}
+
+body.lmt-premium-setup .instruction-panel-body,
+body.lmt-premium-setup .instruction-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+body.lmt-premium-setup .has-flow .instruction-panel-body,
+body.lmt-premium-setup .has-section .instruction-panel-body,
+body.lmt-premium-setup .has-section .instruction-section-body {
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+}
+
+body.lmt-premium-setup .has-branches .instruction-section-body {
+  justify-content: center;
+}
+
+body.lmt-premium-setup .has-branches .instruction-section-body > p {
+  margin: 0;
+  text-align: center;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.lmt-premium-setup .has-flow .instruction-panel-body > p,
+body.lmt-premium-setup .has-section .instruction-panel-body > p,
+body.lmt-premium-setup .has-section .instruction-section-body > p {
+  margin: 0;
+  text-align: left;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.lmt-premium-setup .instruction-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 1.25rem;
+  text-align: left;
+  list-style: disc;
+}
+
+body.lmt-premium-setup .instruction-steps li {
+  line-height: 1.5;
+  padding-left: 0.2rem;
+}
+
+body.lmt-premium-setup .instruction-label {
+  margin: 0;
+  text-align: left;
+  line-height: 1.4;
+}
+
+body.lmt-premium-setup .instruction-group {
+  display: grid;
+  gap: 8px;
+}
+
+body.lmt-premium-setup .instruction-panel-body > :is(ul, ol),
+body.lmt-premium-setup .instruction-section-body > :is(ul, ol) {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 1.25rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body.lmt-premium-setup .instruction-panel--compact,
+body.lmt-premium-setup .has-flow .instruction-panel {
+  min-height: 0;
+}
+
+body.lmt-premium-setup .instruction-panel--compact .instruction-panel-body {
+  justify-content: flex-start;
+}
+
+body.lmt-premium-setup .instruction-intro.instruction-panel {
+  width: 100%;
+  max-width: none;
+  gap: 0;
+}
+
+body.lmt-premium-setup .has-section > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+body.lmt-premium-setup .has-section > .instruction-section > h3 {
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+body.lmt-premium-setup .instruction-intro:not(.instruction-panel) {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 52ch);
+  margin-inline: auto;
+  text-align: center;
+}
+
+body.lmt-premium-setup .dialog-content.has-branches > .instruction-intro {
+  grid-column: 1 / -1;
+}
+
+body.lmt-premium-setup .instruction-intro p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+body.lmt-premium-setup dialog .dialog-content.has-branches {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: none;
+  align-items: stretch;
+}
+
+body.lmt-premium-setup .dialog-content.has-branches > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+body.lmt-premium-setup .dialog-content.has-branches > .instruction-section > h3 {
+  align-self: center;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
+  margin-bottom: 10px;
+}
+
+body.lmt-premium-setup .dialog-content.has-branches .instruction-section-body {
+  flex: 1;
+  min-height: 0;
+}
+
+body.lmt-premium-setup .dialog-content.has-branches .instruction-section-body p {
+  line-height: 1.5;
+}
+
+body.lmt-premium-setup .instruction-section {
+  gap: 10px;
+  padding: 16px 14px 14px;
+  justify-items: center;
+  text-align: center;
+}
+
+body.lmt-premium-setup .instruction-section h3 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 4px 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: .02em;
+  border-radius: 999px;
+  width: auto;
+  max-width: max-content;
+  white-space: nowrap;
+  text-transform: none;
+  background: #fff1f0;
+  color: var(--red);
+}
+
+body.lmt-premium-setup .instruction-section p {
+  width: 100%;
+  margin: 0;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+body.lmt-premium-setup .has-branches .instruction-section p {
+  text-align: center;
+}
+
+body.lmt-premium-setup .has-section .instruction-section p {
+  text-align: left;
+}
+
+body.lmt-premium-setup .instruction-section p.or,
+body.lmt-premium-setup .instruction-panel-body p.or {
+  max-width: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+  font-size: .82rem;
+}
+
+body.lmt-premium-setup .instruction-section ul,
+body.lmt-premium-setup .instruction-section ol {
+  justify-self: center;
+  width: 100%;
+  padding-left: 1.25rem;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  body.lmt-premium-setup dialog .dialog-content.has-branches {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-grid { --cols: 3; --col-gap: 88px; }

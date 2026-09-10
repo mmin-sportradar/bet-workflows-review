@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LMT Golf BET Integration process for Premium Golf Service Essential and Advanced">
+  <title>LMT Golf BET Integration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+  <link rel="stylesheet" href="../../shared/chrome.css?v=bbc8f30892" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../../shared/responsive.css?v=bbc8f30892" />
+  <script src="../../shared/catalog.js?v=bbc8f30892" defer></script>
+  <script src="../../shared/chrome.js?v=bbc8f30892" defer></script>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">BET PRODUCTS · SETUP FLOW</p>
+      <h1>LMT Golf BET Integration</h1>
+      <p class="subtitle">Premium Golf Service Essential and Advanced</p>
+    </div>
+    <nav class="team-switcher" aria-label="Filter steps by responsible team">
+      <span class="switcher-label">Responsibilities:</span>
+      <button class="team-button selected" type="button" data-team="all">All teams</button>
+      <button class="team-button beti" type="button" data-team="bet-integration">BET Integration</button>
+      <button class="team-button imga" type="button" data-team="imga">IMGA</button>
+      <button class="team-button av" type="button" data-team="av">AV</button>
+    </nav>
+  </header>
+
+  <main class="flow-shell">
+    <aside class="source-note" aria-label="Process note">
+      <strong>Package scope:</strong> Essential activates <strong>regular LMT Golf</strong> in Store, with no cross-team work. Advanced activates <strong>LMT + LMT Premium + LCO via LMT</strong> — IMGA for the operator, AV for LCO via LMT.
+    </aside>
+
+    <section class="flow-grid" aria-label="LMT Golf BET Integration steps">
+      <button class="stage-card beti-card step-one" type="button" data-owner="bet-integration" data-dialog="step-1-dialog">
+        <span class="stage-number">1</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Identify package and client type</strong>
+        <span class="summary">Confirm Essential or Advanced, and whether the client is new or an existing IMG migration.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card imga-card step-two" type="button" data-owner="imga" data-dialog="step-2-dialog">
+        <span class="stage-number">2</span>
+        <span class="owner">IMGA TEAM · ADVANCED</span>
+        <strong>Confirm the operator name</strong>
+        <span class="summary">For Advanced, confirm or create the operator via Slack so BETI can set it in Store.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-three" type="button" data-owner="bet-integration" data-dialog="step-3-dialog">
+        <span class="stage-number">3</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>In-Store activation</strong>
+        <span class="summary">Enter the operator name in <code>imgaOperator</code> and activate the LMT Golf widget for the package.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-four" type="button" data-owner="bet-integration" data-dialog="step-4-dialog">
+        <span class="stage-number">4</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Share docs by client type</strong>
+        <span class="summary">New clients get API Hub Golf LMT docs on the Jira. Existing IMG migrations get the internal migration guide.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-five" type="button" data-owner="bet-integration" data-dialog="step-5-dialog">
+        <span class="stage-number">5</span>
+        <span class="owner">BET INTEGRATION TEAM</span>
+        <strong>Check AV scope</strong>
+        <span class="summary">LMT only: add handover details and close. LCO via LMT: continue with the AV and BETI cards that follow.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card av-card step-six" type="button" data-owner="av" data-dialog="step-6-dialog">
+        <span class="stage-number">6</span>
+        <span class="owner">AV TEAM · LCO VIA LMT</span>
+        <strong>Provide the AV Bookmaker ID</strong>
+        <span class="summary">LMT is configured in Store. Reply on Jira with the AV Bookmaker ID so BETI can connect the order.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-seven" type="button" data-owner="bet-integration" data-dialog="step-7-dialog">
+        <span class="stage-number">7</span>
+        <span class="owner">BET INTEGRATION TEAM · LCO VIA LMT</span>
+        <strong>Connect the order</strong>
+        <span class="summary">Link the Bookmaker ID to the order, then ask AV to send JWT docs and request the client’s Public RSA key.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card av-card step-eight" type="button" data-owner="av" data-dialog="step-8-dialog">
+        <span class="stage-number">8</span>
+        <span class="owner">AV TEAM · LCO VIA LMT</span>
+        <strong>Share JWT docs and request the RSA key</strong>
+        <span class="summary">Send JWT authentication docs to the client, request their Public RSA key, and post it on Jira.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card step-nine" type="button" data-owner="bet-integration" data-dialog="step-9-dialog">
+        <span class="stage-number">9</span>
+        <span class="owner">BET INTEGRATION TEAM · LCO VIA LMT</span>
+        <strong>Apply the RSA key</strong>
+        <span class="summary">Apply the Public RSA key in Store and confirm LMT is ready for embedded LCO.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand" aria-label="Sportradar">SPORTRADAR</div><time datetime="2026-09-08">8 September 2026</time></footer>
+
+  <dialog id="step-1-dialog" aria-labelledby="step-1-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-1-title">Identify package and client type</h2>
+    <p>When a cloned ticket is assigned to BETI from Customer Support, check the contracted package and whether the client is <strong>new</strong> or an <strong>existing IMG migration</strong>.</p>
+    <ol>
+      <li>Confirm whether Salesforce requested <strong>Premium Golf Service Essential</strong> or <strong>Premium Golf Service Advanced</strong>.</li>
+      <li>Confirm whether the client is new or an existing IMG / IMT Event Centre migration. Check the list of existing IMT clients.</li>
+      <li>An operator name in the IMG repository does <strong>not</strong> mean they are still an IMG client — some names remain from a previous IMG relationship.</li>
+    </ol>
+    <h3>Essential</h3>
+    <p>Activate <strong>regular LMT Golf</strong> only. No cross-team coordination; the work is self-contained in Store.</p>
+    <h3>Advanced</h3>
+    <p>Activate <strong>LMT + LMT Premium + LCO via LMT</strong>. IMGA confirms the operator (Slack). AV handles LCO via LMT.</p>
+  </dialog>
+
+  <dialog id="step-2-dialog" aria-labelledby="step-2-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">IMGA TEAM · ADVANCED</p>
+    <h2 id="step-2-title">Confirm the operator name</h2>
+    <p>For <strong>Premium Golf Service Advanced</strong>, confirm or create the operator name via Slack.</p>
+    <p>BETI checks the IMGA repository and enters the confirmed name in Store. Essential does not need this coordination.</p>
+  </dialog>
+
+  <dialog id="step-3-dialog" aria-labelledby="step-3-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-3-title">In-Store activation</h2>
+    <ol>
+      <li>Check the IMGA repository for an existing operator name, or create one if the client is new.</li>
+      <li>For Advanced, use the operator IMGA confirmed on Slack.</li>
+      <li>Enter the operator name into the <code>imgaOperator</code> field in Store.</li>
+      <li>Activate the <strong>LMT Golf</strong> widget depending on the package.</li>
+    </ol>
+  </dialog>
+
+  <dialog id="step-4-dialog" aria-labelledby="step-4-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-4-title">Share docs by client type</h2>
+    <h3>New clients</h3>
+    <p>Share the standard <a href="https://apidocs.sportradar.com/resources/widgets/docs/lmt/lmt-golf" target="_blank" rel="noopener noreferrer">API Hub Golf LMT documentation</a> and the Golf LMT demo pages in the Jira ticket.</p>
+    <h3>Existing IMG Event Centre migrations</h3>
+    <p>If they want to keep their existing layout and styling, send the <strong>Migration Integration Guide</strong>. That guide is internal — do not share it with brand-new clients.</p>
+    <p>Remind the client of the legacy sunset date: <strong>30 November 2026</strong>.</p>
+  </dialog>
+
+  <dialog id="step-5-dialog" aria-labelledby="step-5-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM</p>
+    <h2 id="step-5-title">Check AV scope</h2>
+    <h3>LMT only</h3>
+    <p>Add handover details and close the ticket.</p>
+    <h3>LCO via LMT</h3>
+    <p>Stay on this flow. AV provides the Bookmaker ID and later the JWT / RSA handoff; BETI connects the order and applies the key.</p>
+  </dialog>
+
+  <dialog id="step-6-dialog" aria-labelledby="step-6-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">AV TEAM · LCO VIA LMT</p>
+    <h2 id="step-6-title">Provide the AV Bookmaker ID</h2>
+    <p>BETI will have configured the LMT widget in Store and asked on Jira:</p>
+    <p><strong>@av-integration, LMT widget has been configured in Store. Could you please provide the AV Bookmaker ID for this client so we can connect it to the order?</strong></p>
+    <p>Reply on the Jira ticket with the <strong>AV Bookmaker ID</strong>.</p>
+  </dialog>
+
+  <dialog id="step-7-dialog" aria-labelledby="step-7-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM · LCO VIA LMT</p>
+    <h2 id="step-7-title">Connect the order</h2>
+    <p>Link the AV Bookmaker ID to the order in Store. Then tag AV:</p>
+    <p><strong>@av-integration, Store configuration complete. AV Bookmaker ID [XXXXX] is now linked to Order [YYYYY]. Please share the JWT authentication documentation with the client and request their Public RSA Key.</strong></p>
+  </dialog>
+
+  <dialog id="step-8-dialog" aria-labelledby="step-8-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">AV TEAM · LCO VIA LMT</p>
+    <h2 id="step-8-title">Share JWT docs and request the RSA key</h2>
+    <p>Share the JWT authentication documentation with the client and request their Public RSA Key.</p>
+    <p>Post the client’s Public RSA Key on the Jira ticket for BETI to apply in Store.</p>
+  </dialog>
+
+  <dialog id="step-9-dialog" aria-labelledby="step-9-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">BET INTEGRATION TEAM · LCO VIA LMT</p>
+    <h2 id="step-9-title">Apply the RSA key</h2>
+    <p>Once AV provides the client’s Public RSA Key in Jira, apply it to the client’s account in Store.</p>
+    <p>If the client already has an active Public RSA Key configured for other existing LCO services, re-upload is not needed.</p>
+    <p>Post final confirmation:</p>
+    <p><strong>Public RSA Key has been applied. LMT is ready for embedded LCO.</strong></p>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

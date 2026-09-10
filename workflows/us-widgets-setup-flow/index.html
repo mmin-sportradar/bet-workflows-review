@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sports Page Solutions Widgets setup and existing-product support">
+  <title>US Widgets — Process Flow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&amp;display=optional" />
+  <link rel="stylesheet" href="../../shared/chrome.css?v=bbc8f30892" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../../shared/responsive.css?v=bbc8f30892" />
+  <script src="../../shared/catalog.js?v=bbc8f30892" defer></script>
+  <script src="../../shared/chrome.js?v=bbc8f30892" defer></script>
+</head>
+<body class="us-widgets-setup">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">PROCESS FLOW</p>
+      <h1>US Widgets</h1>
+      <p class="subtitle">Sports Page Solutions Widgets</p>
+    </div>
+    <div class="header-controls">
+      <nav class="team-switcher" aria-label="Filter steps by responsible team">
+        <span class="switcher-label">Responsibilities:</span>
+        <button class="team-button selected" type="button" data-team="all">All teams</button>
+        <button class="team-button sales" type="button" data-team="sales">Sales Reps</button>
+        <button class="team-button beti" type="button" data-team="beti">BETI</button>
+        <button class="team-button support" type="button" data-team="support">BET Team / Support</button>
+      </nav>
+      <section class="scenario-switcher" aria-label="Select the request type">
+        <span class="scenario-label">Request type:</span>
+        <button class="scenario-button selected" type="button" data-scenario="all">All paths</button>
+        <button class="scenario-button" type="button" data-scenario="activation">1a · New product activation</button>
+        <button class="scenario-button" type="button" data-scenario="existing">1b · Existing products</button>
+      </section>
+    </div>
+  </header>
+
+  <main class="flow-shell" data-selected="all" data-scenario="all">
+    <aside class="source-note" aria-label="Process note">
+      <strong>Routing:</strong> a new product activation (new or existing client) follows <strong>1a</strong>. An existing-product request — bug fixes, improvements, or domain whitelisting — follows <strong>1b</strong>, existing clients only. Every Jira ticket uses the label <code>uswidgets_request</code> so it appears on the dedicated board.
+    </aside>
+
+    <section class="flow-grid" aria-label="US Widgets process">
+      <button class="stage-card sales-card has-connector" type="button" data-owner="sales" data-scenarios="activation" data-dialog="activation-salesforce">
+        <span class="stage-number">1</span>
+        <span class="owner">1A · SALES REPS</span>
+        <img class="source-icon" src="../../shared/icons/salesforce.png" alt="" />
+        <strong>Salesforce account info</strong>
+        <span class="summary">Open or skip the account, then create or amend an opportunity with Sports Page Solutions Widgets on the quote.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card sales-card has-connector" type="button" data-owner="sales" data-scenarios="activation" data-dialog="activation-service">
+        <span class="stage-number">2</span>
+        <span class="owner">1A · SALES REPS</span>
+        <img class="source-icon" src="../../shared/icons/service-administration.png" alt="" />
+        <strong>Service administration</strong>
+        <span class="summary">Request the service on the opportunity. IPs and domains for whitelisting are mandatory. Finish creates the BETI Jira.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card beti-card has-connector" type="button" data-owner="beti" data-scenarios="activation" data-dialog="activation-setup">
+        <span class="stage-number">3</span>
+        <span class="owner">1A · BETI</span>
+        <img class="source-icon" src="../../shared/icons/client-setup.png" alt="" />
+        <strong>Client setup</strong>
+        <span class="summary">Update assignee, watchers, and labels. Support enables every widget for the requested sport by default.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card sales-card" type="button" data-owner="sales" data-scenarios="activation" data-dialog="activation-notify">
+        <span class="stage-number">4</span>
+        <span class="owner">1A · SALES REPS</span>
+        <img class="source-icon" src="../../shared/icons/finalization.png" alt="" />
+        <strong>Inform the client</strong>
+        <span class="summary">The resolved Jira has the alias, demo page, and developers portal. Notify the client, then close the ticket.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+
+      <button class="stage-card sales-card has-connector" type="button" data-owner="sales" data-scenarios="existing" data-dialog="existing-intake">
+        <span class="stage-number">1</span>
+        <span class="owner">1B · SALES REPS</span>
+        <img class="source-icon" src="../../shared/icons/communication.png" alt="" />
+        <strong>Forward the request</strong>
+        <span class="summary">The client reports a technical issue to Sales, who emails Support — or writes to Support directly. The ticket steps are the same either way.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card support-card has-connector" type="button" data-owner="support" data-scenarios="existing" data-dialog="existing-ticket">
+        <span class="stage-number">2</span>
+        <span class="owner">1B · BET TEAM / SUPPORT</span>
+        <img class="source-icon" src="../../shared/icons/form-setup.png" alt="" />
+        <strong>Open the US widgets ticket</strong>
+        <span class="summary">Use the standard US widgets template, set assignee, watchers, and the <code>uswidgets_request</code> label, then resolve within 3–5 business days.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+      <button class="stage-card sales-card" type="button" data-owner="sales" data-scenarios="existing" data-dialog="existing-notify">
+        <span class="stage-number">3</span>
+        <span class="owner">1B · SALES REPS</span>
+        <img class="source-icon" src="../../shared/icons/send-instructions.png" alt="" />
+        <strong>Notify the client of the fix</strong>
+        <span class="summary">Once Support has solved the ticket, Sales notifies the client of the fix.</span>
+        <span class="detail-hint">View instructions</span>
+      </button>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand" aria-label="Sportradar">SPORTRADAR</div><time datetime="2026-09-08">8 September 2026</time></footer>
+
+  <dialog id="activation-salesforce" aria-labelledby="activation-salesforce-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1A · SALES REPS</p>
+    <h2 id="activation-salesforce-title">Salesforce account info</h2>
+    <p>This is the same Salesforce step for a new client and for an existing client activating Sports Page Solutions Widgets. Skip opening an account when the client is already in Salesforce.</p>
+    <h3>New client</h3>
+    <p><strong>Open a new account</strong> via Salesforce.</p>
+    <p><strong>Create a new opportunity</strong> with a Quote where <strong>Sports Page Solutions Widgets</strong> is chosen.</p>
+    <h3>Existing client</h3>
+    <p><strong>Create a new opportunity</strong>, or <strong>amend an existing opportunity</strong>, with a Quote where <strong>Sports Page Solutions Widgets</strong> is chosen.</p>
+  </dialog>
+
+  <dialog id="activation-service" aria-labelledby="activation-service-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1A · SALES REPS</p>
+    <h2 id="activation-service-title">Service administration</h2>
+    <p><strong>Request the service</strong> via the “Service Administration” button on the Opportunity.</p>
+    <ul>
+      <li>Define the type of request by ticking the right box (Service Request, Service Prolongation, and so on).</li>
+      <li>Define a function — Pre-sales Trial or Post Sales Integration — and choose <strong>Sports Page Solutions Widgets</strong>.</li>
+      <li>Enter the <strong>Service Start Date</strong>.</li>
+      <li>Provide the IPs / domains that should be whitelisted. This field is <strong>mandatory</strong>.</li>
+    </ul>
+    <p>Finish the process by clicking <strong>Finish</strong>.</p>
+    <p>A <strong>Jira ticket is created automatically</strong> for the BETI team. It is available from the link on the opportunity. Put the label <code>uswidgets_request</code> on the ticket so it shows on the dedicated board.</p>
+  </dialog>
+
+  <dialog id="activation-setup" aria-labelledby="activation-setup-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1A · BETI</p>
+    <h2 id="activation-setup-title">Client setup</h2>
+    <p>Once Jira is created, BETI updates the ticket fields: <strong>assignee</strong>, <strong>watchers</strong>, and <strong>labels</strong>.</p>
+    <h3>Default widget enablement</h3>
+    <p><strong>Important.</strong> Once the ticket is created from Salesforce with the requested widgets, Support enables <strong>all available widgets for the required sport</strong> by default. Confirm the set against the showcase of all available widgets.</p>
+    <h3>When the ticket is resolved</h3>
+    <p>After submission, the BET team prioritises and activates products within <strong>3–5 business days</strong>.</p>
+    <p>When the ticket is resolved, the Jira comment contains:</p>
+    <ol>
+      <li>the client’s alias</li>
+      <li>a link to the demo page</li>
+      <li>a link to the developers portal for the relevant widgets</li>
+    </ol>
+    <p>The ticket is then reassigned to the Sales Rep.</p>
+  </dialog>
+
+  <dialog id="activation-notify" aria-labelledby="activation-notify-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1A · SALES REPS</p>
+    <h2 id="activation-notify-title">Inform the client</h2>
+    <p>Sales notifies the client of the setup, using the comment BETI left on the resolved Jira:</p>
+    <ul>
+      <li>the widget type that was enabled</li>
+      <li>the link to the demo page (from engineering) plus the client alias</li>
+      <li>the link to the developers portal for documentation and code snippets for the enabled widgets</li>
+    </ul>
+    <p>Sales <strong>closes the ticket</strong> once the client is informed.</p>
+  </dialog>
+
+  <dialog id="existing-intake" aria-labelledby="existing-intake-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1B · SALES REPS</p>
+    <h2 id="existing-intake-title">Forward the request</h2>
+    <p>Use this path only for an <strong>existing client</strong> and an <strong>existing product</strong> — bug fixes, improvements, or domain whitelisting. A new product activation is flow 1a, including for existing clients.</p>
+    <h3>Via Sales</h3>
+    <p>The client reports the technical issue to Sales. Sales forwards it to Support by email.</p>
+    <h3>Direct to Support</h3>
+    <p>The client reports the issue to Support directly. Once Support has the request, the ticket steps are the same as after a Sales forward.</p>
+  </dialog>
+
+  <dialog id="existing-ticket" aria-labelledby="existing-ticket-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1B · BET TEAM / SUPPORT</p>
+    <h2 id="existing-ticket-title">Open the US widgets ticket</h2>
+    <p>Support creates a ticket using the <strong>standard US widgets template</strong> and sets the fields as follows:</p>
+    <ul>
+      <li><strong>Assignee:</strong> BET support. If BET support cannot resolve the issue, escalate to Engineering.</li>
+      <li><strong>Watchers:</strong> the Sales rep, and the POs Lazar Milicevic and Dejan Todorovic.</li>
+      <li><strong>Label:</strong> <code>uswidgets_request</code></li>
+    </ul>
+    <p>After submission, the BET team prioritises and provides a resolution within <strong>3–5 business days</strong>.</p>
+    <p>Example ticket: <a href="https://jira.sportradar.ag/browse/BETI-6093">BETI-6093</a>.</p>
+  </dialog>
+
+  <dialog id="existing-notify" aria-labelledby="existing-notify-title">
+    <button class="dialog-close" type="button" aria-label="Close dialog">×</button>
+    <p class="dialog-owner">1B · SALES REPS</p>
+    <h2 id="existing-notify-title">Notify the client of the fix</h2>
+    <p>Once the ticket is solved, Sales notifies the client of the fix.</p>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

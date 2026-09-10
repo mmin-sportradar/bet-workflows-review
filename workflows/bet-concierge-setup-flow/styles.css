@@ -1,0 +1,71 @@
+:root {
+  --ink: #121752;
+  --red: #d90000;
+  --sales: #f2f3f8;
+  --beti: #d9eaf8;
+  --additional: #f6dfcf;
+  --line: #d8dbe5;
+  --muted: #5d6780;
+  --footer: #092842;
+}
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; color: var(--ink); background: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+button { font: inherit; }
+.page-header { position: relative; display: flex; flex-direction: column; align-items: start; gap: 38px; width: 100%; max-width: none; margin-inline: 0; padding: 48px clamp(32px, 4vw, 88px) 32px; border-bottom: 1px solid var(--line); }
+.header-controls { display: flex; width: 100%; align-items: center; gap: 14px; }
+.eyebrow { margin: 0 0 9px; color: var(--red); font-size: .8rem; font-weight: 900; letter-spacing: .1em; }h1 { margin: 0; font-size: clamp(2.3rem, 3.3vw, 4rem); font-weight: 920; letter-spacing: -.06em; line-height: .96; }.subtitle { margin: 16px 0 0; color: var(--muted); font-size: clamp(1rem, 1.05vw, 1.12rem); line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { display: flex; flex-wrap: wrap; justify-content: end; gap: 10px; max-width: 760px; }.switcher-label { align-self: center; margin-right: 6px; color: var(--muted); font-size: .86rem; font-weight: 790; }.team-button, .scenario-button { cursor: pointer; border: 1px solid transparent; border-radius: 999px; padding: 11px 16px; color: var(--ink); background: #fff; font-size: .83rem; font-weight: 820; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }.team-button:hover, .scenario-button:hover { transform: translateY(-1px); }.team-button.selected, .scenario-button.selected { border-color: var(--ink); box-shadow: 0 4px 13px #19215b24; }.team-button.sales { background: var(--sales); }.team-button.beti { background: var(--beti); }.team-button.additional { background: var(--additional); }
+.flow-shell { display: grid; gap: 32px; max-width: 2040px; min-height: calc(100vh - 235px); margin: 0 auto; padding: 35px clamp(32px, 4vw, 88px) 58px; }/* chrome.css's shared .scenario-switcher rule sets margin-inline:auto (for
+   flows where it stands alone, centered, in the flow-shell) — this page's
+   own rule doesn't otherwise touch margin, so that auto-centering silently
+   wins and pulls it out of alignment with the team-switcher above it. */
+.scenario-switcher { display: flex; flex-wrap: wrap; justify-content: end; gap: 10px; max-width: 760px; margin-inline: 0; }.scenario-label { align-self: center; margin-right: 5px; color: var(--muted); font-size: .88rem; font-weight: 790; }.scenario-button { padding: 10px 15px; border-color: #d8dbe5; background: #fff; font-size: .8rem; }.scenario-button.selected { color: #fff; background: var(--ink); }
+.flow-grid { --flow-gap: clamp(32px, 2.6vw, 56px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: var(--flow-gap); }.stage-card, .reference-card { position: relative; min-height: 250px; border: 0; border-radius: 14px; padding: 38px 24px 26px; color: var(--ink); text-align: center; box-shadow: 0 1px 0 #ffffffb5 inset, 0 12px 28px #1f2b5520; }.stage-card { display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; justify-items: center; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }.stage-card:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 1px 0 #ffffffb5 inset, 0 17px 34px #1f2b5530; }.sales-card { background: var(--sales); }.beti-card { background: var(--beti); }.reference-card { background: var(--additional); }
+.stage-number { position: absolute; top: -16px; left: 50%; display: grid; width: 35px; height: 35px; place-items: center; border-radius: 50%; color: #fff; background: var(--red); box-shadow: 0 3px 8px #d900003d; font-size: .92rem; font-weight: 900; transform: translateX(-50%); }.owner { align-self: end; margin: 0 0 14px; color: var(--red); font-size: .67rem; font-weight: 900; letter-spacing: .08em; }.stage-card strong, .reference-card strong { display: block; max-width: 16ch; font-size: clamp(1.12rem, 1.32vw, 1.4rem); font-weight: 880; letter-spacing: -.04em; line-height: 1.08; }.summary, .reference-card > span { align-self: center; display: block; max-width: 42ch; margin: 16px 0; color: #3d4965; font-size: clamp(.84rem, .9vw, .98rem); line-height: 1.48; }.detail-hint, .reference-action { align-self: end; margin-top: 8px; border: 0; border-radius: 8px; padding: 11px 14px; color: #fff; background: var(--red); box-shadow: 0 5px 12px #d9000040; font-size: .73rem; font-weight: 880; letter-spacing: .02em; line-height: 1; }
+/* Shared arrow primitive: anchor the arrow to the block it leaves and centre it
+   in the real gap, so it tracks the grid at every breakpoint. Step three's
+   arrow is the exception: in the 3-column grid it sits at the end of row one,
+   so "step N points at step N+1" stops being true there — four is below-left,
+   not to the right — and it stays hidden below. */
+.step-one::after, .step-two::after, .step-four::after, .step-five::after { content: ""; position: absolute; z-index: 2; top: 50%; left: 100%; width: clamp(16px, 1.3vw, 28px); height: 18px; background: var(--muted); clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%); transform: translate(calc(var(--flow-gap) / 2 - 50%), -50%); }
+.step-three::after { display: none; }
+.support-grid { display: grid; grid-template-columns: minmax(0, 1fr); }.reference-card { display: grid; justify-items: center; min-height: 235px; padding: 31px 36px; }.reference-card .owner { margin-bottom: 11px; }.reference-card > strong { max-width: none; }.reference-card > span { margin: 14px 0; }.reference-action { display: inline-block; cursor: pointer; margin-top: 2px; }
+/* min-height/height locked with !important: chrome.js's cross-page row-height
+   equalizer buckets cards by rounded top position, and when a row holds only
+   dependency stubs (no full card to anchor it) that bucketing can race with
+   the stub's own collapse, occasionally forcing it back up to a full card's
+   height. This shared heuristic doesn't know about this file's collapsed-stub
+   pattern, so it's overridden rather than patched around. */
+/* align-items:center added: .owner/.detail-hint/strong all rely on
+   justify-items:center from the base card's grid layout to sit centered
+   despite their own max-width caps. is-dependency switches to a flex column,
+   which has no justify-items equivalent — align-items is the flex analogue,
+   applied here at the container so every child (not just these three)
+   centers the same way. */
+.stage-card.is-dependency { cursor: default; box-shadow: none; }.stage-card.is-dependency .owner { margin-bottom: 9px; color: var(--muted); }.stage-card.is-dependency .detail-hint { align-self: center; padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: 0; }.stage-card.is-dependency .detail-hint::after { content: "dependency"; font-size: .72rem; }.flow-shell[data-selected="sales"] .support-grid, .flow-shell[data-selected="beti"] .support-grid { display: none; }.flow-shell[data-selected="additional"] .flow-grid { display: none; }.flow-shell[data-selected="additional"] { grid-template-columns: minmax(0, 860px); justify-content: center; align-content: center; }.flow-shell[data-selected="additional"] .support-grid { display: grid; }
+dialog { width: min(780px, calc(100vw - 34px)); max-height: min(840px, calc(100vh - 40px)); overflow: auto; border: 0; border-radius: 19px; padding: 39px clamp(25px, 5vw, 55px) 42px; color: var(--ink); text-align: center; box-shadow: 0 25px 80px #1119325c; }dialog::backdrop { background: #101a35a1; backdrop-filter: blur(3px); }.dialog-close { position: absolute; top: 15px; right: 18px; width: 32px; height: 32px; cursor: pointer; border: 0; border-radius: 50%; color: var(--ink); background: #eef0f5; font-size: 1.4rem; line-height: 1; }.dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .69rem; font-weight: 900; letter-spacing: .1em; }dialog h2 { max-width: 23ch; margin: 0 auto 29px; font-size: clamp(1.55rem, 3vw, 2.15rem); letter-spacing: -.045em; line-height: 1.04; }
+.dialog-content { display: grid; gap: 14px; max-width: 66ch; margin: 0 auto; }.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content li { padding-left: 4px; line-height: 1.5; }.dialog-content a { color: #215da8; font-weight: 760; overflow-wrap: anywhere; }.instruction-section { display: grid; gap: 12px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }.instruction-section h3 { margin: 0; justify-self: center; border-radius: 999px; padding: 7px 11px; color: var(--red); background: #fff1f0; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }.instruction-section p { margin: 0; line-height: 1.5; text-wrap: pretty; }.instruction-section ul { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content.has-branches { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; gap: 14px; }.dialog-content.has-many-branches { grid-template-columns: 1fr; max-width: 56ch; }
+/* Keep introductory dialog content readable before branch panels. */
+.dialog-content.has-branches > :is(p, ul, ol) { grid-column: 1 / -1; width: min(100%, 54ch); justify-self: center; }
+.force-stacked .dialog-content.has-branches { grid-template-columns: 1fr; max-width: 56ch; }
+.scenario-panels { display: grid; gap: 13px; }.scenario-panel { display: none; gap: 12px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }.scenario-panel.visible { display: grid; }.scenario-panel h3 { margin: 0; justify-self: center; border-radius: 999px; padding: 7px 11px; color: var(--red); background: #fff1f0; font-size: .76rem; letter-spacing: .07em; text-transform: uppercase; }.scenario-panel p { margin: 0; line-height: 1.52; text-wrap: pretty; }
+footer { display: flex; align-items: center; justify-content: space-between; min-height: 95px; padding: 20px clamp(28px, 4vw, 78px); color: #fff; background: var(--footer); }footer img { width: 200px; height: auto; max-height: 45px; object-fit: contain; object-position: left center; }footer time { font-size: .78rem; }
+@media (max-width: 1650px) { .subtitle { text-wrap: wrap; }.team-switcher, .scenario-switcher { justify-content: start; max-width: none; }.flow-grid { --flow-gap: 34px; } }
+@media (max-width: 920px) { .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }.step-one::after, .step-two::after, .step-four::after, .step-five::after { display: none; } }
+@media (max-width: 620px) { .flow-grid { grid-template-columns: 1fr; }.stage-card { min-height: 240px; }.reference-card { min-height: 220px; }.team-button, .scenario-button { padding: 9px 11px; font-size: .73rem; }.dialog-content.has-branches { grid-template-columns: 1fr; }footer { min-height: 84px; }footer img { width: 158px; } }
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-grid { --cols: 3; --col-gap: 56px; }

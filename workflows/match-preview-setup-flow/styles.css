@@ -1,0 +1,393 @@
+:root {
+  --navy: #202560;
+  --ink: #172036;
+  --muted: #63708a;
+  --line: #d9dfeb;
+  --red: #f4322b;
+  --sales: #f4f5f8;
+  --beti: #e7f1fb;
+  --integrations: #ecebff;
+}
+
+* { box-sizing: border-box; }
+body.match-preview-setup { display: flex; flex-direction: column; min-height: 100dvh; margin: 0; color: var(--ink); background: #fff; font-family: Arial, Helvetica, sans-serif; }
+.page-header { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; align-self: stretch; width: 100%; max-width: none; margin-inline: 0; padding: 42px clamp(32px, 7vw, 150px) 28px; border-bottom: 1px solid var(--line); }
+.eyebrow, .owner, .dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .73rem; font-weight: 700; letter-spacing: .11em; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { margin-bottom: 8px; color: var(--navy); font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -.06em; line-height: .95; }
+.subtitle { margin: 0; color: var(--muted); font-size: 1rem; }
+.team-switcher { display: flex; gap: 9px; flex-wrap: wrap; justify-content: end; padding: 10px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; box-shadow: 0 6px 18px #1920380d; }
+.team-button { border: 1px solid var(--line); border-radius: 999px; padding: 12px 18px; background: #fff; color: var(--ink); cursor: pointer; font: 700 .9rem Arial, sans-serif; }
+.team-button.sales { background: var(--sales); }.team-button.beti { background: var(--beti); }.team-button.integrations { background: var(--integrations); }
+.team-button.selected { border-color: var(--navy); background: var(--navy); color: #fff; }
+/* chrome.js centers the subnav with auto margins when the header resolves a
+   real max-width (it does, globally, via --sr-measure) — auto margins on a
+   flex item's cross axis suppress stretch, so without an explicit width the
+   subnav shrinks to its content and drifts off the header's left edge. */
+body.match-preview-setup > .sr-subnav { width: 100%; }
+.flow-stage { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-width: 0; width: 100%; }
+.flow-shell { display: flex; align-items: center; justify-content: center; width: 100%; margin: 0; padding: 48px clamp(32px, 7vw, 150px); box-sizing: border-box; }
+.flow-scale { display: flex; align-items: center; justify-content: center; flex: 0 1 auto; max-width: 100%; max-height: 100%; overflow: visible; }
+.flow-scale-inner { transform-origin: top left; }
+.flow-scale > .flow-scale-inner > .flow-grid { flex: 0 0 auto; margin: 0; }
+.flow-grid { position: relative; display: grid; grid-template-columns: repeat(4, 360px); justify-content: center; align-content: center; width: max-content; max-width: 100%; margin: auto; column-gap: 60px; align-items: center; }
+.stage-card { position: relative; display: grid; grid-template-rows: auto 1fr auto auto auto; justify-items: center; width: 360px; aspect-ratio: 1; min-height: 244px; padding: 24px; overflow: visible; border: 1px solid var(--line); border-radius: 14px; color: var(--ink); cursor: pointer; text-align: center; transition: transform .16s, box-shadow .16s, border-color .16s; }
+.stage-card:hover { transform: translateY(-3px); border-color: #aeb9cc; box-shadow: 0 10px 24px #18223d14; }
+.sales-card { background: var(--sales); }.beti-card { background: var(--beti); }.integrations-card { background: var(--integrations); }
+.owner { margin: 0; font-size: .86rem; }
+.stage-number { position: absolute; top: 16px; right: 16px; display: grid; place-items: center; width: 40px; height: 40px; margin: 0; border-radius: 50%; background: var(--red); color: #fff; font-size: 1.1rem; font-weight: 700; }
+.stage-card strong { align-self: center; color: var(--navy); font-size: 1.68rem; line-height: 1.08; }
+.summary { align-self: center; color: var(--muted); font-size: 1.14rem; line-height: 1.32; }.detail-hint { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 18px; padding: 11px 20px; border-radius: 999px; background: var(--red); color: #fff; font-size: .96rem; font-weight: 700; box-shadow: 0 5px 12px #f4322b35; }
+.source-icon { align-self: center; display: block; width: 205px; height: 128px; object-fit: contain; }
+.flow-arrow { position: absolute; top: 50%; width: 54px; height: 2px; background: var(--line); transform: translateY(-50%); }
+.flow-arrow::after { content: ""; position: absolute; top: -4px; right: 0; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-top: 2px solid var(--muted); transform: rotate(45deg); }
+.arrow-one { left: calc(50% - 447px); }.arrow-two { left: calc(50% - 27px); }.arrow-three { left: calc(50% + 393px); }
+.flow-shell:not([data-selected="all"]) .flow-arrow { display: none; }
+.flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]), .flow-shell[data-selected="beti"] .stage-card:not([data-owner="beti"]), .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]) { background: #f5f6f9; cursor: default; } .flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]) .detail-hint, .flow-shell[data-selected="beti"] .stage-card:not([data-owner="beti"]) .detail-hint, .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]) .detail-hint { display: none; }
+.flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]) .summary, .flow-shell[data-selected="beti"] .stage-card:not([data-owner="beti"]) .summary, .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]) .summary { text-wrap: pretty; }.flow-shell[data-selected="sales"] .stage-card:not([data-owner="sales"]):hover, .flow-shell[data-selected="beti"] .stage-card:not([data-owner="beti"]):hover, .flow-shell[data-selected="integrations"] .stage-card:not([data-owner="integrations"]):hover { transform: none; border-color: var(--line); box-shadow: none; }
+dialog { width: min(700px, calc(100% - 32px)); max-height: min(760px, calc(100dvh - 48px)); overflow: auto; border: 1px solid var(--line); border-radius: 18px; padding: 36px 48px 40px; color: var(--ink); text-align: center; box-shadow: 0 28px 72px #10182d40; }
+dialog::before { content: ""; display: block; width: 46px; height: 4px; margin: 0 auto 14px; border-radius: 99px; background: var(--red); }
+dialog::backdrop { background: #17203685; }
+dialog .dialog-owner { text-align: center; }
+dialog h2 { max-width: 18ch; margin: 0 auto 18px; color: var(--navy); font-size: 2rem; letter-spacing: -.04em; line-height: 1.08; text-wrap: balance; }
+.dialog-content { display: grid; gap: 14px; max-width: 54ch; margin: 0 auto; }
+.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }
+.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+.dialog-content li { padding-left: 4px; line-height: 1.5; }
+.instruction-section { display: grid; gap: 12px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }
+.instruction-section h3 { margin: 0; padding: 7px 11px; justify-self: center; border-radius: 999px; background: #fff1f0; color: var(--red); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+.instruction-section p { margin: 0; line-height: 1.5; text-wrap: pretty; }
+.instruction-section ul, .instruction-section ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+.instruction-section .or { color: var(--muted); font-weight: 700; }
+.dialog-content.has-branches { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: none; }
+.dialog-content.has-many-branches { grid-template-columns: 1fr; max-width: 56ch; }
+.dialog-close { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--muted); cursor: pointer; font-size: 1.45rem; line-height: 1; }
+footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 62px; margin-top: auto; padding: 12px 32px; background: #172638; color: #fff; } footer strong { display: block; font-size: 1.35rem; letter-spacing: -.06em; } footer small { display: block; font-size: .43rem; letter-spacing: .1em; } footer time { font-size: .9rem; }
+.entry-arrow { display: none; }
+@media (max-width: 1899px) and (min-width: 900px) {
+  .flow-grid { grid-template-columns: repeat(3, 260px); column-gap: 36px; row-gap: 80px; }
+  .stage-card { width: 260px; min-height: 260px; padding: 17px; }
+  .stage-card:nth-of-type(4) { grid-column: 1; grid-row: 2; }
+  .owner { font-size: .75rem; }.stage-number { width: 34px; height: 34px; font-size: .96rem; }.stage-card strong { font-size: 1.4rem; }.summary { font-size: .94rem; }.detail-hint { min-height: 38px; margin-top: 14px; padding: 9px 15px; font-size: .82rem; }
+  .source-icon { width: 150px; height: 90px; }
+  .flow-arrow { top: 130px; }
+  .arrow-one { left: calc(50% - 175px); }.arrow-two { left: calc(50% + 121px); }.arrow-three { left: calc(50% + 444px); }
+  .entry-arrow { display: block; top: 470px; left: calc(50% - 498px); }
+}
+@media (max-width: 899px) { .flow-grid { grid-template-columns: repeat(2, minmax(0, 280px)); gap: 20px; }.stage-card { width: 100%; }.flow-arrow { display: none; } }
+@media (max-width: 760px) { .page-header { align-items: start; flex-direction: column; padding: 30px 20px 22px; }.team-switcher { justify-content: start; }.flow-shell { padding: 32px 20px; } dialog { padding: 34px 24px 30px; }.dialog-content.has-branches { grid-template-columns: 1fr; } }
+/* Keep introductory dialog content readable before branch panels. */
+.dialog-content.has-branches > :is(p, ul, ol, .instruction-intro) {
+  grid-column: 1 / -1;
+  width: min(100%, 54ch);
+  justify-self: center;
+}
+
+/* Visual pass: preserve connected arrows for filtered teams and scale source cards. */
+.page-header { padding: 48px clamp(36px, 7vw, 160px) 32px; }
+.subtitle { line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { gap: 10px; padding: 12px; }
+.team-button { padding: 13px 20px; font-size: .94rem; }
+.flow-shell { padding: 56px clamp(36px, 7vw, 160px); }
+.flow-grid { grid-template-columns: repeat(4, 390px); column-gap: 68px; }
+.stage-card { width: 390px; min-height: 390px; padding: 28px; border-radius: 16px; }
+.stage-number { top: 18px; right: 18px; width: 44px; height: 44px; font-size: 1.18rem; }
+.owner { font-size: .92rem; }
+.stage-card strong { font-size: 1.85rem; }
+.summary { font-size: 1.2rem; line-height: 1.38; }
+.detail-hint { min-height: 48px; margin-top: 20px; padding: 12px 22px; font-size: 1rem; }
+.source-icon { width: 230px; }
+/* chrome.css's shared ".flow-shell img" rule (0,1,1) outranks a bare
+   ".source-icon" class (0,1,0) for `height`, silently forcing it back to
+   auto/intrinsic-ratio. Match scope through body.match-preview-setup instead
+   of !important so this legitimately outranks it. */
+body.match-preview-setup .source-icon { height: 142px; }
+.flow-arrow { width: 62px; height: 3px; }
+.flow-arrow::after { top: -5px; width: 10px; height: 10px; }
+.flow-shell:not([data-selected="all"]) .flow-arrow { display: block; }
+
+@media (max-width: 1899px) and (min-width: 900px) {
+  .flow-grid { grid-template-columns: repeat(3, 300px); column-gap: 48px; row-gap: 92px; }
+  .stage-card { width: 300px; min-height: 300px; padding: 20px; }
+  .stage-number { width: 38px; height: 38px; font-size: 1rem; }
+  .source-icon { width: 175px; }
+  body.match-preview-setup .source-icon { height: 105px; }
+  .stage-card strong { font-size: 1.52rem; }
+  .summary { font-size: 1rem; }
+  .detail-hint { min-height: 42px; font-size: .88rem; }
+  .flow-shell:not([data-selected="all"]) .flow-arrow { display: block; }
+}
+/* Keep all four cards on a single line wherever the row fits; below this the
+   grid drops to the 3 + 1 wrapped layout above. */
+@media (min-width: 1400px) and (max-width: 1899px) {
+  .flow-grid { grid-template-columns: repeat(4, 300px); }
+  .stage-card:nth-of-type(4) { grid-column: auto; grid-row: auto; }
+  .flow-arrow { top: 219px; }
+  .arrow-one { left: calc(50% - 375px); }.arrow-two { left: calc(50% - 7px); }.arrow-three { left: calc(50% + 361px); }
+  .entry-arrow { display: none; }
+}
+@media (max-width: 899px) {
+  .subtitle { text-wrap: wrap; }
+  .team-button { padding: 10px 14px; font-size: .8rem; }
+}
+
+/* Instruction dialogs: tighter labels, centered copy, balanced line breaks. */
+body.match-preview-setup dialog .dialog-content {
+  gap: 16px;
+}
+
+body.match-preview-setup dialog .dialog-content:is(.has-flow, .has-section) {
+  width: 100%;
+  max-width: none;
+  gap: 14px;
+}
+
+body.match-preview-setup .instruction-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+}
+
+body.match-preview-setup .has-flow .instruction-panel,
+body.match-preview-setup .has-section .instruction-panel,
+body.match-preview-setup .has-section .instruction-section {
+  text-align: left;
+}
+
+body.match-preview-setup .instruction-panel-body,
+body.match-preview-setup .instruction-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+body.match-preview-setup .has-flow .instruction-panel-body,
+body.match-preview-setup .has-section .instruction-panel-body,
+body.match-preview-setup .has-section .instruction-section-body {
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+}
+
+body.match-preview-setup .has-branches .instruction-section-body {
+  justify-content: center;
+}
+
+body.match-preview-setup .has-branches .instruction-section-body > p {
+  margin: 0;
+  text-align: center;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.match-preview-setup .has-flow .instruction-panel-body > p,
+body.match-preview-setup .has-section .instruction-panel-body > p,
+body.match-preview-setup .has-section .instruction-section-body > p {
+  margin: 0;
+  text-align: left;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.match-preview-setup .instruction-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 1.25rem;
+  text-align: left;
+  list-style: disc;
+}
+
+body.match-preview-setup .instruction-steps li {
+  line-height: 1.5;
+  padding-left: 0.2rem;
+}
+
+body.match-preview-setup .instruction-label {
+  margin: 0;
+  text-align: left;
+  line-height: 1.4;
+}
+
+body.match-preview-setup .instruction-group {
+  display: grid;
+  gap: 8px;
+}
+
+body.match-preview-setup .instruction-panel-body > :is(ul, ol),
+body.match-preview-setup .instruction-section-body > :is(ul, ol) {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 1.25rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body.match-preview-setup .instruction-panel--compact,
+body.match-preview-setup .has-flow .instruction-panel {
+  min-height: 0;
+}
+
+body.match-preview-setup .instruction-panel--compact .instruction-panel-body {
+  justify-content: flex-start;
+}
+
+body.match-preview-setup .instruction-intro.instruction-panel {
+  width: 100%;
+  max-width: none;
+  gap: 0;
+}
+
+body.match-preview-setup .has-section > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+body.match-preview-setup .has-section > .instruction-section > h3 {
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+body.match-preview-setup .instruction-intro:not(.instruction-panel) {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 52ch);
+  margin-inline: auto;
+  text-align: center;
+}
+
+body.match-preview-setup .dialog-content.has-branches > .instruction-intro {
+  grid-column: 1 / -1;
+}
+
+body.match-preview-setup .instruction-intro p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+body.match-preview-setup dialog .dialog-content.has-branches {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: none;
+  align-items: stretch;
+}
+
+body.match-preview-setup .dialog-content.has-branches > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+body.match-preview-setup .dialog-content.has-branches > .instruction-section > h3 {
+  align-self: center;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
+  margin-bottom: 10px;
+}
+
+body.match-preview-setup .dialog-content.has-branches .instruction-section-body {
+  flex: 1;
+  min-height: 0;
+}
+
+body.match-preview-setup .dialog-content.has-branches .instruction-section-body p {
+  line-height: 1.5;
+}
+
+body.match-preview-setup .instruction-section {
+  gap: 10px;
+  padding: 16px 14px 14px;
+  justify-items: center;
+  text-align: center;
+}
+
+body.match-preview-setup .instruction-section h3 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 4px 11px;
+  line-height: 1.2;
+  font-weight: 700;
+  font-size: .72rem;
+  letter-spacing: .02em;
+  border-radius: 999px;
+  width: auto;
+  max-width: max-content;
+  white-space: nowrap;
+  text-transform: none;
+  background: #fff1f0;
+  color: var(--red);
+}
+
+body.match-preview-setup .instruction-section p {
+  width: 100%;
+  margin: 0;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+body.match-preview-setup .has-branches .instruction-section p {
+  text-align: center;
+}
+
+body.match-preview-setup .has-section .instruction-section p {
+  text-align: left;
+}
+
+body.match-preview-setup .instruction-section p.or {
+  max-width: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+body.match-preview-setup .instruction-section ul,
+body.match-preview-setup .instruction-section ol {
+  justify-self: center;
+  width: 100%;
+  padding-left: 1.25rem;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  body.match-preview-setup dialog .dialog-content.has-branches {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-grid { --cols: 4; --col-gap: 68px; }
