@@ -1,0 +1,166 @@
+:root {
+  --navy: #202560;
+  --ink: #172036;
+  --muted: #63708a;
+  --line: #d9dfeb;
+  --red: #ed362d;
+  --sportradar: #f5f6fa;
+  --client: #d6e6f7;
+  --footer: #102e45;
+}
+
+* { box-sizing: border-box; }
+body { display: flex; flex-direction: column; min-height: 100dvh; margin: 0; color: var(--ink); background: #fff; font-family: Arial, Helvetica, sans-serif; }
+button { font: inherit; }
+.page-header { display: flex; align-items: end; justify-content: space-between; gap: 30px; align-self: stretch; width: 100%; max-width: none; margin-inline: 0; padding: 38px clamp(28px, 5vw, 88px) 24px; border-bottom: 1px solid var(--line); }
+/* chrome.js centers the subnav with auto margins when the header resolves a
+   real max-width (it does, globally, via --sr-measure) — auto margins on a
+   flex item's cross axis suppress stretch, so without an explicit width the
+   subnav shrinks to its content and drifts off the header's left edge. */
+body.statshub-integration > .sr-subnav { width: 100%; }
+.eyebrow, .owner, .dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+h1, h2, p { margin-top: 0; }
+h1 { margin-bottom: 7px; color: var(--navy); font-size: clamp(2.35rem, 4vw, 3.75rem); letter-spacing: -.06em; line-height: .95; }
+.subtitle { max-width: 42ch; margin: 0; color: var(--muted); font-size: 1rem; }
+.team-switcher { display: flex; align-items: center; justify-content: end; gap: 8px; flex-wrap: wrap; padding: 9px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; box-shadow: 0 6px 18px #1920380d; }
+.switcher-label { color: var(--ink); font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.team-button { border: 1px solid var(--line); border-radius: 999px; padding: 10px 15px; background: #fff; color: var(--ink); cursor: pointer; font-size: .84rem; font-weight: 700; }
+.team-button.sportradar { background: var(--sportradar); }.team-button.client { background: var(--client); }
+.team-button.selected { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+.flow-shell { display: grid; flex: 1; align-content: center; width: 100%; padding: 42px clamp(28px, 5vw, 88px); }
+.flow-lane { position: relative; display: grid; grid-template-columns: repeat(4, 280px); gap: 70px; align-items: stretch; justify-content: center; width: max-content; max-width: 100%; margin: auto; }
+/* Rows map 1:1 to the card's in-flow children (owner, source-icon, strong,
+   duration, summary, detail-hint) — summary is the only flexible one, so it
+   absorbs variable text length instead of the row template guessing a fixed
+   size for a specific child. */
+.stage-card { position: relative; display: grid; grid-template-rows: auto auto auto auto 1fr auto; justify-items: center; min-height: 360px; padding: 16px 20px 19px; overflow: visible; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); cursor: pointer; text-align: center; transition: transform .16s, box-shadow .16s, border-color .16s; }
+.stage-card:hover { transform: translateY(-3px); border-color: #aeb9cc; box-shadow: 0 10px 24px #18223d14; }.sportradar-card { background: var(--sportradar); }.client-card { background: var(--client); }
+.duration { margin: 12px 0; padding: 5px 9px; border-radius: 4px; background: var(--navy); color: #fff; font-size: .76rem; font-weight: 700; }
+.stage-number { position: absolute; top: 15px; left: 15px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--red); color: #fff; font-size: .95rem; font-weight: 700; }
+.owner { align-self: start; margin: 4px 0 0; font-size: .74rem; }.source-icon { align-self: center; display: block; width: 170px; margin: 8px 0 1px; object-fit: contain; }
+/* chrome.css's shared ".flow-shell img" rule (0,1,1) outranks a bare
+   ".source-icon" class (0,1,0) for `height`, silently forcing it back to
+   auto/intrinsic-ratio. Match scope through body.statshub-integration
+   instead of !important so this legitimately outranks it. */
+body.statshub-integration .source-icon { height: 116px; }
+.stage-card strong { align-self: center; color: var(--navy); font-size: 1.23rem; line-height: 1.1; }.summary { align-self: center; color: var(--muted); font-size: .89rem; line-height: 1.3; }
+.detail-hint { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; margin-top: 12px; padding: 8px 13px; border-radius: 999px; background: var(--red); color: #fff; font-size: .74rem; font-weight: 700; }
+.flow-arrow { position: absolute; top: 50%; width: 52px; height: 2px; background: var(--line); transform: translateY(-50%); }.flow-arrow::after { content: ""; position: absolute; top: -4px; right: 0; width: 8px; height: 8px; border-top: 2px solid var(--muted); border-right: 2px solid var(--muted); transform: rotate(45deg); }
+.arrow-one { left: calc(25% - 35px); }.arrow-two { left: calc(50% - 26px); }.arrow-three { left: calc(75% - 17px); }
+.flow-shell:not([data-selected="all"]) .flow-arrow { display: none; }
+/* .flow-lane sets align-items:stretch, which would otherwise stretch this
+   collapsed card to match its full-size row-mate — align-self:start opts it
+   out so min-height is the actual rendered height, not just a floor — center
+   rather than start so it sits in the middle of the row's height instead of
+   pinned to the top. */
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"],
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] { background: #f5f6f9; cursor: default; }
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .duration,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .duration,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .stage-number,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .stage-number,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .source-icon,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .source-icon,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] strong,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] strong,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .detail-hint,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .detail-hint { display: none; }
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .owner,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .owner { color: var(--muted); }
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .summary,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .summary { color: var(--ink); }
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"]:hover,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"]:hover { transform: none; border-color: var(--line); box-shadow: none; }
+
+dialog { width: min(640px, calc(100% - 32px)); max-height: min(700px, calc(100dvh - 48px)); overflow: auto; border: 1px solid var(--line); border-radius: 18px; padding: 36px 48px 40px; color: var(--ink); text-align: center; box-shadow: 0 28px 72px #10182d40; }
+dialog::before { content: ""; display: block; width: 46px; height: 4px; margin: 0 auto 14px; border-radius: 99px; background: var(--red); }
+dialog::backdrop { background: #17203685; }
+dialog .dialog-owner { text-align: center; }
+dialog h2 { max-width: 20ch; margin: 0 auto 18px; color: var(--navy); font-size: 2rem; letter-spacing: -.04em; line-height: 1.08; text-wrap: balance; }
+.dialog-content { display: grid; gap: 14px; margin: 0 auto; }
+.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }
+.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+.dialog-content li { padding-left: 4px; line-height: 1.5; }
+dialog a { color: var(--navy); font-weight: 700; }
+.dialog-close { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--muted); cursor: pointer; font-size: 1.45rem; line-height: 1; }
+
+footer { display: flex; align-items: center; justify-content: space-between; min-height: 68px; padding: 9px clamp(28px, 5vw, 88px); background: var(--footer); color: #fff; } footer img { display: block; width: 195px; height: 45px; object-fit: contain; object-position: left center; } footer time { font-size: .78rem; }
+
+@media (max-width: 1500px) {
+  .flow-lane { grid-template-columns: repeat(2, 290px); gap: 28px; width: auto; }.flow-arrow { display: none; }
+}
+@media (max-width: 860px) {
+  .page-header { align-items: start; flex-direction: column; }.team-switcher { justify-content: start; }.flow-lane { grid-template-columns: 1fr; width: min(100%, 340px); }.stage-card { width: 100%; }
+}
+@media (max-width: 600px) {
+  .page-header, .flow-shell { padding-right: 20px; padding-left: 20px; } dialog { padding: 34px 24px 30px; } footer { padding-right: 20px; padding-left: 20px; } footer img { width: 170px; }
+}
+
+/* Visual pass: larger source icons, stronger hierarchy, and wrapped-flow arrows. */
+.page-header { padding: 48px clamp(36px, 5vw, 100px) 32px; }
+.subtitle { max-width: none; line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { gap: 10px; padding: 12px; }
+.switcher-label { font-size: .8rem; }
+.team-button { padding: 13px 20px; font-size: .94rem; }
+.flow-shell { padding: 52px clamp(36px, 5vw, 100px); }
+/* Scoped below — unconditional, it would win the cascade over the ≤1500px
+   (2-col) and ≤860px (1-col) blocks above (same specificity, later in
+   source) and silently break the responsive column collapse, pushing cards
+   off-screen at narrow widths. */
+@media (min-width: 1501px) {
+  .flow-lane { grid-template-columns: repeat(4, 320px); gap: 88px; }
+}
+.stage-card { grid-template-rows: auto auto auto auto minmax(0, 1fr) auto; min-height: 430px; padding: 22px 24px 24px; border-radius: 15px; }
+.duration { margin: 16px 0; padding: 7px 11px; font-size: .88rem; }
+.stage-number { top: 18px; left: 18px; width: 42px; height: 42px; font-size: 1.12rem; }
+.owner { margin-top: 8px; font-size: .86rem; }
+.source-icon { width: min(100%, 200px); margin: 10px 0 5px; object-fit: contain; object-position: center; }
+body.statshub-integration .source-icon { height: 132px; }
+.stage-card strong { font-size: 1.42rem; }
+.summary { font-size: 1.02rem; line-height: 1.38; }
+.detail-hint { min-height: 42px; margin-top: 16px; padding: 10px 16px; font-size: .88rem; }
+.flow-arrow { width: 68px; height: 4px; background: var(--muted); }
+.flow-arrow::after { top: -7px; width: 14px; height: 14px; border-width: 3px; }
+.flow-shell:not([data-selected="all"]) .flow-arrow { display: block; }
+
+@media (max-width: 1500px) and (min-width: 861px) {
+  .subtitle { text-wrap: wrap; }
+  .flow-lane { grid-template-columns: repeat(2, 320px); gap: 76px 92px; }
+  .stage-card::after, .stage-card:nth-of-type(3)::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 68px;
+    height: 18px;
+    background: var(--muted);
+    clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%);
+    transform: translateY(-50%);
+  }
+  .stage-card::after { right: -80px; }
+  .stage-card:nth-of-type(2)::after, .stage-card:nth-of-type(4)::after { display: none; }
+  .stage-card:nth-of-type(3)::before { left: -80px; }
+  .flow-shell:not([data-selected="all"]) .stage-card::after,
+  .flow-shell:not([data-selected="all"]) .stage-card::before { display: none; }
+}
+
+@media (max-width: 860px) {
+  .subtitle { text-wrap: wrap; }
+  .team-button { padding: 10px 14px; font-size: .82rem; }
+}
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-lane { --cols: 4; --col-gap: 88px; }

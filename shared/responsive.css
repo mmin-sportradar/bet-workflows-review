@@ -1,0 +1,737 @@
+/* One fluid layout contract for all 27 pages.
+
+   This file MUST be the last stylesheet on every page, after the flow's own
+   styles.css. That is the whole point of it: the rules below are written at
+   ordinary class specificity and win by document order alone, so none of them
+   needs !important and chrome.css keeps its zero-!important discipline.
+
+   It replaces the "responsive diagrams" section that used to sit in chrome.css.
+   That block never did anything: its comment claimed chrome.css loaded after
+   each flow's stylesheet, but 26 of 27 pages load chrome.css FIRST, so every
+   `.flow-grid` rule in it lost on source order to the flow's own `.flow-grid`.
+   It was also gated to `@media (max-width: 1439px)`, which left no fluid
+   fallback at all on the wide screens where the fixed-pixel flows overflow.
+
+   The approach here is to have no breakpoints. Column counts come from
+   `auto-fit`, so they follow the available width continuously rather than
+   stepping at ~60 hand-picked pixel values that did not tile. */
+
+:root {
+  /* One gutter for the whole site, replacing seven different per-flow clamps
+     (7vw/150px, 5vw/96px, 4vw/88px …). The 16px floor is what makes 320px work;
+     several flows floored at 32-38px, which left too little for a card. */
+  --sr-gutter: clamp(16px, 4vw, 96px);
+
+  /* Diagrams stop growing here. The flows capped themselves at 1900/1920/2040px;
+     one value keeps 1920 monitors looking as they do today and stops 4K from
+     stretching a four-card row across 3840px. */
+  --sr-diagram-max: 1920px;
+}
+
+/* ---------- page frame ---------- */
+
+.page-header,
+.flow-shell,
+.catalog-shell {
+  padding-inline: var(--sr-gutter);
+}
+
+/* ---------- the page fills the screen ---------- */
+
+/* The footer floated in the middle of the window on any flow whose content is
+   shorter than the viewport -- lmt-virtualised and bet-3-in-1 at 1920 and up,
+   where five cards in one row leave half the screen empty below them. chrome.css
+   gives .sr-footer `margin-top: auto`, which is the right instruction and had
+   nothing to act on: `auto` only pushes inside a flex or grid parent, and only
+   nine of the flows make their body a flex column. The other twenty-three left
+   the footer sitting immediately under the last card with the page background
+   filling the rest of the window, which reads as the page having ended twice.
+
+   Stated once here for every flow. min-height, not height: a long flow still
+   grows past the viewport. 100dvh rather than the 100dvh-minus-header chrome.css
+   used, because every flow also sets `box-sizing: border-box`, so the body's own
+   3.5rem of top padding for the fixed topbar is already inside the min-height --
+   subtracting the header as well left every page exactly one header short of the
+   window, which is the same footer sitting 56px above the fold. */
+body:has(.page-header) {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+/* The footer's text sat 32px from the window edge while the title above it
+   started at the gutter -- 96px at 1920 -- so the row read as belonging to a
+   wider page than the one it closes. The border stays edge to edge, because it
+   is the line under the page rather than a line under the content; only the text
+   moves in to meet the columns above it.
+
+   The max() is what keeps that true past --sr-diagram-max: the header and the
+   diagram stop growing at 1920 and centre themselves, so beyond that the gutter
+   alone would drift left of them. Below 1920 the second term is negative and the
+   gutter wins. */
+.sr-footer {
+  padding-inline: max(
+    var(--sr-gutter),
+    calc((100% - var(--sr-diagram-max)) / 2 + var(--sr-gutter))
+  );
+}
+
+/* The breadcrumb row lines up with the header statically. chrome.js's
+   alignSubnav() exists because each flow padded its header differently, so the
+   row had to be measured and matched at runtime -- but every header now resolves
+   to the one shared gutter and measure above, so the answer is known at author
+   time. Stating it here means the pre-rendered row is already in the right place
+   at first paint instead of being nudged into it afterwards, which is the last
+   of the layout shift on these pages. (betting-widgets-setup deliberately
+   overrides this from its own app.js, where the row shares a grid cell.) */
+.sr-subnav {
+  /* width, with the auto margins below, is what keeps this full-bleed-then-capped
+     rather than shrink-wrapped: the body is a flex column (see "the page fills
+     the screen"), and a flex item whose cross-axis margins are auto is sized to
+     its content instead of stretching -- so the row collapsed to the width of the
+     back button and centred itself. lmt-setup already carried a `> .sr-subnav {
+     width: 100% }` of its own, from being the one flow whose body was a flex
+     column before this file made them all one. */
+  width: 100%;
+  max-width: var(--sr-diagram-max);
+  margin-inline: auto;
+  padding-inline: var(--sr-gutter);
+}
+
+/* The header and the diagram below it should share one measure, or the title
+   sits on a different left edge from the first card. chrome.css caps the header
+   at --sr-measure (1600px) while the flows capped their shells at 1900-2040px.
+   alignSubnav() copies whatever the header resolves to onto the breadcrumb, so
+   setting it here keeps all three columns aligned. */
+/* Same as .sr-subnav below: five flows centre the header with `margin: 0 auto`,
+   which in a flex column means "size me to my contents" -- the title block and
+   the switcher huddled in the middle of the window. */
+.page-header { width: 100%; max-width: var(--sr-diagram-max); }
+
+/* Replaces the old `@media (max-width: 1023px) { .page-header { flex-direction:
+   column } }`. Wrapping does the same job at whatever width the two halves stop
+   fitting, which differs per flow because their titles differ. */
+.page-header {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.flow-shell,
+.catalog-shell {
+  width: 100%;
+  max-width: var(--sr-diagram-max);
+  margin-inline: auto;
+  /* Drops seven stale `min-height: calc(100vh - 214…248px)` rules. They
+     hardcoded a chrome height from before chrome.js injected the top bar (56px)
+     and subnav (~90px), and used 100vh rather than 100dvh, so they overshot the
+     viewport on mobile. The flow bodies are flex columns whose footer is already
+     pinned with `margin-top: auto`, so content height is enough. */
+  min-height: 0;
+  /* Half the flows draw connectors as ::after pseudo-elements hung off a card
+     with offsets like `right: -60px`. Those cannot be repositioned from script,
+     so clip the x axis to contain them. `clip`, not `hidden`: it keeps the
+     badge overhang and the dialogs intact on the y axis and creates no scroll
+     box of its own. */
+  overflow-x: clip;
+  /* Leftover height collects at the bottom of the page, where the footer
+     absorbs it, instead of being dealt back into the card rows. */
+  align-content: start;
+}
+
+/* One full-width column, whatever the flow declared. Several flows make the
+   shell a centring flex row, which turns the diagram into a flex item sized from
+   its content — and the 8 flows with .flow-scale wrappers additionally pin that
+   item with `flex: 0 0 auto`, i.e. never shrink. A single-column grid gives the
+   diagram the shell's content width to resolve its 1fr tracks against instead.
+   Flows that re-narrow the shell for a specific filter do it with
+   attribute-scoped rules at (0,2,0), which still outrank this. */
+.flow-shell,
+.catalog-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* The 8 pages carrying .flow-scale wrappers are carrying dead weight: only
+   betting-widgets-setup-flow/app.js has any JS for them, and its fitFlowGrid()
+   merely clears zoom/transform/width/height.
+   NOT `display: contents` — that promotes .flow-grid to a flex item of the
+   shell, where the flows' own `.flow-scale > .flow-scale-inner > .flow-grid
+   { flex: 0 0 auto }` then forbids it from shrinking and the diagram overflows
+   (invisibly, because the shell clips). Plain full-width blocks pass the
+   available width straight through instead. */
+.flow-scale,
+.flow-scale-inner {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  transform: none;
+}
+
+/* ---------- the fluid grid ---------- */
+
+/* Every genuine card grid, at every width, with no media query.
+   - `auto-fit` reflows continuously; empty tracks collapse and hand their space
+     to the remaining 1fr tracks, so N cards always fill the row.
+   - `min(…, 100%)` is what makes 320px work. A bare minmax(260px, 1fr) still
+     overflows once the track floor exceeds the content box.
+   - `width: auto` kills the `width: max-content` in 13 flows, which defeated the
+     `max-width: 100%` sitting right beside it.
+   - `display: grid` is load-bearing, not tidiness: betting-widgets-integration
+     switches .flow-lane to `display: flex` at a breakpoint, where
+     grid-template-columns would be ignored — and a flex item with `width: auto`
+     plus the `container-type: inline-size` below collapses to zero width,
+     because inline-size containment makes the used size ignore the contents.
+   - --card-min is the per-flow hook. Prefer setting it over reintroducing a
+     media query. */
+.flow-grid,
+.flow-lane,
+.sportradar-lane,
+.client-lane,
+.stage-grid,
+.widgets-grid,
+.support-grid,
+.optional-grid,
+.task-list,
+.top-phases,
+.integration-groups {
+  display: grid;
+  /* Capped auto-fit. The track floor is the LARGER of
+       --card-min                                  (stops columns getting too narrow)
+       (100% - (cols-1) * gap) / cols              (stops there being too many)
+     so the grid never exceeds --cols columns however wide the screen gets, but
+     still drops to fewer as it narrows, and never below --card-min.
+     The cap matters because these are process diagrams: a four-step flow
+     re-flowed to six across at 1920px reads in the wrong order.
+     The gap term prefers --flow-gap, which 14 flows already declare on these
+     very elements as the single source of their own gap, so the arithmetic stays
+     exact (and keeps working if that clamp is retuned) rather than duplicating a
+     literal. Flows without it get a measured --col-gap in their own styles.css.
+     Guessing the gap too LOW is the dangerous direction: the tracks come out too
+     wide and the grid silently drops to cols-1.
+     --cols is set per flow; the defaults here leave the cap effectively off.
+     min(…, 100%) is what keeps 320px working. */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(
+        max(
+          var(--card-min, 260px),
+          calc((100% - (var(--cols, 12) - 1) * var(--flow-gap, var(--col-gap, 0px))) / var(--cols, 12))
+        ),
+        100%
+      ),
+      1fr
+    )
+  );
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  justify-content: stretch;
+  /* 13 flows centre a max-content grid with `margin: auto`. An auto inline
+     margin on a grid or flex item suppresses stretch -- the item is sized to
+     fit-content and centred instead of filling its area -- which left the lane
+     464px wide inside a 1766px column and forced it to one column. Now that the
+     grid fills the available width there is nothing left to centre.
+     (chrome.js hits the same trap with the subnav; see its comment there.) */
+  margin-inline: 0;
+  /* Rows size to their content rather than splitting the shell's leftover
+     height between them, which is what ballooned a three-line card to ~900px
+     the moment a team filter collapsed the grid to one row. */
+  align-content: start;
+}
+
+/* A grid holding a single card is not a row of anything: auto-fit would collapse
+   the empty tracks and stretch that one card across the full 1920px. Also covers
+   the team-filtered views, where one survivor is common. */
+:is(.flow-grid, .flow-lane, .support-grid, .optional-grid, .task-list, .stage-grid):has(> [data-dialog]:only-child) {
+  grid-template-columns: minmax(0, min(860px, 100%));
+  justify-content: center;
+}
+
+/* A lone reference note is not a card that would balloon -- it is a footnote for
+   the diagram above it, so it takes the full width and shares the diagram's left
+   and right edges. Capping it like a single step card left it floating at 860px
+   in the middle of a 1766px row, which read as unaligned rather than deliberate.
+   Notes that come in pairs (lco-lcp lists two) already sit in their own columns
+   and are untouched. */
+:is(.support-grid, .optional-grid, .flow-grid):has(> .reference-card:only-child) {
+  grid-template-columns: minmax(0, 1fr);
+  justify-content: stretch;
+}
+
+/* Grid and flex children default to min-width:auto, which refuses to shrink
+   below their content and is the other half of every overflow in this codebase. */
+.flow-grid > *,
+.flow-lane > *,
+.sportradar-lane > *,
+.client-lane > *,
+.stage-grid > *,
+.widgets-grid > *,
+.support-grid > *,
+.optional-grid > *,
+.task-list > *,
+.top-phases > *,
+.integration-groups > *,
+.widgets-catalog,
+.optional-shell { min-width: 0; max-width: 100%; }
+
+/* widgets-licensing is a two-pane content + sidebar layout, not a card grid, so
+   it is deliberately not in the rule above. A wrapping flex row collapses it
+   without a breakpoint: each pane asks for its ideal basis but is allowed to
+   take a full line when that basis no longer fits. */
+.licensing-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+}
+
+.licensing-layout > * { flex: 1 1 min(100%, 260px); min-width: 0; }
+.licensing-layout > .widgets-catalog { flex: 3 1 min(100%, 480px); }
+
+/* ---------- cards ---------- */
+
+/* max-width:100% alone never helped: a fixed `width: 360px` simply ignores it.
+   `width: auto` is the declaration that actually frees the card. */
+[data-dialog],
+.stage-card,
+.task-card,
+.widget-card,
+.reference-card,
+.optional-card,
+.interactive-card,
+.additional-card,
+.sales-rule {
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Ten flows take the summary out of flow and centre it on the card --
+   `position: absolute; top: 50%; transform: translate(-50%, -50%)` -- which holds
+   only while the title above it stays on one line. It no longer does: the type
+   scale below sizes a card's title against the card (9cqi), so a title that used
+   to fit one line now wraps at the widths where the cards are widest, and the
+   centred summary was drawn straight through its second line. Both "Set up the
+   Salesforce opportunity" and "Coordinate Advanced AV setup" on the golf setup
+   flow read as two paragraphs printed on top of each other.
+
+   Put back in flow, where a card is already a column that can never overlap
+   itself. `margin-block: 1rem auto` keeps what the absolute positioning was for:
+   auto below takes the leftover height, so the summary still sits between the
+   title and the button rather than clamped under the title -- and the flows that
+   never left flow keep the spacing they had, since their own top margin was the
+   16px this restates. */
+:is(.stage-card, .task-card, .reference-card, .optional-card, .additional-card, .interactive-card) > .summary {
+  position: static;
+  transform: none;
+  margin-block: 1rem auto;
+}
+
+/* Cards size to their content and start at the top of their row; chrome.js's
+   polishCards() then gives every card in a row a matching min-height so they
+   stay even. Without this the row is as tall as the shell and a filtered view
+   balloons a three-line card to ~900px. */
+.flow-grid > [data-dialog],
+.flow-lane > [data-dialog],
+.task-list > [data-dialog] { align-self: start; }
+
+/* Type against the card, not the viewport. This is the pattern the landing page
+   already proves out on .tile (container-type + cqw), applied to the cards so a
+   narrow column shrinks its own text instead of overflowing.
+
+   The :not() is load-bearing. data-dialog marks anything that opens a dialog,
+   which includes a small action BUTTON as well as the cards -- and
+   inline-size containment makes an element's own width ignore its contents.
+   Those buttons sit in cards that use `justify-items: center`, so they are not
+   stretched and fall back to fit-content: with containment on, fit-content
+   resolved to nothing and the button collapsed to just its 14px padding (28px
+   wide) while its label spilled 48px outside the red pill.
+   Cards are unaffected because their width comes from the grid track, not their
+   contents, so only the buttons need excluding. */
+[data-dialog]:not(.reference-action, .stage-action) { container-type: inline-size; }
+
+[data-dialog]:not(.stage-action) > strong        { font-size: clamp(1rem, 9cqi, 1.85rem); }
+[data-dialog]:not(.stage-action) > .summary      { font-size: clamp(.85rem, 6cqi, 1.2rem); }
+[data-dialog]:not(.stage-action) > .owner        { font-size: clamp(.62rem, 3.6cqi, .92rem); }
+/* :not(.is-dependency) is load-bearing. A card belonging to another team blanks
+   its button label with `font-size: 0` and puts the word "dependency" in an
+   ::after -- and the flow's rule for that is (0,3,0), exactly the same weight as
+   this one, so this file's later position won the tie and the label came back.
+   The button then read "View instructionsdependency". */
+[data-dialog]:not(.stage-action, .is-dependency) > .detail-hint { font-size: clamp(.72rem, 4cqi, 1rem); }
+
+[data-dialog]:not(.stage-action) > :is(.stage-number, .task-number) {
+  width: clamp(28px, 11cqi, 44px);
+  height: clamp(28px, 11cqi, 44px);
+  font-size: clamp(.8rem, 4.5cqi, 1.18rem);
+}
+
+/* Several flows scope their icon height as `body.<flow> .source-icon` (0-2-1)
+   specifically to outrank chrome.css's `.flow-shell img` guard. Match that
+   weight without !important: `body[class]` is (0-1-1) and :is(…) contributes
+   (0-1-0), so this is also (0-2-1) and wins on source order. */
+body[class] :is(.source-icon, .stage-icon, .task-icon) {
+  width: 100%;
+  max-width: clamp(90px, 55cqi, var(--icon-max, 230px));
+  height: auto;
+  max-height: clamp(56px, 34cqi, var(--icon-h, 142px));
+  object-fit: contain;
+}
+
+/* Icons taken from the shared library get a box of a settled height rather than
+   one that follows the artwork. With `height: auto` a 390x90 picture occupies
+   36px of the card and a 382x276 one occupies 142px, so on a page whose tiles
+   were not hand-tuned the titles under them start 120px apart and the cards
+   themselves come out different heights. A definite height with `contain`
+   letterboxes each picture instead: every tile keeps the same rhythm whatever
+   shape its icon is, which is the whole point of choosing from a set.
+
+   Deliberately scoped to the library path. The nine flows drawn with their own
+   icons already pin their titles with auto margins, and resizing pictures on
+   pages nobody asked to change is not part of offering a picker. */
+body[class] img.source-icon[src*="/shared/icons/"] {
+  /* The box follows the width of the card rather than being a flat height:
+     container query units are no use here, because the cards that most need
+     this are .stage-action, which the rule above deliberately excludes from
+     being containers -- a fixed height then left the artwork floating in dead
+     space on the narrow ones. An aspect ratio needs no container. */
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: none;
+  /* The gap to the title, held here so it does not depend on whether the
+     flow's own stylesheet happens to space its cards. */
+  margin: 2px auto 12px;
+}
+
+.flow-shell img,
+.catalog-shell img { max-width: 100%; height: auto; }
+
+/* ---------- connectors ---------- */
+
+/* Whether a connector makes sense is a question about geometry, not viewport
+   width — the old blanket hide at max-width:1023px was wrong in both
+   directions. chrome.js writes data-rows on each grid from the row map it
+   already builds, so one selector covers both the real .flow-arrow elements and
+   the 14 flows whose connectors are ::after/::before pseudo-elements that
+   script cannot reach. */
+[data-rows]:not([data-rows="1"]) .flow-arrow { display: none; }
+
+[data-rows]:not([data-rows="1"]) > [data-dialog]::after,
+[data-rows]:not([data-rows="1"]) > [data-dialog]::before,
+[data-rows]:not([data-rows="1"]) > .phase::after,
+[data-rows]:not([data-rows="1"]) > .integration-group::after { content: none; }
+
+/* ---------- remaining overflow sources ---------- */
+
+/* All 26 flows set `text-wrap: nowrap` here in their "visual pass" block, and
+   only some re-wrap it in a media query — several of those bands leave it
+   nowrap on phones, where it is a guaranteed overflow. */
+.subtitle { text-wrap: balance; }
+
+h1, h2, h3,
+[data-dialog] > strong,
+.summary { overflow-wrap: break-word; }
+
+.team-switcher,
+.scenario-switcher { max-width: 100%; }
+
+/* The header's two halves are flex items, so they keep min-width:auto and
+   refuse to shrink below their min-content — which on the longer product titles
+   is ~450px, i.e. wider than a phone. They must be allowed to shrink before
+   flex-wrap above can help them. .header-actions is a grid in three flows and
+   needs the same release. */
+.page-header > *,
+.header-actions,
+.header-actions > *,
+.team-switcher > *,
+.scenario-switcher > * { min-width: 0; max-width: 100%; }
+
+/* Three flows wrap the switcher in `.header-actions { display: grid;
+   justify-items: end }`. With no explicit track that column is `auto`, so it is
+   sized to the switcher's max-content — the whole unwrapped pill row — and
+   escapes the container instead of forcing the pills to wrap. A minmax(0, 1fr)
+   track is definite against the container, so the pills wrap as intended. The
+   switchers keep their own `justify-content: end`, so pills stay right-aligned. */
+.header-actions {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Long unbroken strings in the step dialogs (URLs, IDs) at 320px. */
+dialog :is(p, li, td) { overflow-wrap: break-word; }
+
+/* Deliberately NOT setting overflow-x: hidden on html/body. It would mask the
+   very failures the width-ladder check is there to catch. */
+
+/* ---------- one header layout ---------- */
+
+/* The flows lay their header out three different ways: most put the controls
+   beside the title, bet-concierge and virtual-stadium stack them underneath in
+   a column, and additional-domains uses a one-column grid. The team switcher
+   therefore landed anywhere between 42px and 338px below the header's top, and
+   58px or 72px in from its right edge depending on which gutter that flow set
+   with !important of its own. It is the same control doing the same job on
+   every page, so it belongs in the same place on every page.
+
+   A two-column grid rather than a flex row: the three flows that also have a
+   scenario switcher need somewhere to put it that is not underneath the team
+   switcher, because that is where the coach bubble points -- stacking them put
+   the bubble straight over the scenario pills. The title and the scenario
+   switcher share the left column, the team switcher owns the top right.
+
+   !important throughout because several flows set these very properties with
+   !important -- source order alone is not enough against those. */
+.page-header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: start !important;
+  gap: .875rem 1.5rem !important;
+  padding-top: 2.25rem !important;
+  padding-bottom: 1.5rem !important;
+  padding-inline: var(--sr-gutter) !important;
+}
+
+/* The title block. */
+.page-header > :first-child { grid-area: 1 / 1; min-width: 0; }
+
+/* The wrappers exist only to group the controls in the markup; letting their
+   children join the header's own grid is what allows the two to be placed
+   independently. Nine flows absolutely position the switcher (and two the
+   wrapper) against the header -- `position: absolute; top: 50%; right:
+   clamp(32px, 5vw, 96px)` -- which is why it sat at its own height and its own
+   distance from the edge on those pages, and why no layout above it moved
+   anything. Both are put back in flow. */
+.page-header .header-controls,
+.page-header .header-actions {
+  display: contents !important;
+}
+
+
+.page-header .team-switcher,
+.page-header .scenario-switcher {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  /* Sized by their pills. additional-domains stretches both to `width: 100%`
+     below 1450px, which drew the surface right across the header with the pills
+     huddled at its left end. */
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0;
+}
+
+.page-header .team-switcher { grid-area: 1 / 2; justify-self: end !important; }
+
+/* Left-anchored now, so its pills start from the left too. The flows set
+   `justify-content: end` on it from when it sat on the right, which stranded
+   the last pill against the far edge of its own box on a second line. */
+/* Spans both columns: row 2 has nothing on the right, and confining it to the
+   left one left lco-lcp's four long paths a column too narrow, so "No LMT
+   licence" wrapped onto a line of its own. Given the full width they sit on one
+   line, and the switcher still starts at the title's left edge. */
+.page-header .scenario-switcher {
+  grid-area: 2 / 1 / auto / -1;
+  justify-self: start !important;
+  justify-content: flex-start !important;
+}
+
+/* The Player Prop Zone caveat belongs under the team switcher, in the right
+   column -- the flow's own app.js sizes it to the switcher's exact width, which
+   only lines up if it sits beneath it. Left to the grid's auto-placement it
+   drifted into the left column under the title.
+
+   It waits for a team to be chosen: it shares that column with the coach
+   bubble, and it is a note about which clients a step applies to, which only
+   becomes relevant once someone has said who they are. Hidden with opacity
+   rather than display, so the space stays reserved and nothing in the header
+   moves when it arrives. */
+/* The note hangs off the switcher, so it needs the row directly under it --
+   not row 2 as the grid would otherwise lay it out, which starts below the
+   tallest thing in row 1 (the title block) and left it stranded near the
+   bottom of the header. Scoped with :has() because it means giving the title
+   both rows, and the flows with a scenario switcher need row 2 for that
+   instead. Row 2 takes the leftover height and the note sits at its top, which
+   puts it immediately beneath the switcher -- where the flow's own app.js
+   already assumes it is, matching it to the switcher's exact width. */
+.page-header:has(.product-note) { grid-template-rows: auto 1fr !important; }
+.page-header:has(.product-note) > :first-child { grid-row: 1 / span 2; }
+
+.page-header .product-note {
+  grid-area: 2 / 2;
+  align-self: start;
+  justify-self: end !important;
+  transition: opacity .3s ease;
+}
+
+body:has(.flow-shell[data-selected="all"]) .page-header .product-note {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* One shared width for stacking the header, so every flow does it at the same
+   point rather than at whatever width its own team names happen to need. */
+@media (max-width: 820px) {
+  .page-header {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .page-header .team-switcher { grid-area: 2 / 1; justify-self: start !important; }
+  .page-header:has(.product-note) > :first-child { grid-row: 1; }
+  .page-header .product-note { grid-area: 3 / 1; justify-self: start !important; }
+  .page-header .scenario-switcher { grid-area: 3 / 1; }
+}
+
+/* ---------- the switcher on a phone ---------- */
+
+/* Below 620px nothing about this control changed except the pills getting
+   smaller: chrome.css took them down to a 28px pill, and the container's own
+   .5rem .75rem inset and .5rem gap were never touched at all.
+
+   What that looked like at 360px: `width: auto` above is shrink-to-fit, and this
+   box's max-content width is the label plus every pill on one line -- ~560px on
+   the five-pill flows -- so the fit falls back to "available" and the card IS
+   already full width. The pills then wrapped inside it at their own text widths,
+   so every row ended somewhere different and the last row ended after one pill,
+   leaving a third of a grey panel empty. Three or four ragged rows of small
+   pills inside a full-width card read as an empty panel with some text in it
+   rather than as a control -- on the one control people already miss, which is
+   why the coach mark exists at all.
+
+   So the surface is not the problem and is kept. What was wrong is pretending
+   the box is content-sized on a phone. Laid out as what it is -- one full-width
+   block whose rows each fill their row -- `flex: 1 1 auto` spreads each line's
+   leftover width over that line's own pills, so no line can end ragged and the
+   last line is one full-width pill rather than a stub. It counts no children, so
+   it absorbs the 3/4/5-button variance without a rule per count, unlike the even
+   two-column grid that was the other candidate (a hole on the seven pages with
+   an odd number of teams, and its auto-fit form collapses to a single column
+   outright, because auto-repeat resolves to one track under an indefinite
+   measure). It also settles, without overriding any of them, the two dozen flow
+   rules that set `justify-content: end` or `start` on this container at their own
+   breakpoints: with no free space left on a line there is nothing to justify. */
+@media (max-width: 620px) {
+  .page-header .team-switcher,
+  .page-header .scenario-switcher {
+    /* Beats the `width: auto !important` above -- which is there to stop
+       additional-domains stretching the card across a wide header, a problem
+       that does not exist once the card is the width of the screen. A definite
+       width, not fit-content: flex-grow has nothing to grow into inside a
+       shrink-to-fit box. It is also what chrome.css has been trying to say since
+       before that !important existed, from a file that can never win against it. */
+    width: 100% !important;
+    /* Equal on both axes now the rows are full-bleed: 8px reads as the frame
+       around a block, where .75rem at the sides read as a gutter inside a panel.
+       It also buys the 8px of content width that keeps the widest pair on any
+       flow two-up at 320px rather than one-up. */
+    padding: .5rem;
+    /* Was `center`. A pill whose label wrapped to two lines left its row-mate
+       short, so one row showed two pills of different heights. */
+    align-items: stretch;
+    /* Fourteen flows hang a `0 6px 18px` shadow off this container. chrome.css
+       normalises the border, radius, surface and padding of the card but not its
+       shadow, so half the site's switchers float and half sit flat -- and at full
+       width that shadow becomes a drop band across the whole header. Levelled
+       here for the phone; whether the desktop card carries one at all is a
+       separate decision for chrome.css. */
+    box-shadow: none;
+    /* The gap is deliberately NOT reduced. 8px between two 40px targets is the
+       spacing the 44px guideline is actually about, and tightening the rows so
+       they read as one block would trade mis-tap headroom for a visual nicety. */
+  }
+
+  /* The label on its own line. 105px of "Responsibilities:" competing with the
+     pills for row one is not a trade worth making: moving it above them costs one
+     17px line and buys back a whole pill's width on the first row -- at 620px
+     exactly the difference between five pills on one row and five on two. Four
+     flows already do this at their own ~650px band, so this makes an existing
+     house answer true on all of them. Sentence case, not an uppercase eyebrow:
+     six flows ship it uppercase and tracked, and chrome.css already decided
+     against that for all of them. */
+  .page-header .switcher-label,
+  .page-header .scenario-label {
+    width: 100%;
+    /* chrome.css's .25rem is the gap to the first pill in the inline case. On its
+       own line it is 4px hanging off the wrong side. */
+    margin-right: 0;
+  }
+
+  /* Fill the row rather than ending it wherever the text ends. The scenario pills
+     take this alone: they have no "all" of their own, so there is no row to make
+     primary and no reason to hold them to two per row. */
+  .page-header .scenario-switcher .scenario-button { flex: 1 1 auto; }
+
+  /* The teams read as a small screen of their own: "All teams" takes a row to
+     itself, and the specific teams share the rows below it -- as many to a row
+     as fit, three on one line from 390px up on the four-team flows, two and two
+     on the five-team ones.
+     The one larger pill is "All teams", and it is the same pill on every flow:
+     the reset, which is also what the switcher opens on. Nothing else is allowed
+     to become one, which is what the max-width is for -- without it a row left
+     holding a single pill grew it to the full width, so on a narrow phone the
+     third team was as loud as the reset and the block had two kinds of emphasis
+     in it for no reason anyone could read. Capped at half a row it stays a pill
+     with space beside it, which reads as the end of a list rather than as a
+     second heading.
+     Basis stays `auto` rather than a fixed half: a fixed half caps every row at
+     two pills even at 620px, where three fit comfortably, and the switcher grew
+     a row it did not need. */
+  .page-header .team-switcher .team-button {
+    flex: 1 1 auto;
+    max-width: calc(50% - .25rem);
+  }
+
+  .page-header .team-switcher .team-button[data-team="all"] {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
+
+/* ---------- whose step is this ---------- */
+
+/* A step that is not yours fades right back. Being a little muted was not
+   enough to read as filtered: with only the small "dependency" word to go on,
+   picking a team looked like it had done nothing, and the one card that was
+   yours did not stand out at all. Everything stays on screen -- the flow is
+   still followable end to end -- but only your own steps hold their colour.
+
+   Both spellings are covered: .is-dependency, which half the flows set, and
+   .sr-inactive, which chrome.js sets for the half that filter with selectors
+   instead. */
+/* !important because a flow can out-specify this without meaning to:
+   lmt-virtualised carried `.stage-card.is-dependency { opacity: 1 }` from the
+   old design, which at (0,2,0) beat this rule and left its step cards at full
+   strength while the note beside them faded -- two cards in the same state
+   looking nothing alike. */
+.is-dependency,
+.sr-inactive {
+  filter: grayscale(1) !important;
+  opacity: .42 !important;
+  transition: opacity .2s ease, filter .2s ease;
+}
+
+/* Hover has nothing to offer on a card that is not yours and cannot be
+   clicked. */
+.is-dependency:hover,
+.sr-inactive:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ---------- dialog section labels ---------- */
+
+/* The label above each block inside a step dialog is a pill, sized per flow at
+   .78rem with .08em of tracking. That is fine for "SOX approval" and too big
+   for "Integration instructions", which grew until it touched both edges of its
+   panel and sat next to the short pills looking like a different component.
+   Smaller type, tighter tracking, and room to wrap rather than to spread. */
+.instruction-section > h3 {
+  max-width: 100%;
+  padding: .3125rem .625rem;
+  font-size: .72rem;
+  letter-spacing: .05em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
