@@ -1,0 +1,364 @@
+:root {
+  --navy: #202560;
+  --ink: #172036;
+  --muted: #63708a;
+  --line: #d9dfeb;
+  --red: #f4322b;
+  --panel: #f4f6fa;
+  --client: #e6f0fb;
+}
+
+* { box-sizing: border-box; }
+body.betting-widgets-integration { display: flex; flex-direction: column; min-height: 100dvh; margin: 0; color: var(--ink); background: #fff; font-family: Arial, Helvetica, sans-serif; }
+
+.page-header {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  align-self: stretch; width: 100%; max-width: none; margin-inline: 0; padding: 42px clamp(32px, 7vw, 150px) 28px;
+  border-bottom: 1px solid var(--line);
+}
+/* chrome.js centers the subnav with auto margins when the header resolves a
+   real max-width (it does, globally, via --sr-measure) — auto margins on a
+   flex item's cross axis suppress stretch, so without an explicit width the
+   subnav shrinks to its content and drifts off the header's left edge. */
+body.betting-widgets-integration > .sr-subnav { width: 100%; }
+.eyebrow, .owner, .dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .73rem; font-weight: 700; letter-spacing: .11em; }
+h1, h2, p { margin-top: 0; }
+h1 { margin-bottom: 8px; color: var(--navy); font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -.06em; line-height: .95; }
+.subtitle { margin: 0; color: var(--muted); font-size: 1rem; }
+.team-switcher { display: flex; gap: 9px; flex-wrap: wrap; justify-content: end; padding: 10px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; box-shadow: 0 6px 18px #1920380d; }
+.team-button { border: 1px solid var(--line); border-radius: 999px; padding: 12px 18px; background: #fff; color: var(--ink); cursor: pointer; font: 700 .9rem Arial, sans-serif; }
+.team-button.sportradar { background: var(--panel); }.team-button.client { background: var(--client); }
+.team-button.selected { border-color: var(--navy); background: var(--navy); color: #fff; }
+
+.flow-shell { display: grid; flex: 1 1 auto; min-height: 0; align-content: center; width: 100%; margin: 0; --shell-pad-x: clamp(32px, 7vw, 150px); padding: 48px var(--shell-pad-x); }
+/* Break the duration bar out of the shell's own horizontal padding so it
+   reaches the true page edges, matching the header/footer full-bleed bars. */
+.duration { width: auto; margin-inline: calc(-1 * var(--shell-pad-x)); padding: 7px; background: var(--navy); color: #fff; font-size: .82rem; font-weight: 700; letter-spacing: .03em; text-align: center; }
+.flow-lane { position: relative; display: grid; align-items: center; justify-content: center; }
+.sportradar-lane { grid-template-columns: repeat(2, 270px); column-gap: 72px; padding-top: 28px; }
+.client-lane { grid-template-columns: repeat(3, 270px); column-gap: 72px; margin-top: 40px; }
+.arrow { position: absolute; display: block; width: 54px; height: 2px; background: var(--line); }
+.right-arrow::after { content: ""; position: absolute; top: -4px; right: 0; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-top: 2px solid var(--muted); transform: rotate(45deg); }
+.flow-lane .arrow { top: 50%; transform: translateY(-50%); }
+.sportradar-lane .between-arrow { left: calc(50% - 27px); }
+.sportradar-lane .exit-arrow { left: calc(50% + 324px); }
+.client-lane .entry-arrow { left: calc(50% - 549px); }
+.client-lane .between-one { left: calc(50% - 186px); }
+.client-lane .between-two { left: calc(50% + 132px); }
+.flow-shell:not([data-selected="all"]) .arrow { display: none; }
+
+.stage-card {
+  position: relative; display: grid; grid-template-rows: auto 1fr auto auto auto; justify-items: center;
+  width: 270px; height: 270px; padding: 20px 20px 18px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--panel); color: var(--ink); cursor: pointer; text-align: center; transition: transform .16s, box-shadow .16s, border-color .16s;
+}
+.stage-card:hover { transform: translateY(-3px); border-color: #aeb9cc; box-shadow: 0 10px 24px #18223d14; }
+.client-card { background: var(--client); }
+.owner { align-self: start; margin-bottom: 2px; font-size: .84rem; }
+.stage-number { position: absolute; top: 16px; right: 16px; display: grid; place-items: center; width: 38px; height: 38px; margin: 0; border-radius: 50%; background: var(--red); color: #fff; font-size: 1.06rem; font-weight: 700; }
+.stage-card strong { color: var(--navy); font-size: 1.4rem; line-height: 1.08; }
+.summary { align-self: center; color: var(--muted); font-size: 1.02rem; line-height: 1.3; }
+.detail-hint { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; margin-top: 16px; padding: 10px 16px; border-radius: 999px; background: var(--red); color: #fff; font-size: .88rem; font-weight: 700; box-shadow: 0 5px 12px #f4322b35; }
+
+.source-icon { align-self: center; display: block; width: 165px; object-fit: contain; }
+/* chrome.css's shared ".flow-shell img" rule (0,1,1) outranks a bare
+   ".source-icon" class (0,1,0) for `height`, silently forcing it back to
+   auto/intrinsic-ratio. Match scope through body.betting-widgets-integration
+   instead of !important so this legitimately outranks it. */
+body.betting-widgets-integration .source-icon { height: 116px; }
+
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"],
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] { cursor: default; background: #f5f6f9; }
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .source-icon,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .source-icon,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .stage-number,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .stage-number,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] strong,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] strong,
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"] .detail-hint,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"] .detail-hint { display: none; }
+.flow-shell[data-selected="sportradar"] .stage-card[data-owner="client"]:hover,
+.flow-shell[data-selected="client"] .stage-card[data-owner="sportradar"]:hover { transform: none; border-color: var(--line); box-shadow: none; }
+
+dialog { width: min(580px, calc(100% - 32px)); max-height: min(680px, calc(100dvh - 48px)); overflow: auto; border: 1px solid var(--line); border-radius: 18px; padding: 36px 42px 40px; color: var(--ink); text-align: center; box-shadow: 0 28px 72px #10182d40; }
+dialog::before { content: ""; display: block; width: 46px; height: 4px; margin: 0 auto 14px; border-radius: 99px; background: var(--red); }
+dialog::backdrop { background: #17203685; }
+dialog .dialog-owner { text-align: center; }
+dialog h2 { max-width: 18ch; margin: 0 auto 18px; color: var(--navy); font-size: 2rem; letter-spacing: -.04em; line-height: 1.08; text-wrap: balance; }
+.dialog-content { display: grid; gap: 14px; max-width: 48ch; margin: 0 auto; }
+.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }
+.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+.dialog-content li { padding-left: 4px; line-height: 1.5; }
+.instruction-section { display: grid; gap: 12px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }
+.instruction-section h3 { margin: 0; padding: 7px 11px; justify-self: center; border-radius: 999px; background: #fff1f0; color: var(--red); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }
+.instruction-section p { margin: 0; line-height: 1.5; text-wrap: pretty; }
+.instruction-section ul, .instruction-section ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+.instruction-section .or { color: var(--muted); font-weight: 700; }
+.dialog-content.has-branches { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: none; }
+.dialog-content.has-many-branches { grid-template-columns: 1fr; max-width: 56ch; }
+dialog a { color: var(--navy); font-weight: 700; }
+.dialog-close { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--muted); cursor: pointer; font-size: 1.45rem; line-height: 1; }
+
+footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 62px; margin-top: auto; padding: 12px 32px; background: #172638; color: #fff; }
+footer strong { display: block; font-size: 1.35rem; letter-spacing: -.06em; } footer small { display: block; font-size: .43rem; letter-spacing: .1em; } footer time { font-size: .9rem; }
+
+@media (max-width: 1100px) {
+  .page-header { align-items: start; flex-direction: column; }.team-switcher { justify-content: start; }
+  .flow-lane { display: flex; gap: 10px; }.stage-card { width: 210px; height: 210px; }.flow-lane .arrow { display: none; }
+}
+@media (max-width: 700px) {
+  .page-header { padding: 30px 20px 22px; }.flow-shell { --shell-pad-x: 20px; padding: 32px var(--shell-pad-x); }.flow-lane { flex-wrap: wrap; justify-content: center; }.sportradar-lane { padding-top: 20px; }.client-lane { margin-top: 18px; } dialog { padding: 34px 24px 30px; }.dialog-content.has-branches { grid-template-columns: 1fr; }
+}
+/* Keep introductory dialog content readable before branch panels. */
+.dialog-content.has-branches > :is(p, ul, ol, .instruction-intro) {
+  grid-column: 1 / -1;
+  width: min(100%, 54ch);
+  justify-self: center;
+}
+
+/* Visual pass: larger source-art cards and connected filtered lanes. */
+.page-header { padding: 48px clamp(36px, 7vw, 160px) 32px; }
+.subtitle { line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { gap: 10px; padding: 12px; }
+.team-button { padding: 13px 20px; font-size: .94rem; }
+.flow-shell { --shell-pad-x: clamp(36px, 7vw, 160px); padding: 56px var(--shell-pad-x); }
+.duration { padding: 10px; font-size: .95rem; }
+.sportradar-lane { grid-template-columns: repeat(2, 340px); column-gap: 88px; padding-top: 34px; }
+.client-lane { grid-template-columns: repeat(3, 340px); column-gap: 88px; margin-top: 52px; }
+/* Scoped above the 1100px breakpoint below — unconditional, it would win the
+   cascade over that block's own stage-card/source-icon size (same
+   specificity, later in source) and silently cancel the narrow-viewport
+   shrink, overflowing the icon past the card's own padding box. */
+@media (min-width: 1101px) {
+  .stage-card { width: 340px; height: 340px; padding: 25px; border-radius: 16px; }
+  .source-icon { width: 210px; }
+  /* Higher specificity than the plain-class rule above so it isn't shadowed
+     by the body-scoped base-tier height fix a few lines up. */
+  body.betting-widgets-integration .source-icon { height: 138px; }
+}
+.owner { font-size: .92rem; }
+.stage-number { top: 18px; right: 18px; width: 44px; height: 44px; font-size: 1.18rem; }
+.stage-card strong { font-size: 1.72rem; }
+.summary { font-size: 1.16rem; line-height: 1.36; }
+.detail-hint { min-height: 46px; margin-top: 18px; padding: 12px 20px; font-size: .98rem; }
+.arrow { width: 62px; height: 3px; }
+.right-arrow::after { top: -5px; width: 10px; height: 10px; }
+.sportradar-lane .between-arrow { left: calc(50% - 31px); }
+.sportradar-lane .exit-arrow { left: calc(50% + 397px); }
+.client-lane .entry-arrow { left: calc(50% - 674px); }
+.client-lane .between-one { left: calc(50% - 246px); }
+.client-lane .between-two { left: calc(50% + 183px); }
+.flow-shell:not([data-selected="all"]) .arrow { display: block; }
+
+@media (max-width: 1100px) {
+  .subtitle { text-wrap: wrap; }
+  .team-button { padding: 10px 14px; font-size: .82rem; }
+  .flow-shell:not([data-selected="all"]) .arrow { display: none; }
+}
+
+/* Instruction dialogs: tighter labels, centered copy, balanced line breaks. */
+body.betting-widgets-integration dialog .dialog-content {
+  gap: 16px;
+}
+
+body.betting-widgets-integration dialog .dialog-content:is(.has-flow, .has-section) {
+  width: 100%;
+  max-width: none;
+  gap: 14px;
+}
+
+body.betting-widgets-integration .instruction-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+}
+
+body.betting-widgets-integration .has-section .instruction-panel,
+body.betting-widgets-integration .has-section .instruction-section {
+  text-align: left;
+}
+
+body.betting-widgets-integration .has-flow .instruction-panel {
+  align-items: center;
+  border: none;
+  background: none;
+  padding: 0;
+  text-align: center;
+}
+
+body.betting-widgets-integration .instruction-panel-body,
+body.betting-widgets-integration .instruction-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+body.betting-widgets-integration .has-section .instruction-panel-body,
+body.betting-widgets-integration .has-section .instruction-section-body {
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 12px;
+}
+
+body.betting-widgets-integration .has-flow .instruction-panel-body {
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+body.betting-widgets-integration .has-branches .instruction-section-body {
+  justify-content: center;
+}
+
+body.betting-widgets-integration .has-branches .instruction-section-body > p {
+  margin: 0;
+  text-align: center;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.betting-widgets-integration .has-section .instruction-panel-body > p,
+body.betting-widgets-integration .has-section .instruction-section-body > p {
+  margin: 0;
+  text-align: left;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.betting-widgets-integration .has-flow .instruction-panel-body > p {
+  margin: 0;
+  max-width: 46ch;
+  text-align: center;
+  text-wrap: pretty;
+  line-height: 1.5;
+}
+
+body.betting-widgets-integration .instruction-panel-body > :is(ul, ol),
+body.betting-widgets-integration .instruction-section-body > :is(ul, ol) {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 1.25rem;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+body.betting-widgets-integration .instruction-panel--compact,
+body.betting-widgets-integration .has-flow .instruction-panel {
+  min-height: 0;
+}
+
+body.betting-widgets-integration .instruction-panel--compact .instruction-panel-body {
+  justify-content: flex-start;
+}
+
+body.betting-widgets-integration .instruction-intro.instruction-panel {
+  width: 100%;
+  max-width: none;
+  gap: 0;
+}
+
+body.betting-widgets-integration .has-section > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+body.betting-widgets-integration .has-section > .instruction-section > h3 {
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+body.betting-widgets-integration .instruction-intro:not(.instruction-panel) {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 52ch);
+  margin-inline: auto;
+  text-align: center;
+}
+
+body.betting-widgets-integration .dialog-content.has-branches > .instruction-intro {
+  grid-column: 1 / -1;
+}
+
+body.betting-widgets-integration .instruction-intro p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+body.betting-widgets-integration dialog .dialog-content.has-branches {
+  align-items: stretch;
+}
+
+body.betting-widgets-integration .dialog-content.has-branches > .instruction-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  padding: 18px 18px 22px;
+  gap: 0;
+}
+
+body.betting-widgets-integration .dialog-content.has-branches > .instruction-section > h3 {
+  align-self: center;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
+  margin-bottom: 10px;
+}
+
+body.betting-widgets-integration .dialog-content.has-branches .instruction-section-body {
+  flex: 1;
+  min-height: 0;
+}
+
+body.betting-widgets-integration .instruction-section p.or {
+  max-width: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+  font-size: .82rem;
+}
+
+body.betting-widgets-integration .instruction-panel-body p.or {
+  max-width: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: center;
+  font-size: .82rem;
+}
+
+@media (max-width: 640px) {
+  body.betting-widgets-integration dialog .dialog-content.has-branches {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.sportradar-lane { --cols: 2; --col-gap: 88px; }
+.client-lane { --cols: 3; --col-gap: 88px; }

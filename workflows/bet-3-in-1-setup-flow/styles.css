@@ -1,0 +1,136 @@
+:root {
+  --ink: #121752;
+  --red: #d90000;
+  --sales: #f2f3f8;
+  --beti: #d9eaf8;
+  --additional: #c9caf3;
+  --line: #d8dbe5;
+  --muted: #5d6780;
+  --footer: #092842;
+}
+
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; color: var(--ink); background: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+button { font: inherit; }
+
+.page-header { position: relative; display: flex; align-items: end; justify-content: space-between; gap: 32px; width: 100%; max-width: none; margin-inline: 0; padding: 40px clamp(28px, 5vw, 96px) 25px; border-bottom: 1px solid var(--line); }
+.eyebrow { margin: 0 0 8px; color: var(--red); font-size: .75rem; font-weight: 900; letter-spacing: .1em; }
+h1 { margin: 0; font-size: clamp(2rem, 3vw, 3.5rem); font-weight: 920; letter-spacing: -.06em; line-height: .96; }
+.subtitle { margin: 12px 0 0; color: var(--muted); font-size: clamp(.9rem, 1.1vw, 1.05rem); }
+
+.team-switcher { display: flex; flex-wrap: wrap; justify-content: end; gap: 8px; max-width: 700px; }
+.switcher-label { align-self: center; margin-right: 5px; color: var(--muted); font-size: .8rem; font-weight: 750; }
+.team-button { cursor: pointer; border: 1px solid transparent; border-radius: 999px; padding: 9px 13px; color: var(--ink); background: #fff; font-size: .76rem; font-weight: 790; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.team-button:hover { transform: translateY(-1px); }.team-button.selected { border-color: var(--ink); box-shadow: 0 3px 11px #19215b1f; }.team-button.sales { background: var(--sales); }.team-button.beti { background: var(--beti); }.team-button.additional { background: var(--additional); }
+
+.flow-shell { display: grid; gap: 25px; max-width: 1900px; min-height: calc(100vh - 225px); margin: 0 auto; padding: 35px clamp(28px, 5vw, 96px) 49px; }
+.flow-grid { --flow-gap: clamp(38px, 4vw, 82px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; gap: var(--flow-gap); }
+.stage-card, .reference-card { position: relative; min-height: 310px; border: 0; border-radius: 11px; padding: 31px 24px 22px; color: var(--ink); text-align: center; box-shadow: 0 1px 0 #ffffffb5 inset, 0 10px 26px #1f2b5520; }
+.stage-card { display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease; }.stage-card:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 1px 0 #ffffffb5 inset, 0 15px 30px #1f2b5530; }
+.sales-card { background: var(--sales); }.beti-card { background: var(--beti); }.reference-card { background: var(--additional); }
+.stage-number { position: absolute; top: -12px; left: 50%; display: grid; width: 29px; height: 29px; place-items: center; border-radius: 50%; color: #fff; background: var(--red); box-shadow: 0 2px 6px #d900003d; font-size: .8rem; font-weight: 900; transform: translateX(-50%); }
+.owner { margin: 0 0 17px; color: var(--red); font-size: .64rem; font-weight: 900; letter-spacing: .08em; }
+.stage-card strong, .reference-card strong { display: block; max-width: 16ch; font-size: clamp(1.05rem, 1.38vw, 1.42rem); font-weight: 880; letter-spacing: -.033em; line-height: 1.08; }
+.summary, .reference-card > span { display: block; margin: 16px 0 auto; color: #3d4965; font-size: clamp(.82rem, .92vw, .98rem); line-height: 1.48; }
+.detail-hint, .reference-action { margin-top: 23px; border: 0; border-radius: 7px; padding: 9px 13px; color: #fff; background: var(--red); box-shadow: 0 4px 10px #d9000040; font-size: .72rem; font-weight: 880; letter-spacing: .02em; line-height: 1; }
+.reference-card { min-height: 0; padding: 24px 29px; }.reference-card .owner { margin-bottom: 10px; }.reference-card > strong { max-width: none; }.reference-card > span { margin: 12px 0 0; }.reference-action { display: inline-block; cursor: pointer; margin-top: 17px; }
+/* Self-centering: left:100% anchors the arrow to the card it leaves, and the
+   transform nudges it by half the real grid gap minus half its own width —
+   so it lands in the middle of the actual gap at every breakpoint instead of
+   a hardcoded offset that only matched one specific viewport width. */
+.step-one::after, .step-two::after, .step-three::after { content: ""; position: absolute; z-index: 2; top: 50%; left: 100%; width: clamp(20px, 2vw, 41px); height: 14px; background: var(--muted); clip-path: polygon(0 38%, 70% 38%, 70% 0, 100% 50%, 70% 100%, 70% 62%, 0 62%); transform: translate(calc(var(--flow-gap) / 2 - 50%), -50%); }
+
+/* chrome.js equalises every card in a flow-grid row to the tallest sibling's
+   height via an inline min-height — it doesn't know this card is meant to
+   collapse to a small placeholder, so !important is needed to win back over
+   that inline style rather than the page's own cascade. */
+.stage-card.is-dependency { cursor: default; box-shadow: none; }.stage-card.is-dependency .owner { margin-bottom: 9px; color: var(--muted); }.stage-card.is-dependency .detail-hint { padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: 0; }.stage-card.is-dependency .detail-hint::after { content: "dependency"; font-size: .68rem; }
+/* Nothing is hidden by the filter. A note you do not own mutes and says so,
+   exactly like a step card you do not own. */
+.reference-card.is-dependency { cursor: default; box-shadow: none; }
+.reference-card.is-dependency .owner { color: var(--muted); }
+.reference-card.is-dependency .reference-action { padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: 0; cursor: default; }
+.reference-card.is-dependency .reference-action::after { content: "dependency"; font-size: .72rem; }
+
+dialog { width: min(760px, calc(100vw - 34px)); max-height: min(840px, calc(100vh - 40px)); overflow: auto; border: 0; border-radius: 19px; padding: 39px clamp(25px, 5vw, 55px) 42px; color: var(--ink); text-align: center; box-shadow: 0 25px 80px #1119325c; }
+dialog::backdrop { background: #101a35a1; backdrop-filter: blur(3px); }.dialog-close { position: absolute; top: 15px; right: 18px; width: 32px; height: 32px; cursor: pointer; border: 0; border-radius: 50%; color: var(--ink); background: #eef0f5; font-size: 1.4rem; line-height: 1; }.dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .69rem; font-weight: 900; letter-spacing: .1em; } dialog h2 { max-width: 22ch; margin: 0 auto 29px; font-size: clamp(1.55rem, 3vw, 2.15rem); letter-spacing: -.045em; line-height: 1.04; }
+.dialog-content { display: grid; gap: 14px; margin: 0 auto; }.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content li { padding-left: 4px; line-height: 1.5; }.dialog-content a { color: #215da8; font-weight: 760; overflow-wrap: anywhere; }
+.instruction-section { display: grid; gap: 12px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }.instruction-section h3 { margin: 0; justify-self: center; border-radius: 999px; padding: 7px 11px; color: var(--red); background: #fff1f0; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }.instruction-section p { margin: 0; line-height: 1.5; text-wrap: pretty; }.instruction-section ul, .instruction-section ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+.dialog-content.has-branches { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; gap: 14px; }.dialog-content.has-many-branches { grid-template-columns: 1fr; }
+/* Keep introductory dialog content readable before branch panels. */
+.dialog-content.has-branches > :is(p, ul, ol) { grid-column: 1 / -1; width: min(100%, 54ch); justify-self: center; }
+
+footer { display: flex; align-items: center; justify-content: space-between; min-height: 100px; padding: 22px clamp(28px, 5vw, 96px); color: #fff; background: var(--footer); } footer img { width: 200px; height: auto; max-height: 45px; object-fit: contain; object-position: left center; } footer time { font-size: .8rem; }
+@media (max-width: 1180px) { .page-header { align-items: start; flex-direction: column; }.team-switcher { justify-content: start; max-width: none; }.flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); --flow-gap: 36px; gap: var(--flow-gap); }.step-two::after { display: none; } }
+@media (max-width: 650px) { .page-header { padding-top: 32px; }.flow-shell { padding-top: 44px; }.flow-grid { grid-template-columns: 1fr; }.stage-card, .reference-card { min-height: 255px; }.step-one::after, .step-two::after, .step-three::after { display: none; }.team-switcher { gap: 6px; }.switcher-label { width: 100%; }.team-button { padding: 8px 10px; font-size: .71rem; }.dialog-content.has-branches { grid-template-columns: 1fr; } footer { min-height: 84px; } footer img { width: 158px; } }
+
+/* Visual pass: larger, centered source-faithful text-only workflow cards. */
+.page-header { gap: 38px; padding: 48px clamp(32px, 5vw, 96px) 32px; }
+/* align-items:end only bottom-anchors within the padded content box, and the
+   header's top/bottom padding is asymmetric — so it leaves the switcher a few
+   pixels off the header's true visual centerline. Position it independently
+   of that padding so it centers on the header's actual rendered height. */
+@media (min-width: 1181px) {
+  .team-switcher { position: absolute; top: 50%; right: clamp(32px, 5vw, 96px); transform: translateY(-50%); }
+}
+.eyebrow { margin-bottom: 9px; font-size: .8rem; }
+h1 { font-size: clamp(2.3rem, 3.3vw, 4rem); }
+.subtitle { margin-top: 16px; font-size: clamp(1rem, 1.05vw, 1.12rem); line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { gap: 10px; max-width: 800px; }
+.switcher-label { margin-right: 6px; font-size: .86rem; font-weight: 790; }
+.team-button { padding: 11px 16px; font-size: .83rem; }
+.team-button.selected { box-shadow: 0 4px 13px #19215b24; }
+.flow-shell { gap: 32px; max-width: 2040px; min-height: calc(100vh - 248px); padding: 48px clamp(32px, 5vw, 96px) 62px; }
+.flow-grid { --flow-gap: clamp(42px, 4.5vw, 92px); gap: var(--flow-gap); }
+.stage-card { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 290px; border-radius: 15px; padding: 38px 31px 28px; box-shadow: 0 1px 0 #ffffffb5 inset, 0 12px 28px #1f2b5520; }
+.stage-card:hover:not(:disabled) { box-shadow: 0 1px 0 #ffffffb5 inset, 0 17px 34px #1f2b5530; }
+.stage-number { top: -15px; width: 34px; height: 34px; font-size: .9rem; }
+.owner { margin: 0 0 14px; font-size: .68rem; }
+.stage-card strong { max-width: 18ch; font-size: clamp(1.18rem, 1.42vw, 1.48rem); }
+/* Absolutely positioned at the card's true centre — the owner+title block
+   above it and the button below it are different heights, so centring the
+   description via flex/grid space-splitting (even with equal margins on
+   both sides) still biases its own midpoint toward the taller neighbour by
+   half that difference. Decoupling it from the flow is the only way to land
+   it on the card's actual visual centreline regardless of that asymmetry. */
+.summary { position: absolute; top: 50%; left: 50%; width: 100%; max-width: 31ch; margin: 0; transform: translate(-50%, -50%); font-size: clamp(.88rem, .98vw, 1.05rem); }
+.detail-hint { margin-top: auto; border-radius: 8px; padding: 11px 14px; font-size: .74rem; }
+.step-one::after, .step-two::after, .step-three::after { width: clamp(22px, 2.25vw, 46px); height: 18px; clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%); }
+.reference-card { display: grid; justify-items: center; min-height: 250px; padding: 32px 38px; }
+.reference-card .owner { margin-bottom: 12px; }
+.reference-card > span { max-width: 54ch; margin: 14px 0; font-size: clamp(.88rem, .98vw, 1.05rem); }
+.reference-action { display: inline-block; cursor: pointer; margin-top: 2px; border-radius: 8px; padding: 11px 14px; font-size: .74rem; }
+.stage-card.is-dependency .detail-hint::after { font-size: .72rem; }
+
+@media (max-width: 1180px) {
+  .page-header { align-items: start; flex-direction: column; }
+  .subtitle { text-wrap: wrap; }
+  .team-switcher { justify-content: start; max-width: none; }
+  .step-one::after, .step-two::after, .step-three::after { display: none; }
+}
+@media (max-width: 650px) {
+  .stage-card { min-height: 265px; }
+  .reference-card { min-height: 220px; }
+  .team-button { padding: 9px 11px; font-size: .75rem; }
+}
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-grid { --cols: 5; --col-gap: 92px; }
+
+/* The note takes a step's slot rather than spanning the row: it belongs with
+   the cards, not as a band under them, and as an ordinary cell it reflows with
+   them at every width. No min-height of its own either -- chrome.js equalises
+   it to the row like every other card. */

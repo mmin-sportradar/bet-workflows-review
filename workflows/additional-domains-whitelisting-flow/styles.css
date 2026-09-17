@@ -1,0 +1,101 @@
+:root {
+  --ink: #19215b;
+  --red: #e1261c;
+  --sales: #f1f1f5;
+  --client: #d9ebf9;
+  --support: #f2caef;
+  --additional: #c8c9f5;
+  --line: #dde0e8;
+  --muted: #5d6780;
+  --footer: #102944;
+}
+* { box-sizing: border-box; }
+.body-restore {}
+body { min-width: 320px; min-height: 100vh; margin: 0; color: var(--ink); background: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.page-header { display: grid; grid-template-columns: 1fr; align-items: start; gap: 38px; max-width: none !important; width: 100% !important; margin: 0 !important; padding: 48px var(--sr-gutter, 128px) 32px !important; }
+.eyebrow { margin: 0 0 9px; color: var(--red); font-size: .8rem; font-weight: 900; letter-spacing: .1em; }
+/* Headings should match the card title styling (weight, spacing) */
+h1, h2 { margin: 0; color: var(--ink); font-family: inherit; font-weight: 900; letter-spacing: -.04em; line-height: 1.04; text-transform: none; }
+h1 { font-size: clamp(2.3rem, 3.3vw, 4rem); }
+h2 { font-size: clamp(1.05rem, 1.32vw, 1.34rem); }
+.subtitle { margin: 16px 0 0; color: var(--muted); font-size: clamp(1rem, 1.05vw, 1.12rem); line-height: 1.25; text-wrap: nowrap; }
+.header-actions { display: flex; gap: 16px; align-items: center; justify-self: stretch; width: 100%; }
+/* Each switcher sizes to its own row of pills, the way every other flow with
+   these controls does (bet-concierge, lco-lcp). The clamped 420px width they
+   carried made both of them wrap onto two lines at every width -- at 1920px
+   "Urgent / off hours" dropped under its own label -- and left the two blocks
+   as tall boxes at opposite ends of the header instead of a single row.
+   No width is needed: chrome.css's shared placement already puts the scenario
+   switcher left and the team switcher right, and flex-wrap still stacks the
+   pills when the row genuinely runs out of room. */
+.scenario-switcher, .team-switcher { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 10px; min-width: 0; box-sizing: border-box; }
+.scenario-switcher { justify-content: flex-start; }
+.team-switcher { justify-content: flex-end; }
+
+/* Nudge the title container closer to the left edge on very wide screens */
+.page-header > div:first-child { padding-left: 0 !important; }
+.header-actions { padding-right: 0 !important; }
+.switcher-label { align-self: center; margin-right: 6px; color: var(--muted); font-size: .86rem; font-weight: 790; }
+.scenario-button, .team-button { cursor: pointer; border: 1px solid transparent; border-radius: 999px; padding: 11px 16px; color: var(--ink); background: #fff; font-size: .83rem; font-weight: 820; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.scenario-button:hover, .team-button:hover { transform: translateY(-1px); }
+.scenario-button.selected, .team-button.selected { border-color: var(--ink); box-shadow: 0 4px 13px #19215b24; }
+.scenario-button.urgent { color: var(--red); background: #fff0f0; }
+.team-button.sales { background: var(--sales); }
+.team-button.client-setup { background: var(--client); }
+.team-button.support { background: var(--support); }
+.team-button.additional { background: var(--additional); }
+  .page-header { position: relative; }
+  .page-header::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 100vw;
+    height: 1px;
+    background: var(--line);
+  }
+.flow-shell { max-width: 1920px; min-height: calc(100vh - 248px); margin: 0 auto; padding: 48px clamp(32px, 5vw, 96px) 60px; }
+.flow-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; gap: clamp(38px, 4.3vw, 78px); }
+.phase { position: relative; display: grid; align-content: start; gap: 20px; min-height: 100%; padding: 25px 20px 22px; border-radius: 15px; background: #f7f7fa; }
+.phase:not(:last-child)::after { content: ""; position: absolute; z-index: 3; top: 50%; /* center arrow in the gap between columns */ left: calc(100% + (clamp(38px, 4.3vw, 78px) / 2) - (clamp(22px, 2.15vw, 39px) / 2)); width: clamp(22px, 2.15vw, 39px); height: 20px; background: var(--muted); clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%); transform: translateY(-50%); }
+.phase h2 { margin: 0 0 14px; color: var(--red); font-size: clamp(1.05rem, 1.32vw, 1.34rem); font-weight: 920; letter-spacing: -.025em; text-align: center; text-transform: uppercase; }
+.phase h2 span { color: var(--ink); }
+.task-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 254px; height: 254px; border: 0; border-radius: 12px; padding: 37px 25px 26px; color: var(--ink); cursor: pointer; text-align: center; box-shadow: 0 1px 0 #ffffffb5 inset, 0 9px 22px #1f2b551a; transition: transform .18s ease, box-shadow .18s ease; }
+.task-card:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 1px 0 #ffffffb5 inset, 0 15px 29px #1f2b5530; }
+.task-card[hidden] { display: none; }
+.sales-card { background: var(--sales); }
+.client-card { background: var(--client); }
+.support-card { background: var(--support); }
+.additional-card { background: var(--additional); }
+.task-number { position: absolute; top: -14px; left: 50%; display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; color: #fff; background: var(--red); box-shadow: 0 3px 8px #d900003d; font-size: .86rem; font-weight: 900; transform: translateX(-50%); }
+.owner { margin: 0 0 13px; color: var(--red); font-size: .66rem; font-weight: 900; letter-spacing: .085em; }
+.task-card strong { display: block; max-width: 17ch; font-size: clamp(1.12rem, 1.3vw, 1.4rem); font-weight: 900; letter-spacing: -.04em; line-height: 1.08; }
+.task-card > span:not(.task-number):not(.owner):not(.detail-hint) { display: block; max-width: 29ch; margin: 16px auto 0; color: #3d4965; font-size: clamp(.84rem, .9vw, .98rem); line-height: 1.48; }
+.detail-hint { margin-top: 22px; border-radius: 8px; padding: 11px 14px; color: #fff; background: var(--red); box-shadow: 0 5px 12px #d9000040; font-size: .73rem; font-weight: 880; letter-spacing: .02em; line-height: 1; }
+.urgent-card strong { color: var(--red); }
+.task-card.is-dependency { cursor: default; box-shadow: none; }
+.task-card.is-dependency .owner { margin-bottom: 9px; color: var(--muted); }
+.task-card.is-dependency .detail-hint { padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: 0; }
+.task-card.is-dependency .detail-hint::after { content: "dependency"; font-size: .72rem; }
+dialog { width: min(760px, calc(100vw - 34px)); max-height: min(840px, calc(100vh - 40px)); overflow: auto; border: 0; border-radius: 19px; padding: 39px clamp(25px, 5vw, 55px) 42px; color: var(--ink); text-align: center; box-shadow: 0 25px 80px #1119325c; }dialog::backdrop { background: #101a35a1; backdrop-filter: blur(3px); }.dialog-close { position: absolute; top: 15px; right: 18px; width: 32px; height: 32px; cursor: pointer; border: 0; border-radius: 50%; color: var(--ink); background: #eef0f5; font-size: 1.4rem; line-height: 1; }.dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .69rem; font-weight: 900; letter-spacing: .1em; }dialog h2 { max-width: 22ch; margin: 0 auto 29px; font-size: clamp(1.55rem, 3vw, 2.15rem); letter-spacing: -.045em; line-height: 1.04; }
+.dialog-content { display: grid; gap: 14px; max-width: 54ch; margin: 0 auto; }.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }.dialog-content > ul, .dialog-content > ol { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content li { padding-left: 4px; line-height: 1.5; }.dialog-content a { color: #215da8; font-weight: 760; overflow-wrap: anywhere; }
+footer { display: flex; align-items: center; justify-content: space-between; min-height: 100px; padding: 22px clamp(28px, 5vw, 96px); color: #fff; background: var(--footer); }footer img { width: 200px; height: auto; max-height: 45px; object-fit: contain; object-position: left center; }footer time { font-size: .8rem; }
+@media (max-width: 1450px) { .header-actions { justify-content: flex-start; }.scenario-switcher, .team-switcher { justify-content: flex-start; max-width: none; width: 100%; }.flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }.phase:not(:last-child)::after { display: none; } }
+@media (max-width: 680px) { .subtitle { text-wrap: wrap; }.flow-grid { grid-template-columns: 1fr; }.task-card { min-height: 225px; }.scenario-button, .team-button { padding: 9px 11px; font-size: .72rem; }footer { min-height: 84px; }footer img { width: 158px; } }
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.flow-grid { --cols: 4; --col-gap: 78px; }

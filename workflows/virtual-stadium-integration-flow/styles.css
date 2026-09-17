@@ -1,0 +1,85 @@
+:root {
+  --ink: #20286c;
+  --red: #f1322f;
+  --sportradar: #f4f4f8;
+  --client: #fff2f2;
+  --line: #dce0ea;
+  --muted: #606984;
+  --footer: #171c4d;
+}
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; color: var(--ink); background: #fff; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+button { font: inherit; }
+.page-header { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 38px; width: 100%; max-width: none; margin-inline: 0; padding: 52px clamp(32px, 5vw, 96px) 33px; border-bottom: 1px solid var(--line); }
+/* align-items:center only centers within the padded content box, and the
+   header's top/bottom padding is asymmetric — so it leaves the switcher a
+   few pixels off the header's true visual centerline. Position it
+   independently of that padding so it centers on the rendered header height. */
+@media (min-width: 1181px) {
+  .team-switcher { position: absolute; top: 50%; right: clamp(32px, 5vw, 96px); transform: translateY(-50%); }
+}
+.eyebrow { margin: 0 0 9px; color: var(--red); font-size: .8rem; font-weight: 900; letter-spacing: .1em; }h1 { margin: 0; font-size: clamp(2.3rem, 3.3vw, 4rem); font-weight: 920; letter-spacing: -.06em; line-height: .96; }.subtitle { margin: 16px 0 0; color: var(--muted); font-size: clamp(1rem, 1.05vw, 1.12rem); line-height: 1.25; text-wrap: nowrap; }
+.team-switcher { display: flex; flex-wrap: wrap; justify-content: end; gap: 10px; max-width: 600px; }.switcher-label { align-self: center; margin-right: 6px; color: var(--muted); font-size: .86rem; font-weight: 790; }.team-button { cursor: pointer; border: 1px solid transparent; border-radius: 999px; padding: 11px 17px; color: var(--ink); background: var(--sportradar); font-size: .83rem; font-weight: 820; transition: transform .15s ease, box-shadow .15s ease; }.team-button:hover { transform: translateY(-1px); }.team-button.selected { box-shadow: 0 4px 13px #20286c33; }.team-button.client { background: var(--client); }
+.flow-shell { display: grid; gap: 38px; max-width: 1920px; margin: 0 auto; padding: 48px clamp(32px, 5vw, 96px) 64px; }.top-phases { --flow-gap: clamp(36px, 4vw, 72px); display: grid; grid-template-columns: 1fr 1fr; gap: var(--flow-gap); align-items: stretch; }.phase { position: relative; border-radius: 17px; padding: 27px; background: #f7f7fa; }
+/* left:100% + a translateX of half the real gap minus half the arrow's own
+   width centers it exactly regardless of viewport — the previous fixed
+   calc(100% + clamp(...)) offset didn't account for the arrow's own width,
+   so it sat shifted right by about half its own width instead of centered. */
+.top-phases .phase:not(:last-child)::after, .integration-group:not(:last-child)::after { content: ""; position: absolute; z-index: 3; top: 50%; left: 100%; width: clamp(20px, 2vw, 36px); height: 20px; background: var(--muted); clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%); transform: translate(calc(var(--flow-gap) / 2 - 50%), -50%); }.phase h2 { margin: 0 0 21px; font-size: clamp(1.25rem, 1.7vw, 1.7rem); font-weight: 900; letter-spacing: -.03em; text-align: center; text-transform: uppercase; }.phase h2 span { color: var(--ink); }.task-list { display: grid; gap: 18px; }.task-list.two-up, .phase-initial .task-list, .phase-adapter .task-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.task-card { position: relative; display: grid; grid-template-rows: 68px auto auto minmax(0, 1fr) auto auto; justify-items: center; min-height: 290px; border: 0; border-radius: 13px; padding: 22px 18px 16px; color: var(--ink); cursor: pointer; text-align: center; box-shadow: 0 1px 0 #ffffffb5 inset, 0 9px 22px #1f2b5518; transition: transform .18s ease, box-shadow .18s ease; }.task-card:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 1px 0 #ffffffb5 inset, 0 14px 28px #1f2b552d; }.sportradar-card { background: var(--sportradar); }.client-card { background: var(--client); }.task-icon { align-self: center; width: min(100%, 112px); object-fit: contain; }
+/* chrome.css's shared ".flow-shell img" rule (0,1,1) outranks a bare
+   ".task-icon" class (0,1,0) for `height`, silently forcing each icon to its
+   own intrinsic aspect ratio instead of a uniform size. Match scope through
+   body.virtual-stadium-integration instead of !important so this
+   legitimately outranks it. */
+body.virtual-stadium-integration .task-icon { height: 68px; }.task-number { position: absolute; top: -13px; left: 50%; display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; color: #fff; background: var(--red); font-size: .82rem; font-weight: 900; transform: translateX(-50%); }.owner { align-self: end; margin: 0 0 10px; color: var(--red); font-size: .62rem; font-weight: 900; letter-spacing: .08em; }.task-card strong { display: block; max-width: 18ch; font-size: clamp(1rem, 1.2vw, 1.26rem); font-weight: 900; letter-spacing: -.035em; line-height: 1.08; }.task-card > span:not(.task-number):not(.owner):not(.duration):not(.detail-hint) { align-self: center; display: block; margin: 8px 0; color: #34475d; font-size: clamp(.78rem, .86vw, .93rem); line-height: 1.4; }.duration { align-self: center; margin: 0; border-radius: 6px; padding: 7px 12px; color: #fff; background: var(--ink); font-size: .73rem; font-weight: 850; }.client-card .duration { background: var(--red); }.detail-hint { align-self: end; margin-top: 8px; border: 0; border-radius: 8px; padding: 9px 12px; color: #fff; background: var(--red); box-shadow: 0 4px 10px #f1322f40; font-size: .7rem; font-weight: 880; letter-spacing: .02em; line-height: 1; }
+.phase-initial .task-card, .phase-adapter .task-card { min-height: 333px; }
+.phase-integration { position: relative; padding: 29px; }
+/* Anchored to .integration-groups, not .phase-integration: the section also
+   contains the "3. INTEGRATION" heading above the groups, so top:50% of the
+   whole section landed noticeably above the groups' own vertical center —
+   visibly out of line with the arrows between the groups themselves, which
+   are anchored to each group's own height. left is offset by the extra 29px
+   of .phase-integration's padding so the arrow keeps the same horizontal
+   position as before. */
+.integration-groups { position: relative; }.integration-groups::before { content: ""; position: absolute; z-index: 3; top: 50%; left: -64px; width: 26px; height: 20px; background: var(--muted); clip-path: polygon(0 36%, 66% 36%, 66% 0, 100% 50%, 66% 100%, 66% 64%, 0 64%); transform: translateY(-50%); }.integration-groups { --flow-gap: clamp(34px, 4vw, 68px); display: grid; grid-template-columns: 1.25fr 1.1fr .9fr; gap: var(--flow-gap); }.integration-group { position: relative; padding: 21px; border-radius: 14px; background: #eeeef6; }.integration-group h3 { margin: 0 0 17px; font-size: clamp(1.1rem, 1.35vw, 1.35rem); font-weight: 900; letter-spacing: -.03em; text-align: center; text-transform: uppercase; }.integration-group h3 small { display: block; margin-top: 5px; color: var(--muted); font-size: .64em; letter-spacing: .02em; }.integration-group .task-card { min-height: 268px; }.web-group .task-card { min-height: 304px; }.mobile-group .task-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }.mobile-group .task-card { min-height: 317px; }
+/* min-height/height locked with !important: chrome.js's cross-page row-height
+   equalizer buckets cards by rounded top position, and when a row holds only
+   dependency stubs (no full card to anchor it) that bucketing can race with
+   the stub's own collapse, occasionally forcing it back up to a full card's
+   height. This shared heuristic doesn't know about this file's collapsed-stub
+   pattern, so it's overridden rather than patched around. */
+/* align-items:center added: .owner/.detail-hint/strong all rely on
+   justify-items:center from the base card's grid layout to sit centered
+   despite their own max-width caps. is-dependency switches to a flex column,
+   which has no justify-items equivalent — align-items is the flex analogue,
+   applied here at the container so every child centers the same way. */
+.task-card.is-dependency { cursor: default; box-shadow: none; }
+/* .owner/.detail-hint's shared align-self:end means "push to the row's
+   bottom" once cards are display:grid — but is-dependency switches to a flex
+   column, where align-self instead controls the horizontal axis, silently
+   pushing both to the card's right edge. Recenter them here. */
+.task-card.is-dependency .owner { margin-bottom: 8px; color: var(--muted); }.task-card.is-dependency .detail-hint { align-self: center; padding: 0; color: var(--muted); background: transparent; box-shadow: none; font-size: 0; }.task-card.is-dependency .detail-hint::after { content: "dependency"; font-size: .7rem; }
+dialog { width: min(740px, calc(100vw - 34px)); max-height: min(840px, calc(100vh - 40px)); overflow: auto; border: 0; border-radius: 19px; padding: 39px clamp(25px, 5vw, 55px) 42px; color: var(--ink); text-align: center; box-shadow: 0 25px 80px #1119325c; }dialog::backdrop { background: #101a35a1; backdrop-filter: blur(3px); }.dialog-close { position: absolute; top: 15px; right: 18px; width: 32px; height: 32px; cursor: pointer; border: 0; border-radius: 50%; color: var(--ink); background: #eef0f5; font-size: 1.4rem; line-height: 1; }.dialog-owner { margin: 0 0 8px; color: var(--red); font-size: .69rem; font-weight: 900; letter-spacing: .1em; }dialog h2 { max-width: 23ch; margin: 0 auto 29px; font-size: clamp(1.55rem, 3vw, 2.15rem); letter-spacing: -.045em; line-height: 1.04; }
+.dialog-content { display: grid; gap: 14px; max-width: 66ch; margin: 0 auto; }.dialog-content > p { margin: 0; line-height: 1.52; text-wrap: pretty; }.dialog-content > ul { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }.dialog-content li { padding-left: 4px; line-height: 1.5; }.instruction-section { display: grid; gap: 12px; padding: 22px 20px 18px; border: 1px solid var(--line); border-radius: 14px; background: #f8f9fc; text-align: center; }.instruction-section h3 { margin: 0; justify-self: center; border-radius: 999px; padding: 7px 11px; color: var(--red); background: #fff1f0; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; }.instruction-section p { margin: 0; line-height: 1.5; text-wrap: pretty; }.instruction-section ul { display: grid; gap: 9px; margin: 0; padding-left: 24px; text-align: left; }
+footer { display: flex; align-items: center; justify-content: space-between; min-height: 100px; padding: 22px clamp(28px, 5vw, 96px); color: #fff; background: var(--footer); }footer img { width: 200px; height: auto; max-height: 45px; object-fit: contain; object-position: left center; }footer time { font-size: .8rem; }
+@media (max-width: 1180px) { .page-header { align-items: start; flex-direction: column; }.subtitle { text-wrap: wrap; }.team-switcher { justify-content: start; max-width: none; }.integration-groups { grid-template-columns: 1fr 1fr; }.sdk-group { grid-column: 1 / -1; }.sdk-group .task-list { grid-template-columns: minmax(0, 1fr); max-width: 50%; }.top-phases .phase:not(:last-child)::after, .integration-group:not(:last-child)::after, .integration-groups::before { display: none; } }
+@media (max-width: 720px) { .top-phases, .integration-groups, .task-list.two-up, .phase-initial .task-list, .phase-adapter .task-list, .mobile-group .task-list { grid-template-columns: 1fr; }.sdk-group { grid-column: auto; }.sdk-group .task-list { max-width: none; }.task-card, .phase-initial .task-card, .phase-adapter .task-card, .integration-group .task-card { min-height: 300px; }.team-button { padding: 9px 12px; font-size: .75rem; }footer { min-height: 84px; }footer img { width: 158px; } }
+
+/* ---------- fluid grid: column cap ---------- */
+
+/* Consumed by the shared contract in shared/responsive.css, which sizes every
+   diagram grid with a capped auto-fit and no breakpoints.
+
+   --cols is the widest column count this diagram was drawn for. Without it a
+   wide screen keeps adding columns, and for a process diagram that changes the
+   order the steps are read in. Narrowing stays continuous, so there is no
+   viewport to re-tune.
+
+   --col-gap only has to be >= the real column gap; too low and the tracks come
+   out too wide and the grid quietly drops to cols-1. It is the measured
+   resolved gap at its widest. Where the flow declares --flow-gap on the same
+   element the contract prefers that instead, so this is a fallback. */
+.top-phases { --cols: 2; --col-gap: 72px; }
+.task-list { --cols: 2; --col-gap: 18px; }
+.integration-groups { --cols: 3; --col-gap: 68px; }
